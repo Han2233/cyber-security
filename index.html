@@ -11,35 +11,25 @@
 <!-- ======================= 顶部横幅 ======================= -->
 <header class="hero">
   <h1>网络安全概述</h1>
-  <p>Cyber Security Overview —— 从「为什么需要安全」到「CIA 三元组」，从风险周期、安全策略到密码学、数字签名与 PKI。基于课件内容重新编排的互动学习版：每个概念配图解、演示和小测。</p>
+  <p>Cyber Security Overview —— 四讲合一：L1 概述（CIA、攻击、密码学、签名、PKI）→ L2 风险管理（SLE/ALE）→ L3 策略与程序 → L4 数学基础（模运算、RSA、CRT）。每讲配图解、动手实验室和全英文自测。</p>
   <div class="badges">
-    <span class="badge">6 个交互式演示</span>
+    <span class="badge">4 讲 · 11 个交互演示</span>
+    <span class="badge">4 套英文自测</span>
     <span class="badge">中英术语对照</span>
-    <span class="badge">含 16 题自测</span>
     <span class="badge">离线可用</span>
   </div>
-  <span class="course">COMP7906 Introduction to Cyber Security · Lecture 1 · Russell Yiu · 2026</span>
+  <span class="course">COMP7906 Introduction to Cyber Security · Lectures 1–4 · Russell Yiu · 2026</span>
 </header>
 
 <!-- ======================= 顶部导航 ======================= -->
 <nav class="nav">
   <div class="nav-inner" id="topNav">
-    <a href="#sec1">1 为什么需要安全</a>
-    <a href="#sec2">2 CIA 三元组</a>
-    <a href="#sec3">3 安全的挑战</a>
-    <a href="#sec4">4 框架与管理</a>
-    <a href="#sec5">5 攻击·威胁·风险</a>
-    <a href="#sec6">6 服务与机制</a>
-    <a href="#sec7">7 风险管理周期</a>
-    <a href="#sec8">8 安全策略</a>
-    <a href="#sec9">9 密码学总览</a>
-    <a href="#sec10">10 三类密码算法</a>
-    <a href="#sec11">11 数字签名</a>
-    <a href="#sec12">12 PKI</a>
-    <a href="#sec13">13 应用·认证·监控</a>
-    <a href="#sec14">14 复习自测</a>
-    <a href="#glossary">术语表</a>
+    <a href="#lec1" data-lecture="L1">L1 网络安全概述</a>
+    <a href="#lec2" data-lecture="L2">L2 风险管理</a>
+    <a href="#lec3" data-lecture="L3">L3 策略与程序</a>
+    <a href="#lec4" data-lecture="L4">L4 数学基础</a>
   </div>
+</div>
 </nav>
 
 <div class="wrap">
@@ -47,6 +37,7 @@
   <!-- ======================= 目录侧栏 ======================= -->
   <aside class="toc" id="tocSide">
     <h2>目录 Contents</h2>
+    <div class="grp">Lecture 1 · 概述</div>
     <a href="#sec1">1 为什么需要安全</a>
     <a href="#sec2">2 CIA 三元组</a>
     <a href="#sec3">3 安全的挑战</a>
@@ -61,10 +52,52 @@
     <a href="#sec12">12 PKI</a>
     <a href="#sec13">13 应用·认证·监控</a>
     <a href="#sec14">14 复习自测</a>
-    <a href="#glossary">附录 · 术语表</a>
-  </aside>
+    <a href="#glossary">L1 术语表</a>
+    <div class="grp">Lecture 2 · 风险管理</div>
+    <a href="#l2-1">L2-1 ISO 31000</a>
+    <a href="#l2-2">L2-2 目标与关键问题</a>
+    <a href="#l2-3">L2-3 评估流程总览</a>
+    <a href="#l2-4">L2-4 项目定义</a>
+    <a href="#l2-5">L2-5 准备阶段</a>
+    <a href="#l2-6">L2-6 数据收集</a>
+    <a href="#l2-7">L2-7 风险度量</a>
+    <a href="#l2-8">L2-8 SLE / ALE 计算</a>
+    <a href="#l2-9">L2-9 缓解与报告</a>
+    <a href="#l2-10">L2-10 自测</a>
+    <div class="grp">Lecture 3 · 策略与程序</div>
+    <a href="#l3-1">L3-1 为什么需要策略</a>
+    <a href="#l3-2">L3-2 三类策略</a>
+    <a href="#l3-3">L3-3 制定与要素</a>
+    <a href="#l3-4">L3-4 层级：策略到程序</a>
+    <a href="#l3-5">L3-5 策略实例</a>
+    <a href="#l3-6">L3-6 自测</a>
+    <div class="grp">Lecture 4 · 数学基础</div>
+    <a href="#l4-1">L4-1 模运算</a>
+    <a href="#l4-2">L4-2 欧几里得算法</a>
+    <a href="#l4-3">L4-3 费马与欧拉定理</a>
+    <a href="#l4-4">L4-4 RSA 数学</a>
+    <a href="#l4-5">L4-5 中国剩余定理</a>
+    <a href="#l4-6">L4-6 离散对数与群环域</a>
+    <a href="#l4-7">L4-7 多项式与 GF(2ⁿ)</a>
+    <a href="#l4-8">L4-8 自测</a>
+    <a href="#glossary-all">总术语表</a>
+  </aside></aside>
 
   <main class="content">
+
+  <!-- ======================= 讲座横幅 L1 ======================= -->
+  <section class="lecture-banner" id="lec1">
+    <span class="lb-num">LECTURE 1</span>
+    <h2>网络安全概述 · Cyber Security Overview</h2>
+    <p>从「为什么需要安全」到 CIA 三元组，从风险周期、策略到密码学、数字签名与 PKI。Lecture 1 是整门课的地图，后面的讲座都是它的展开。</p>
+    <div class="lb-nav">
+      <a href="#sec1">1 为什么需要安全</a><a href="#sec2">2 CIA 三元组</a><a href="#sec3">3 安全的挑战</a>
+      <a href="#sec4">4 框架与管理</a><a href="#sec5">5 攻击·威胁·风险</a><a href="#sec6">6 服务与机制</a>
+      <a href="#sec7">7 风险管理周期</a><a href="#sec8">8 安全策略</a><a href="#sec9">9 密码学总览</a>
+      <a href="#sec10">10 三类算法</a><a href="#sec11">11 数字签名</a><a href="#sec12">12 PKI</a>
+      <a href="#sec13">13 应用·认证·监控</a><a href="#sec14">14 复习自测</a>
+    </div>
+  </section>
 
   <!-- ======================= 第一章：为什么需要网络安全 ======================= -->
   <section class="chapter" id="sec1">
@@ -935,7 +968,7 @@
   </section>
 
   <!-- ======================= 附录：术语表 ======================= -->
-  <section class="chapter" id="glossary">
+  <section class="chapter" id="glossary-l1">
     <h2><span class="chapter-no">附</span>中英术语速查表</h2>
     <p class="chapter-sub">Glossary</p>
 
@@ -993,6 +1026,738 @@
     </table>
 
     <p style="text-align:center;color:var(--ink-faint);font-size:13px">本页内容基于 COMP7906 Lecture 1 课件整理，仅供课程学习参考。</p>
+  </section>
+
+  <!-- ======================= 讲座横幅 L2 ======================= -->
+  <section class="lecture-banner" id="lec2">
+    <span class="lb-num">LECTURE 2</span>
+    <h2>网络安全风险管理概览 · Cyber Security Risk Management Overview</h2>
+    <p>从 ISO 31000 框架出发，走一遍完整的风险评估流程：项目定义 → 准备 → 数据收集 → 风险分析 → 缓解分析 → 报告。重点掌握 SLE / ALE 定量计算。</p>
+    <div class="lb-nav">
+      <a href="#l2-1">1 ISO 31000</a><a href="#l2-2">2 目标与四问</a><a href="#l2-3">3 流程总览</a>
+      <a href="#l2-4">4 项目定义</a><a href="#l2-5">5 准备阶段</a><a href="#l2-6">6 数据收集</a>
+      <a href="#l2-7">7 风险度量</a><a href="#l2-8">8 SLE/ALE</a><a href="#l2-9">9 缓解与报告</a>
+      <a href="#l2-10">10 自测</a>
+    </div>
+  </section>
+
+  <!-- ======================= L2-1：ISO 31000 ======================= -->
+  <section class="chapter" id="l2-1">
+    <h2><span class="chapter-no">L2-1</span>ISO 31000：框架与过程</h2>
+    <p class="chapter-sub">Risk Management Framework vs Process</p>
+    <table class="tb">
+      <tr><th>概念</th><th>英文</th><th>含义</th></tr>
+      <tr><td>风险管理框架</td><td><span class="en">Risk Management Framework</span></td><td>规划与设计风险管理活动的<strong>总体结构</strong>（「怎么组织」）</td></tr>
+      <tr><td>风险管理过程</td><td><span class="en">Risk Management Process</span></td><td>风险管理活动的<strong>具体实施</strong>（「怎么做」）</td></tr>
+    </table>
+    <p>二者关系：<strong>框架指导并评估过程；过程反过来评估组织的网络安全风险</strong>。</p>
+    <div class="analogy"><span class="tag">通俗理解</span>框架是公司章程和组织架构，过程是每天的日常工作流。没有框架，过程乱成一团；没有过程，框架是空架子。</div>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>框架 = 结构（planning &amp; design）；过程 = 实施（implementation）。</li><li>一句话关系：框架指导和评估过程，过程评估风险。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-2：目标与四问 ======================= -->
+  <section class="chapter" id="l2-2">
+    <h2><span class="chapter-no">L2-2</span>评估目标与四个关键问题</h2>
+    <p class="chapter-sub">Objectives & Key Questions</p>
+    <h3>目标（与 Lecture 1 一致的五条）</h3>
+    <ol>
+      <li>确保尽职调查被履行；</li>
+      <li>建立对组织系统与基础设施的理解；</li>
+      <li>为制定安全策略与程序提供基础；</li>
+      <li>为选择与实施防护措施提供基础；</li>
+      <li>为评估现有防护措施的有效性提供基础。</li>
+    </ol>
+    <h3>四个关键问题（对应四个环节，考试爱考连线）</h3>
+    <table class="tb">
+      <tr><th>问题</th><th>对应环节</th><th>英文</th></tr>
+      <tr><td>风险在哪里？</td><td><b>风险识别</b></td><td><span class="en">Risk Identification</span></td></tr>
+      <tr><td>当前风险水平如何？</td><td><b>风险分析</b></td><td><span class="en">Risk Analysis</span></td></tr>
+      <tr><td>当前风险水平可接受吗？</td><td><b>风险评价</b></td><td><span class="en">Risk Evaluation</span></td></tr>
+      <tr><td>需要做什么才能降到可接受水平？</td><td><b>风险处理</b></td><td><span class="en">Risk Treatment</span></td></tr>
+    </table>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>评估目标五条：尽职、理解、策略基础、防护选择、有效性评估。</li><li>四问四环节：识别 → 分析 → 评价 → 处理。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-3：流程总览 ======================= -->
+  <section class="chapter" id="l2-3">
+    <h2><span class="chapter-no">L2-3</span>评估 / 处理流程总览</h2>
+    <p class="chapter-sub">The Process</p>
+    <div class="pipeline">
+      <div class="pipe-step"><b>定义项目</b>范围与目标<br>Define scope &amp; objective</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>准备</b>授权·业务审查·资产·威胁<br>Prepare</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>收集数据</b>行政·技术·物理<br>Gather data</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>分析风险</b>威胁/脆弱性映射·评价<br>Analyze risks</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>确定处理策略</b>接受水平·处理方式<br>Risk handling</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>缓解分析</b>防护建议·成本效益<br>Mitigation</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>报告</b>Reporting</div>
+    </div>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>七步流程：定义 → 准备 → 收集 → 分析 → 处理 → 缓解 → 报告。</li><li>后续章节 L2-4 ~ L2-9 逐环节展开。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-4：项目定义 ======================= -->
+  <section class="chapter" id="l2-4">
+    <h2><span class="chapter-no">L2-4</span>项目定义：圈定范围</h2>
+    <p class="chapter-sub">Project Definition</p>
+    <h3>要确定什么</h3>
+    <ul>
+      <li><strong>目的 / 目标</strong>：合同合规（Contract compliance）还是项目审查（Program review）；</li>
+      <li><strong>预算与时间约束</strong>；</li>
+      <li><strong>范围</strong>：纳入哪些资产与控制、评估的边界；</li>
+      <li><strong>系统边界</strong>（System boundaries）。</li>
+    </ul>
+    <h3>范围由两类边界决定</h3>
+    <table class="tb">
+      <tr><th>安全控制 Security Controls</th><th>资产 Assets</th></tr>
+      <tr>
+        <td>
+          <b>行政控制 Administrative</b>：策略、程序、非技术活动（离职面谈）、技术性活动（审计日志审查）<br>
+          <b>物理控制 Physical</b>：保护设施与员工（保安、CCTV）<br>
+          <b>技术控制 Technical</b>：为资产提供逻辑保护（杀毒软件）
+        </td>
+        <td>
+          <b>有形 Tangible</b>：物理实体（人员、设施、系统）<br>
+          <b>无形 Intangible</b>：无物理形态的可辨识非货币资产（知识产权、员工安全、客户名单、声誉、许可证）
+        </td>
+      </tr>
+    </table>
+    <h3>系统边界（两种责任）</h3>
+    <ul>
+      <li><strong>物理边界 Physical</strong>：对物理资产（服务器、工作站）的责任；</li>
+      <li><strong>逻辑边界 Logical</strong>：对系统数据的责任；</li>
+      <li>还要记录<strong>系统互联</strong>（interconnections）及其理由。</li>
+    </ul>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>控制三类：行政（人/流程）、物理（设施）、技术（逻辑保护）。</li><li>资产两类：有形（可触）+ 无形（客户名单、声誉、知识产权）。</li><li>边界两类：物理（设备归谁管）+ 逻辑（数据归谁管）。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-5：准备阶段 ======================= -->
+  <section class="chapter" id="l2-5">
+    <h2><span class="chapter-no">L2-5</span>准备阶段：授权、业务审查、资产与威胁</h2>
+    <p class="chapter-sub">Preparation</p>
+
+    <h3>① 获得授权 Obtain Permission</h3>
+    <ul>
+      <li>识别系统所有者（System Owner）并获得授权——谁是真正的所有者？多方共有？共享系统？</li>
+      <li>注意潜在的法律违规风险（Potential violation of legislation）；</li>
+      <li>项目所需账号：类型、权限级别、用途。</li>
+    </ul>
+
+    <h3>② 业务审查 Business Review</h3>
+    <p>目标：识别安全需求、理解现有基础设施。七个主要步骤：识别业务目标 → 组织结构 → 相关终端用户 → 基础设施 → 业务伙伴与供应商 → 竞争对手 → 趋势与标准。四种常用方法：<strong>访谈 Interviews、文档审查 Document review、问卷 Questionnaire、研究 Research</strong>。</p>
+
+    <h3>③ 识别关键系统与资产</h3>
+    <p>目标：弄清「要保护什么」。识别信息系统四要素：<strong>资源边界、功能、数据与数据所有者、授权用户</strong>——务必同时覆盖有形与无形资产。判定关键性（criticality）：保护要求（高/中/低）、使命关键度（使命关键/重要/支持性）、系统定义（一般支持系统/主要应用/应用）。</p>
+
+    <h3>④ 资产估价 Asset Valuation</h3>
+    <ul>
+      <li>定性 vs 定量两种方法；<strong>预算和成本效益分析需要定量</strong>。</li>
+      <li>定量法：有形资产 → 重置成本（replacement cost）；无形资产 → 数据/软件重置成本 + 按 C/I/A 衡量信息价值。</li>
+    </ul>
+
+    <h3>⑤ 威胁识别 Threat Identification</h3>
+    <p>威胁 = 发生会对组织造成不良影响的事件。三要素：</p>
+    <table class="tb">
+      <tr><th>要素</th><th>英文</th><th>说明</th></tr>
+      <tr><td>主体</td><td>Agent</td><td>执行威胁的东西，<strong>不一定是人</strong>（恶意代码、大自然）</td></tr>
+      <tr><td>动机</td><td>Motive</td><td>驱动主体行动的原因，<strong>可能是意外也可能是蓄意</strong></td></tr>
+      <tr><td>结果</td><td>Outcomes</td><td>不良后果</td></tr>
+    </table>
+    <p>两大类别：<strong>意外 Accidental</strong> 与 <strong>蓄意 Intentional</strong>。列威胁清单（checklist）时要<strong>明确定义每个威胁</strong>，保证评估团队理解一致。</p>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>先拿授权（找对系统所有者），再做业务审查（7 步、4 法）。</li><li>资产估价：定量才有预算和成本效益分析。</li><li>威胁三要素：主体（可非人）、动机（可意外）、结果。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-6：数据收集 ======================= -->
+  <section class="chapter" id="l2-6">
+    <h2><span class="chapter-no">L2-6</span>数据收集</h2>
+    <p class="chapter-sub">Data Gathering</p>
+    <h3>三个维度</h3>
+    <table class="tb">
+      <tr><th>维度</th><th>英文</th><th>方法</th></tr>
+      <tr><td>行政</td><td>Administrative</td><td>文档审查、组织审查、访谈、观察</td></tr>
+      <tr><td>物理</td><td>Physical</td><td>文档审查、巡检（Inspection）、观察</td></tr>
+      <tr><td>技术</td><td>Technical</td><td>设计与架构审查、配置审查、<b>测试</b>（漏洞扫描、渗透测试）</td></tr>
+    </table>
+    <h3>两大方法</h3>
+    <ul>
+      <li><strong>统计抽样 Statistical Sampling</strong>：按预设置信水平（confidence level）确定样本量；</li>
+      <li><strong>RIIOT</strong>：<b>R</b>eview（审查）+ <b>I</b>nterview（访谈）+ <b>I</b>nspect（巡检）+ <b>O</b>bserve（观察）+ <b>T</b>est（测试）——五字口诀。</li>
+    </ul>
+    <div class="analogy"><span class="tag">口诀</span>RIIOT = 查、谈、检、观、测。</div>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>行政/物理/技术三维度，技术维度靠扫描和渗透测试。</li><li>RIIOT 五字诀是考点；统计抽样按置信水平定样本量。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-7：风险度量 ======================= -->
+  <section class="chapter" id="l2-7">
+    <h2><span class="chapter-no">L2-7</span>风险度量：六个基本要素</h2>
+    <p class="chapter-sub">Establishing Risk Metrics</p>
+    <h3>威胁/脆弱性/资产映射（Mapping）</h3>
+    <p>目标：把「威胁→脆弱性」「脆弱性→资产」的关系讲清楚。课件简化示例：</p>
+    <table class="tb">
+      <tr><th>脆弱性 Vulnerability</th><th>相关威胁 Relevant Threats</th><th>受影响的资产</th></tr>
+      <tr><td>未部署杀毒机制</td><td>数据窃取 / 数据破坏 / 数据修改</td><td>声誉、数据机密性 / 可用性 / 完整性</td></tr>
+    </table>
+    <h3>六个基本风险要素（考试常考）</h3>
+    <div class="pipeline">
+      <div class="pipe-step"><b>资产价值</b>Asset value</div>
+      <div class="pipe-step"><b>威胁频率</b>Threat frequency</div>
+      <div class="pipe-step"><b>暴露因子</b>Threat exposure factor</div>
+      <div class="pipe-step"><b>防护有效性</b>Safeguard effectiveness</div>
+      <div class="pipe-step"><b>防护成本</b>Safeguard cost</div>
+      <div class="pipe-step"><b>置信因子</b>Confidence factor</div>
+    </div>
+    <h3>定量 vs 定性</h3>
+    <table class="tb">
+      <tr><th></th><th>优点 Pros</th><th>缺点 Cons</th></tr>
+      <tr><td><b>定量</b></td><td>客观；易理解；为成本效益分析提供基础；可用专业管理语言表达；绩效可客观跟踪</td><td>复杂耗时；劳动密集；依赖专业知识；缺乏通用量化标准；不灵活</td></tr>
+      <tr><td><b>定性</b></td><td>简单；无需量化资产价值等；易于让各级人员参与；灵活</td><td>主观；无法做成本效益分析；风险价值可能失真；绩效无法客观跟踪</td></tr>
+    </table>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>六要素：价值、频率、暴露、有效性、成本、置信。</li><li>定量给数字（可算 ROI），定性给等级（快而主观）。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-8：SLE/ALE ======================= -->
+  <section class="chapter" id="l2-8">
+    <h2><span class="chapter-no">L2-8</span>SLE 与 ALE：定量风险计算</h2>
+    <p class="chapter-sub">Single Loss Expectancy · Annualized Loss Expectancy</p>
+    <div class="formula">
+      <span class="fn">单次损失期望 SLE（Single Loss Expectancy）：</span>
+      SLE = 资产价值 AV × 暴露因子 EF
+    </div>
+    <div class="formula">
+      <span class="fn">年度损失期望 ALE（Annualized Loss Expectancy）：</span>
+      ALE = SLE × 年发生率 ARO
+    </div>
+    <ul>
+      <li><strong>暴露因子 EF（Exposure Factor）</strong>：威胁发生后，资产价值损失的<strong>百分比</strong>。</li>
+      <li><strong>年发生率 ARO（Annualized Rate of Occurrence）</strong>：威胁<strong>每年预计发生</strong>的次数——6 个月发生 2 次 → ARO = 4；8 年发生 2 次 → ARO = 0.25。</li>
+    </ul>
+    <div class="analogy"><span class="tag">课件例题</span>ABC 公司总部价值 300 万美元，位于地震多发区。过去 4 年发生 6 次地震，暴露因子估计 60%。求 ALE。<br>
+    解：ARO = 6 ÷ 4 = 1.5；SLE = 3,000,000 × 60% = 1,800,000；<b>ALE = 1,800,000 × 1.5 = 2,700,000 美元</b>。</div>
+
+    <h3>动手算：ALE 计算器</h3>
+    <div class="demo">
+      <p class="demo-title">演示 7 · ALE 计算器与防护成本效益</p>
+      <p class="demo-tip">输入资产价值、暴露因子、年发生率，实时算出 SLE 与 ALE。加上防护措施后（输入防护后的 EF 与年成本），看「期望缓解价值」是否为正——为正才值得买。</p>
+      <div class="controls">
+        <div class="ctrl-group"><label for="ale-av">资产价值 AV（美元）</label>
+          <input type="text" id="ale-av" value="3000000"></div>
+      </div>
+      <div class="controls">
+        <div class="ctrl-group"><label for="ale-ef">暴露因子 EF</label>
+          <input type="range" id="ale-ef" min="5" max="100" step="5" value="60">
+          <span class="val" id="ale-ef-val">60%</span></div>
+        <div class="ctrl-group"><label for="ale-aro">年发生率 ARO</label>
+          <input type="range" id="ale-aro" min="0.1" max="10" step="0.1" value="1.5">
+          <span class="val" id="ale-aro-val">1.5</span></div>
+      </div>
+      <div class="controls">
+        <div class="ctrl-group"><label for="ale-ef2">加防护后的 EF</label>
+          <input type="range" id="ale-ef2" min="0" max="100" step="5" value="20">
+          <span class="val" id="ale-ef2-val">20%</span></div>
+        <div class="ctrl-group"><label for="ale-cost">防护年均成本（美元）</label>
+          <input type="text" id="ale-cost" value="300000"></div>
+      </div>
+      <div class="demo-info" id="ale-info"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>SLE = AV × EF；ALE = SLE × ARO——两道乘法，年年考。</li><li>ARO 是「每年多少次」：半年 2 次 = 4，8 年 2 次 = 0.25。</li><li>风险值算出来后：可接受就留着，不可接受就做缓解分析。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-9：缓解与报告 ======================= -->
+  <section class="chapter" id="l2-9">
+    <h2><span class="chapter-no">L2-9</span>风险缓解分析与报告</h2>
+    <p class="chapter-sub">Risk Mitigation Analysis & Reporting</p>
+    <h3>缓解分析三大步骤</h3>
+    <ol>
+      <li><strong>选择防护措施并做预期缓解分析</strong>：选防护措施 → 建立「防护/脆弱性」配对 → 评估预期缓解效果（大量数据需自动化工具）；</li>
+      <li><strong>计算防护措施成本</strong>：每平方英尺安装成本、年均成本、年维护成本、工时与材料；</li>
+      <li><strong>成本效益分析</strong>（Cost-Benefit Analysis）。</li>
+    </ol>
+    <div class="formula">
+      <span class="fn">期望风险缓解价值（Expected Risk Mitigation Value）：</span>
+      缓解价值 = 防护前 ALE − ( 防护后 ALE + 防护措施年均成本 )
+    </div>
+    <p>注意：实际没那么简单——<strong>所有选定防护措施的联合效果</strong>必须一并考虑（防护之间有协同也有重叠）。</p>
+    <h3>风险评估报告结构（Sample Report）</h3>
+    <div class="pipeline">
+      <div class="pipe-step"><b>引言</b>Introduction</div>
+      <div class="pipe-step"><b>执行摘要</b>Executive Summary</div>
+      <div class="pipe-step"><b>资产识别</b>Asset Identification</div>
+      <div class="pipe-step"><b>威胁识别</b>Threat Identification</div>
+      <div class="pipe-step"><b>风险分析</b>Risk Analysis</div>
+      <div class="pipe-step"><b>防护识别</b>Safeguard Identification</div>
+      <div class="pipe-step"><b>成本效益</b>Cost-Benefit Analysis</div>
+      <div class="pipe-step"><b>建议</b>Recommendations</div>
+      <div class="pipe-step"><b>附录</b>Appendix</div>
+    </div>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>缓解三步骤：选防护 → 算成本 → 成本效益分析。</li><li>缓解价值 = ALE 前 −（ALE 后 + 成本），为正才划算。</li><li>报告结构 9 段，从引言到附录。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-10：自测 ======================= -->
+  <section class="chapter" id="l2-10">
+    <h2><span class="chapter-no">L2-10</span>Lecture 2 自测</h2>
+    <p class="chapter-sub">Quiz</p>
+    <div class="demo">
+      <p class="demo-title">演示 12 · L2 自测（12 题 · English）</p>
+      <p class="demo-tip">All questions are in English, as in the exam. 做完交卷看解析，错题可单独重做。</p>
+      <div id="quiz-box2"></div>
+      <div class="controls">
+        <button class="btn primary" id="quiz-submit2">Submit / 交卷</button>
+        <button class="btn" id="quiz-reset2">Reset</button>
+        <button class="btn" id="quiz-wrong2">Retry wrong ones</button>
+      </div>
+      <div class="quiz-score" id="quiz-score2" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 讲座横幅 L3 ======================= -->
+  <section class="lecture-banner" id="lec3">
+    <span class="lb-num">LECTURE 3</span>
+    <h2>网络安全策略与程序 · Cyber Security Policies and Procedures</h2>
+    <p>策略定方向，标准定规则，程序定动作。本讲把「策略 → 标准 → 指南 → 程序」的层级讲透，并给出真实策略范例。</p>
+    <div class="lb-nav">
+      <a href="#l3-1">1 为什么需要策略</a><a href="#l3-2">2 三类策略</a><a href="#l3-3">3 制定与要素</a>
+      <a href="#l3-4">4 层级与归类练习</a><a href="#l3-5">5 策略实例</a><a href="#l3-6">6 自测</a>
+    </div>
+  </section>
+
+  <!-- ======================= L3-1 ======================= -->
+  <section class="chapter" id="l3-1">
+    <h2><span class="chapter-no">L3-1</span>为什么需要策略 & 什么是策略</h2>
+    <p class="chapter-sub">Why Policies · What is a Policy</p>
+    <h3>为什么需要策略（5 条）</h3>
+    <ol>
+      <li>表明管理层支持（Demonstrate management support）；</li>
+      <li>定义安全角色与职责（roles and responsibilities）；</li>
+      <li>规避责任风险（Avoid liabilities）；</li>
+      <li>确保防护措施被恰当一致地实施；</li>
+      <li>为标准、程序、指南的制定以及产品选型提供蓝图（blueprints）。</li>
+    </ol>
+    <h3>什么是策略</h3>
+    <p>策略是组织网络安全姿态的<strong>信念、目标和目的的高层描述</strong>。它不是实现规范（implementation specifications），也不等同于标准、程序和指南。</p>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>策略 = 高层声明（方向），不是操作手册（细节）。</li><li>五条理由：管理支持、职责、责任、一致性、蓝图。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-2 ======================= -->
+  <section class="chapter" id="l3-2">
+    <h2><span class="chapter-no">L3-2</span>三类策略</h2>
+    <p class="chapter-sub">Types of Policies</p>
+    <div class="cards3">
+      <div class="card">
+        <h4><span class="dot green"></span>总体策略 General Policy</h4>
+        <p><span class="en">General Policy</span>：建立组织整体网络安全愿景（vision），覆盖面最广、层级最高。</p>
+      </div>
+      <div class="card">
+        <h4><span class="dot blue"></span>专题策略 Topic-Specific</h4>
+        <p><span class="en">Topic-Specific Policy</span>：一次聚焦一个具体议题（如密码策略、远程访问策略）。</p>
+      </div>
+      <div class="card">
+        <h4><span class="dot orange"></span>应用专属策略 Application-Specific</h4>
+        <p><span class="en">Application-Specific Policy</span>：针对某个特定系统或应用的保护（如财务系统使用策略）。</p>
+      </div>
+    </div>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>三层结构：总体（愿景）→ 专题（议题）→ 应用（系统）。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-3 ======================= -->
+  <section class="chapter" id="l3-3">
+    <h2><span class="chapter-no">L3-3</span>制定流程、组成部分与关键要素</h2>
+    <p class="chapter-sub">Policy Development · Components · Key Elements</p>
+    <h3>制定流程（六步，与 L1 一致）</h3>
+    <div class="pipeline">
+      <div class="pipe-step"><b>确定范围与目标</b></div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>了解基础设施</b></div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>撰写</b>Write</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>评审</b>Review</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>批准</b>Approve</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>执行</b>Enforce</div>
+    </div>
+    <h3>策略的组成部分（Components）</h3>
+    <ul>
+      <li><strong>主题 / 论点陈述</strong>（Topic / Thesis statement）；</li>
+      <li><strong>范围与相关性</strong>（Scope and relevance）；</li>
+      <li><strong>角色与职责</strong>（Roles and Responsibilities）；</li>
+      <li><strong>合规与纪律处分</strong>（Compliance and disciplinary actions）；</li>
+      <li><strong>附加信息</strong>（Additional information）。</li>
+    </ul>
+    <h3>好策略的关键要素（6 条）</h3>
+    <div class="pipeline">
+      <div class="pipe-step"><b>清晰易懂</b>Clear</div>
+      <div class="pipe-step"><b>契合组织</b>Applicable</div>
+      <div class="pipe-step"><b>可行</b>Doable</div>
+      <div class="pipe-step"><b>可执行</b>Enforceable</div>
+      <div class="pipe-step"><b>前瞻性</b>Proactive</div>
+      <div class="pipe-step"><b>分阶段</b>Phasing in</div>
+    </div>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>六步流程：范围目标 → 基础设施 → 撰写 → 评审 → 批准 → 执行。</li><li>组成部分五件套：主题、范围、职责、合规纪律、附加信息。</li><li>关键要素：清楚、适用、可行、可执行、前瞻、分阶段。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-4 ======================= -->
+  <section class="chapter" id="l3-4">
+    <h2><span class="chapter-no">L3-4</span>层级：从立法到程序</h2>
+    <p class="chapter-sub">The Hierarchy</p>
+    <div class="demo" style="padding:10px">
+      <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="策略层级（L3 版）" style="width:100%;max-width:440px;margin:0 auto;display:block">
+        <polygon points="260,20 380,70 140,70" fill="#be123c" stroke="#881337"/>
+        <text x="260" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">立法 Legislation</text>
+        <polygon points="175,78 345,78 420,128 100,128" fill="#e11d48" stroke="#881337"/>
+        <text x="260" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">组织策略 Corporate Policy</text>
+        <polygon points="130,136 390,136 440,186 80,186" fill="#f43f5e" stroke="#881337"/>
+        <text x="260" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">标准 Standards（强制）</text>
+        <polygon points="100,194 420,194 450,244 70,244" fill="#fb7185" stroke="#881337"/>
+        <text x="260" y="226" text-anchor="middle" font-size="13" font-weight="700" fill="#4c0519">指南 Guidelines（建议）</text>
+        <polygon points="80,252 440,252 460,290 60,290" fill="#fda4af" stroke="#881337"/>
+        <text x="260" y="278" text-anchor="middle" font-size="13" font-weight="700" fill="#4c0519">程序 Procedures（怎么做）</text>
+      </svg>
+    </div>
+    <div class="notice"><span class="tag">注意课件前后差异</span>Lecture 1（slide 30）的层级顺序是 Standards → Procedures → Guidelines；<b>Lecture 3 的顺序是 Standards → Guidelines → Procedures</b>。考试以题目对应的课件为准，这里按 Lecture 3 讲解（指南在程序之上更常见）。</div>
+    <table class="tb">
+      <tr><th>层级</th><th>英文</th><th>定义</th></tr>
+      <tr><td>策略</td><td>Policy</td><td>对组织信念、目标和目的的高层一般性陈述</td></tr>
+      <tr><td>标准</td><td>Standard</td><td><b>强制性</b>的特定规则、结构、活动或规定，为策略提供具体方向</td></tr>
+      <tr><td>指南</td><td>Guideline</td><td>对程序实施的<strong>建议 / 推荐</strong>（非强制）</td></tr>
+      <tr><td>程序</td><td>Procedure</td><td>策略、标准、指南<strong>如何实施</strong>的具体细节</td></tr>
+    </table>
+    <h4>课件配套示例（经典四连，考试常考）</h4>
+    <table class="tb">
+      <tr><th>层级</th><th>例句</th></tr>
+      <tr><td>Policy</td><td>Access to and use of departmental computing resources is restricted to authorized persons.</td></tr>
+      <tr><td>Standard</td><td>Two-factor authentication mechanism will be used to authenticate users.</td></tr>
+      <tr><td>Guideline</td><td>Passwords/smartcard PINs should consist of at least 8 characters with a mix of alpha, numeric and special characters.</td></tr>
+      <tr><td>Procedure</td><td>Requests for user id and smartcard must be approved and signed by the relevant system owners.</td></tr>
+    </table>
+
+    <h3>动手练：归类练习</h3>
+    <div class="demo">
+      <p class="demo-title">演示 8 · 策略层级归类（8 句）</p>
+      <p class="demo-tip">把每句话归类为 Policy / Standard / Guideline / Procedure。提示：看语气——「must + 具体规则」= Standard，「should / 建议」= Guideline，「具体步骤审批流程」= Procedure，「高层方向」= Policy。</p>
+      <div id="match-box"></div>
+      <div class="controls">
+        <button class="btn primary" id="match-submit">Submit / 交卷</button>
+        <button class="btn" id="match-reset">Reset</button>
+      </div>
+      <div class="quiz-score" id="match-score" style="display:none"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>层级：立法 → 策略 → 标准（强制）→ 指南（建议）→ 程序（怎么做）。</li><li>记语气：must 定规则 = 标准；should = 指南；审批流程 = 程序。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-5 ======================= -->
+  <section class="chapter" id="l3-5">
+    <h2><span class="chapter-no">L3-5</span>策略实例拆解</h2>
+    <p class="chapter-sub">Policy Examples</p>
+    <h3>总体策略示例（General Policy）</h3>
+    <div class="code"><span class="cap"># General Policy 示例</span>
+Information is an invaluable asset and should be appropriately protected.
+All employees are responsible for protecting the organization's information from
+(intentional and accidental) unauthorized access, modification, duplication,
+destruction, or disclosure.
+Internal auditors will perform periodic reviews to ensure the compliance of this
+policy. Consequences of violating this policy are addressed in the Employee's Handbook.</div>
+
+    <h3>专题策略示例：信息分类（Topic-Specific）</h3>
+    <ul>
+      <li><strong>政策声明</strong>：信息是宝贵资产，必须按敏感度、价值和关键度分类保护。</li>
+      <li><strong>分类级别</strong>：<b>Public</b>（经授权渠道向公众公开的信息）/ <b>Confidential</b>（一旦泄露会对公司造成重大损害的信息）。</li>
+      <li><strong>降级（Declassification）</strong>：信息所有者应定期审查，必要时重新分类。</li>
+      <li><strong>三层职责</strong>：
+        <table class="tb" style="margin:8px 0">
+          <tr><th>角色</th><th>英文</th><th>职责</th></tr>
+          <tr><td>信息所有者</td><td>Information Owner</td><td>确定分类；定义并实施保护机制；监控合规并报告违规；<b>授权与撤销访问权</b></td></tr>
+          <tr><td>信息保管者</td><td>Information Custodian</td><td>由所有者指定，<b>维护</b>所有者建立的保护机制</td></tr>
+          <tr><td>信息使用者</td><td>Information User</td><td>经所有者授权访问信息并使用保护机制</td></tr>
+        </table>
+      </li>
+      <li><strong>合规（Compliance）</strong>：管理层负责管理与监控信息使用、确保员工理解义务、按策略实施安全实践、对偏差启动纠正措施；违规员工按《员工手册》接受纪律处分。</li>
+    </ul>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>总体策略：三句话定基调（资产观、全员责任、审计与后果）。</li><li>专题策略：分类（Public/Confidential）+ 降级 + 三层角色 + 合规。</li><li>Owner 管授权，Custodian 管维护，User 管使用——职责别记串。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-6：自测 ======================= -->
+  <section class="chapter" id="l3-6">
+    <h2><span class="chapter-no">L3-6</span>Lecture 3 自测</h2>
+    <p class="chapter-sub">Quiz</p>
+    <div class="demo">
+      <p class="demo-title">演示 13 · L3 自测（10 题 · English）</p>
+      <div id="quiz-box3"></div>
+      <div class="controls">
+        <button class="btn primary" id="quiz-submit3">Submit / 交卷</button>
+        <button class="btn" id="quiz-reset3">Reset</button>
+        <button class="btn" id="quiz-wrong3">Retry wrong ones</button>
+      </div>
+      <div class="quiz-score" id="quiz-score3" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 讲座横幅 L4 ======================= -->
+  <section class="lecture-banner" id="lec4">
+    <span class="lb-num">LECTURE 4</span>
+    <h2>数学基础 · Mathematical Foundations</h2>
+    <p>模运算、欧几里得算法、费马/欧拉定理、RSA、中国剩余定理、离散对数、群环域与 GF(2ⁿ)——密码学的全部数学地基，配三个动手实验室。</p>
+    <div class="lb-nav">
+      <a href="#l4-1">1 模运算</a><a href="#l4-2">2 欧几里得算法</a><a href="#l4-3">3 费马与欧拉</a>
+      <a href="#l4-4">4 RSA 数学</a><a href="#l4-5">5 中国剩余定理</a><a href="#l4-6">6 离散对数与群环域</a>
+      <a href="#l4-7">7 多项式与 GF(2ⁿ)</a><a href="#l4-8">8 自测</a>
+    </div>
+  </section>
+
+  <!-- ======================= L4-1：模运算 ======================= -->
+  <section class="chapter" id="l4-1">
+    <h2><span class="chapter-no">L4-1</span>模运算 Modular Arithmetic</h2>
+    <p class="chapter-sub">Definition and Basic Properties</p>
+    <p>对任意整数 a、b 和非零整数 n：若 <b>n | (a − b)</b>（n 整除 a−b），则称 a 与 b <strong>模 n 同余</strong>，记作 a ≡ b (mod n)。a mod n 表示 a 模 n 的<strong>非负最小余数</strong>（落在 {0, 1, …, n−1} 中）。</p>
+    <div class="formula">
+      <span class="fn">两条核心性质（做题神器）：</span>
+      (a + b) mod n = ((a mod n) + (b mod n)) mod n<br>
+      ab mod n = ((a mod n)(b mod n)) mod n
+    </div>
+    <div class="analogy"><span class="tag">课件例题</span>10 mod 7 = 3；<b>−10 mod 7 = 4</b>（注意负数取模：−10 + 7 + 7 = 4，余数必须是 0 到 n−1 之间的非负数）。<br>
+    验证性质：a=234, b=87, n=5 → (234+87) mod 5 = 1 = (4+2) mod 5；234×87 mod 5 = 3 = (4×2) mod 5。推论：a<sup>k</sup> mod n = (a mod n)<sup>k</sup> mod n。</div>
+
+    <h3>动手算：模运算实验室</h3>
+    <div class="demo">
+      <p class="demo-title">演示 9 · 模运算实验室</p>
+      <p class="demo-tip">输入任意大的整数（包括负数），验证同余性质：先整体算，再分开取模算，结果必然相同——这就是密码学里所有大数运算都能「先取模再算」的原因。</p>
+      <div class="controls">
+        <div class="ctrl-group"><label>a</label><input type="text" id="mod-a" value="234"></div>
+        <div class="ctrl-group"><label>b</label><input type="text" id="mod-b" value="87"></div>
+        <div class="ctrl-group"><label>n</label><input type="text" id="mod-n" value="5"></div>
+      </div>
+      <div class="controls">
+        <div class="ctrl-group"><label>指数 k</label><input type="text" id="mod-k" value="10"></div>
+        <button class="btn primary" id="mod-go">计算</button>
+      </div>
+      <div class="demo-info" id="mod-info"></div>
+    </div>
+
+    <h3>定理：模 n 的逆元存在性</h3>
+    <p><strong>定理 1</strong>：若 gcd(a, n) = 1，则存在唯一的 b（0 ≤ b &lt; n）使得 ba mod n = 1，称 b 为 a 模 n 的<strong>逆元</strong>，记作 a⁻¹ mod n。逆元是 RSA 密钥生成的关键（e 的逆元就是 d）。</p>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>a ≡ b (mod n) ⟺ n | (a−b)；a mod n 是 0..n−1 的非负余数。</li><li>负数的模：−10 mod 7 = 4。</li><li>先取模再运算，结果不变——大数运算的基础。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-2：欧几里得算法 ======================= -->
+  <section class="chapter" id="l4-2">
+    <h2><span class="chapter-no">L4-2</span>欧几里得算法与模逆元</h2>
+    <p class="chapter-sub">Euclidean Algorithm · Multiplicative Inverse</p>
+    <h3>欧几里得算法（求最大公约数）</h3>
+    <p>反复使用带余除法：m = nq + r，且 gcd(a, b) = gcd(b, a mod b)。</p>
+    <div class="code"><span class="cap"># 求 gcd(68, 36)</span>
+68 = 1×36 + 32
+36 = 1×32 + 4
+32 = 8×4 + 0     <span class="cm"># 余数为 0，最后的非零余数 4 就是答案</span>
+gcd(68, 36) = 4</div>
+    <h3>扩展欧几里得算法（写成线性组合）</h3>
+    <p>把 gcd(m, n) 表示成 k₁m + k₂n 的形式——求逆元的必经之路：</p>
+    <div class="code"><span class="cap"># gcd(28, 51) = 1 的线性组合</span>
+51 = 1×28 + 23
+28 = 1×23 + 5
+23 = 4×5 + 3
+5 = 1×3 + 2
+3 = 1×2 + 1
+2 = 2×1
+<span class="cm"># 反向回代：</span>
+1 = 11×51 + (−20)×28</div>
+    <h3>求模逆元两步法</h3>
+    <ol>
+      <li>用扩展欧几里得算法找 k₁、k₂ 使 k₁a + k₂n = 1；</li>
+      <li>计算 b = k₁ mod n，即得 a⁻¹ mod n。</li>
+    </ol>
+    <div class="analogy"><span class="tag">课件例题</span>求 28⁻¹ mod 51：由 1 = 11×51 + (−20)×28 得 28⁻¹ = (−20) mod 51 = <b>31</b>（验证：31×28 = 868，868 mod 51 = 1 ✓）。<br>
+    练习答案：12⁻¹ mod 61 = 56（1 = 61 + (−5)×12 → (−5) mod 61 = 56）。</div>
+
+    <h3>动手算：逆元求解器</h3>
+    <div class="demo">
+      <p class="demo-title">演示 10 · 扩展欧几里得 & 模逆元求解器</p>
+      <p class="demo-tip">输入 a 和 n，计算 gcd(a, n)、线性组合表达式；若 gcd = 1，进一步算出逆元 a⁻¹ mod n（全程展示辗转相除的每一步）。</p>
+      <div class="controls">
+        <div class="ctrl-group"><label>a</label><input type="text" id="eea-a" value="28"></div>
+        <div class="ctrl-group"><label>n</label><input type="text" id="eea-n" value="51"></div>
+        <button class="btn primary" id="eea-go">计算</button>
+      </div>
+      <div class="demo-info" id="eea-info"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>欧几里得：辗转相除到余数 0，最后非零余数 = gcd。</li><li>扩展版：反向回代写成 k₁a + k₂n = gcd。</li><li>逆元 = k₁ mod n；只有 gcd(a,n)=1 时逆元才存在。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-3：费马与欧拉 ======================= -->
+  <section class="chapter" id="l4-3">
+    <h2><span class="chapter-no">L4-3</span>费马小定理与欧拉定理</h2>
+    <p class="chapter-sub">Fermat's Little Theorem · Euler's Theorem</p>
+    <div class="formula">
+      <span class="fn">费马小定理（Fermat's Little Theorem，p 为素数且 p ∤ a）：</span>
+      <i>a</i><sup>p−1</sup> ≡ 1 (mod p)
+    </div>
+    <div class="analogy"><span class="tag">课件练习</span>验证 a=3, p=11：3¹⁰ mod 11 = [(27 mod 11)(27 mod 11)(27 mod 11)(3 mod 11)] mod 11 = (5·5·5·3) mod 11 = 1 ✓。<br>
+    <b>应用</b>：费马定理反过来可用于<strong>素性检测</strong>——随机选 a，若 a^(N−1) mod N ≠ 1 则 N 必为合数；若 = 1 则 N「极可能」是素数（误判概率约 10⁻¹³，伪素数除外）。</div>
+    <p>欧拉函数（<span class="en">Euler Totient Function</span>）φ(n)：1 ≤ k &lt; n 且 gcd(k, n) = 1 的整数 k 的个数。例如 φ(10) = 4（1、3、7、9）。关键结论：<strong>若 n = pq（p、q 为素数），φ(n) = (p−1)(q−1)</strong>——RSA 的灵魂公式。</p>
+    <div class="formula">
+      <span class="fn">欧拉定理（Euler's Theorem，gcd(a, n) = 1）：</span>
+      <i>a</i><sup>φ(n)</sup> ≡ 1 (mod n)
+    </div>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>费马：a^(p−1) ≡ 1 (mod p)，还兼做素性检测。</li><li>φ(n)：小于 n 且与 n 互素的整数个数；φ(pq) = (p−1)(q−1)。</li><li>欧拉：a^φ(n) ≡ 1 (mod n)——RSA 解密正确性的证明基础。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-4：RSA 数学 ======================= -->
+  <section class="chapter" id="l4-4">
+    <h2><span class="chapter-no">L4-4</span>RSA：密钥生成与加解密</h2>
+    <p class="chapter-sub">RSA Key Generation, Encryption and Decryption</p>
+    <h3>密钥生成四步（Key Generation）</h3>
+    <ol>
+      <li>生成大素数 p、q；</li>
+      <li>计算 n = pq，φ(n) = (p−1)(q−1)；</li>
+      <li>随机选 e（0 ≤ e &lt; φ(n) 且 gcd(e, φ(n)) = 1）；</li>
+      <li>计算 d = e⁻¹ mod φ(n)。</li>
+    </ol>
+    <p>然后<strong>安全销毁 p、q、φ(n)</strong>。公钥 = &lt;e, n&gt;，私钥 = &lt;d, n&gt;。备注：k 位 RSA 指模数 n 是 k 位整数（如 1024 位 RSA）；p、q 必须足够大以防暴力分解。</p>
+    <div class="formula">
+      <span class="fn">加密（公钥 &lt;e, n&gt;，明文块 m &lt; n）：</span>
+      c = m<sup>e</sup> mod n
+    </div>
+    <div class="formula">
+      <span class="fn">解密（私钥 &lt;d, n&gt;）：</span>
+      m = c<sup>d</sup> mod n
+    </div>
+    <p><strong>为什么能解回来？</strong>因为 de ≡ 1 (mod φ(n))，即 de = kφ(n) + 1，由欧拉定理的推论 a^(kφ(n)+1) ≡ a (mod n)，所以 c<sup>d</sup> = m<sup>ed</sup> = m<sup>kφ(n)+1</sup> ≡ m (mod n)。这就是「明文必须小于 n」的原因。</p>
+
+    <h3>动手玩：RSA 迷你加解密</h3>
+    <div class="demo">
+      <p class="demo-title">演示 11 · RSA 小型加解密实验室</p>
+      <p class="demo-tip">用 p=13, q=11（n=143, φ=120, e=7, d=103）的真实密钥对，把消息 m 加密成 c，再解回来。试着改 p、q、e，观察：e 必须与 φ(n) 互素，否则无法生成 d。</p>
+      <div class="controls">
+        <div class="ctrl-group"><label>p</label><input type="text" id="rsa-p" value="13"></div>
+        <div class="ctrl-group"><label>q</label><input type="text" id="rsa-q" value="11"></div>
+        <div class="ctrl-group"><label>e</label><input type="text" id="rsa-e" value="7"></div>
+        <div class="ctrl-group"><label>消息 m</label><input type="text" id="rsa-m" value="42"></div>
+      </div>
+      <div class="controls"><button class="btn primary" id="rsa-go">加密 + 解密</button></div>
+      <div class="demo-info" id="rsa-info"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>密钥生成：p,q → n,φ → 选 e → 算 d，然后销毁 p,q,φ。</li><li>加密 c = m^e mod n；解密 m = c^d mod n；明文必须 m &lt; n。</li><li>安全靠「分解 n 很难」；d 的存在性靠 gcd(e, φ) = 1。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-5：中国剩余定理 ======================= -->
+  <section class="chapter" id="l4-5">
+    <h2><span class="chapter-no">L4-5</span>中国剩余定理 CRT</h2>
+    <p class="chapter-sub">Chinese Remainder Theorem</p>
+    <p><strong>中国剩余定理</strong>：若 n₁, n₂, …, nₖ 两两互素，则同余方程组 x ≡ aᵢ (mod nᵢ) 在模 M = n₁n₂…nₖ 下有<strong>唯一解</strong>。解法：对每个 i，令 Mᵢ = M/nᵢ，求 Mᵢ⁻¹ mod nᵢ，则：</p>
+    <div class="formula">
+      <span class="fn">CRT 解：</span>
+      x = [ <span class="sigma"><span class="slim"><span>k</span><span>i=1</span></span><span class="sg">Σ</span></span> a<sub>i</sub>·M<sub>i</sub>·(M<sub>i</sub><sup>−1</sup> mod n<sub>i</sub>) ] mod M
+    </div>
+    <div class="analogy"><span class="tag">课件例题</span>x ≡ 2 (mod 5)，x ≡ 3 (mod 13)：M = 65；M₁ = 13，M₁⁻¹ mod 5 = 2；M₂ = 5，M₂⁻¹ mod 13 = 8。<br>
+    x = [2×13×2 + 3×5×8] mod 65 = [52 + 120] mod 65 = 172 mod 65 = <b>42</b>。验证：42 mod 5 = 2 ✓，42 mod 13 = 3 ✓。</div>
+    <h3>CRT 的应用：低指数攻击</h3>
+    <p>若三个用户 A、B、C 的公钥都是 (e=3, nᵢ)（nᵢ 两两互素），且有人把<strong>同一条消息 m</strong> 分别加密给他们：攻击者截获 m³ mod n_A、m³ mod n_B、m³ mod n_C 后，用 CRT 求出唯一的 M ≡ m³ (mod n_An_Bn_C)。由于 m³ 本来就小于这个乘积，<strong>M = m³，直接开立方得 m</strong>！对策：加密前引入随机性（填充）。</p>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>CRT：两两互素的同余方程组有唯一解 mod 乘积。</li><li>解题三步：算 M、算各 Mᵢ⁻¹、加权求和取模。</li><li>低指数攻击（e=3 广播同一条消息）被 CRT 破解。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-6：离散对数与群环域 ======================= -->
+  <section class="chapter" id="l4-6">
+    <h2><span class="chapter-no">L4-6</span>离散对数与群、环、域</h2>
+    <p class="chapter-sub">Discrete Logarithms · Groups, Rings, Fields</p>
+    <h3>离散对数</h3>
+    <ul>
+      <li><strong>阶 order</strong>：使 a^m ≡ 1 (mod n) 的最小正整数 m；φ(n) 是阶的<strong>最大可能值</strong>。</li>
+      <li><strong>原根 primitive root</strong>：阶恰等于 φ(n) 的数。</li>
+      <li><strong>离散对数 dlog</strong>：对素数 p 的原根 a 和整数 b，存在唯一 i（0 ≤ i ≤ p−1）使 b ≡ a^i (mod p)，i 记作 dlog<sub>a,p</sub>(b)。</li>
+    </ul>
+    <div class="formula">
+      <span class="fn">离散对数问题 DLP（DSA、Diffie-Hellman 的安全根基）：</span>
+      给定 p、g、y，求 x 使得 y = g<sup>x</sup> mod p —— 计算上困难
+    </div>
+    <h3>群 Group（G1~G4 必背）</h3>
+    <ol>
+      <li><strong>封闭性 Closure</strong>：a•b ∈ G；</li>
+      <li><strong>结合律 Associative</strong>：(a•b)•c = a•(b•c)；</li>
+      <li><strong>单位元 Identity</strong>：存在 e 使 a•e = e•a = a；</li>
+      <li><strong>逆元 Inverse</strong>：每个 a 有 b 使 a•b = b•a = e。</li>
+    </ol>
+    <p>再加一条<strong>交换律（G5 Commutative）</strong>就是阿贝尔群（Abelian group）。若存在生成元 g 使所有元素都是 g 的幂，则为<strong>循环群</strong>（cyclic）。</p>
+    <h3>环 Ring（R1~R4）与域 Field</h3>
+    <table class="tb">
+      <tr><th>结构</th><th>要求</th></tr>
+      <tr><td>环 Ring</td><td>加法构成阿贝尔群 + 乘法封闭 + 乘法结合 + <b>分配律</b>（(a+b)c = ac + bc）</td></tr>
+      <tr><td>交换环 / 整环</td><td>再加乘法交换律 → 交换环；再加乘法单位元 1 和「无零因子」→ 整环（Integral Domain）</td></tr>
+      <tr><td><b>域 Field</b></td><td>整环 + 每个非零元素都有乘法逆元（可做加减乘除）</td></tr>
+    </table>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>离散对数：正着算（模幂）快，反着求（对数）难——单向函数。</li><li>群四公理：封闭、结合、单位元、逆元；+交换 = 阿贝尔群。</li><li>域 = 能四则运算的结构；GF(p)、GF(2ⁿ) 是密码学的常用域。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-7：多项式与有限域 ======================= -->
+  <section class="chapter" id="l4-7">
+    <h2><span class="chapter-no">L4-7</span>多项式算术与有限域 GF(2ⁿ)</h2>
+    <p class="chapter-sub">Polynomial Arithmetic · Finite Fields</p>
+    <ul>
+      <li><strong>有限域 GF(p)</strong>：集合 {0, 1, …, p−1} 配模 p 的加减乘除。</li>
+      <li><strong>有限域 GF(pⁿ)</strong>：系数在 GF(p) 上、次数 ≤ n−1 的多项式；加法按系数模 p 逐位相加，乘法先按多项式乘、再除以一个<strong>不可约多项式</strong>（irreducible polynomial）取余。</li>
+      <li>AES 使用的不可约多项式：<b>m(x) = x⁸ + x⁴ + x³ + x + 1</b>（GF(2⁸)，考试必背）。</li>
+    </ul>
+    <div class="analogy"><span class="tag">课件例题（Stallings）</span>{57} ⊕ {83} = {D4}：<br>
+    多项式：x⁶+x⁴+x²+x+1 ⊕ x⁷+x+1 = x⁷+x⁶+x⁴+x²<br>
+    二进制：01010111 ⊕ 10000011 = 11010100；十六进制：{57} ⊕ {83} = {D4}。<br>
+    乘法的关键技巧：x⁸ mod m(x) = x⁴+x³+x+1（因为 x⁸ ≡ m(x)−x⁸）。</div>
+    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>GF(2ⁿ) 的多项式乘法要做「模不可约多项式」运算。</li><li>AES 多项式 m(x) = x⁸+x⁴+x³+x+1 必背。</li><li>加法 = 异或（系数模 2），{57}⊕{83}={D4}。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-8：自测 ======================= -->
+  <section class="chapter" id="l4-8">
+    <h2><span class="chapter-no">L4-8</span>Lecture 4 自测</h2>
+    <p class="chapter-sub">Quiz</p>
+    <div class="demo">
+      <p class="demo-title">演示 14 · L4 自测（10 题 · English）</p>
+      <div id="quiz-box4"></div>
+      <div class="controls">
+        <button class="btn primary" id="quiz-submit4">Submit / 交卷</button>
+        <button class="btn" id="quiz-reset4">Reset</button>
+        <button class="btn" id="quiz-wrong4">Retry wrong ones</button>
+      </div>
+      <div class="quiz-score" id="quiz-score4" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 总术语表（L2-L4） ======================= -->
+  <section class="chapter" id="glossary-all">
+    <h2><span class="chapter-no">附</span>L2–L4 术语速查表</h2>
+    <p class="chapter-sub">Glossary for Lectures 2–4</p>
+    <table class="tb glossary">
+      <tr><th>中文</th><th>English</th><th>一句话解释</th></tr>
+      <tr><td>风险管理框架</td><td>Risk Management Framework</td><td>风险管理的规划与设计结构</td></tr>
+      <tr><td>风险管理过程</td><td>Risk Management Process</td><td>风险管理活动的具体实施</td></tr>
+      <tr><td>行政 / 物理 / 技术控制</td><td>Administrative / Physical / Technical</td><td>安全控制三分类（人流程 / 设施 / 逻辑保护）</td></tr>
+      <tr><td>有形 / 无形资产</td><td>Tangible / Intangible Asset</td><td>可触资产 / 无物理形态资产（声誉、客户名单）</td></tr>
+      <tr><td>RIIOT</td><td>RIIOT</td><td>审查、访谈、巡检、观察、测试</td></tr>
+      <tr><td>单次损失期望</td><td>SLE</td><td>AV × EF，一次威胁造成的损失</td></tr>
+      <tr><td>年度损失期望</td><td>ALE</td><td>SLE × ARO，一年的期望损失</td></tr>
+      <tr><td>暴露因子</td><td>Exposure Factor (EF)</td><td>资产价值损失的百分比</td></tr>
+      <tr><td>年发生率</td><td>ARO</td><td>威胁每年预计发生的次数</td></tr>
+      <tr><td>总体 / 专题 / 应用策略</td><td>General / Topic / Application-Specific</td><td>策略三类型（愿景 / 议题 / 系统）</td></tr>
+      <tr><td>信息所有者 / 保管者 / 使用者</td><td>Owner / Custodian / User</td><td>分类授权 / 维护机制 / 按权使用</td></tr>
+      <tr><td>同余</td><td>Congruence</td><td>a ≡ b (mod n) ⟺ n | (a−b)</td></tr>
+      <tr><td>欧几里得算法</td><td>Euclidean Algorithm</td><td>辗转相除求最大公约数</td></tr>
+      <tr><td>扩展欧几里得算法</td><td>Extended Euclidean Algorithm</td><td>把 gcd 写成两数的线性组合，用于求逆元</td></tr>
+      <tr><td>模逆元</td><td>Modular Inverse</td><td>ba ≡ 1 (mod n) 中的 b，记为 a⁻¹ mod n</td></tr>
+      <tr><td>欧拉函数</td><td>Euler Totient Function φ(n)</td><td>小于 n 且与 n 互素的整数个数</td></tr>
+      <tr><td>费马小定理</td><td>Fermat's Little Theorem</td><td>a^(p−1) ≡ 1 (mod p)</td></tr>
+      <tr><td>欧拉定理</td><td>Euler's Theorem</td><td>a^φ(n) ≡ 1 (mod n)</td></tr>
+      <tr><td>中国剩余定理</td><td>Chinese Remainder Theorem</td><td>两两互素模的同余方程组有唯一解</td></tr>
+      <tr><td>离散对数问题</td><td>Discrete Logarithm Problem</td><td>由 y = g^x mod p 求 x，计算困难</td></tr>
+      <tr><td>原根</td><td>Primitive Root</td><td>阶等于 φ(n) 的元素</td></tr>
+      <tr><td>群 / 环 / 域</td><td>Group / Ring / Field</td><td>封闭+结合+单位+逆元 / 再加分配律 / 可四则运算</td></tr>
+      <tr><td>不可约多项式</td><td>Irreducible Polynomial</td><td>不能被分解为两个更低次多项式之积</td></tr>
+      <tr><td>有限域 GF(2ⁿ)</td><td>Finite Field</td><td>AES 等密码算法的运算域</td></tr>
+    </table>
+    <p style="text-align:center;color:var(--ink-faint);font-size:13px">L2–L4 内容基于 COMP7906 课件整理，仅供课程学习参考。</p>
   </section>
 
   </main>

@@ -149,11 +149,86 @@ section.chapter > h2 { margin: 0 0 6px; font-size: 26px; display: flex; align-it
 .chapter-no {
   flex: 0 0 auto;
   display: inline-flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; border-radius: 12px;
+  min-width: 40px;
+  padding: 0 8px;
+  height: 40px; border-radius: 12px;
   background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: #fff; font-size: 17px; font-weight: 700;
+  color: #fff; font-size: 15px; font-weight: 700;
 }
 .chapter-sub { margin: 0 0 20px; color: var(--ink-faint); font-size: 15px; padding-left: 52px; }
+
+/* ---------- 讲座分界横幅 ---------- */
+.lecture-banner {
+  background:
+    radial-gradient(900px 320px at 85% -20%, rgba(3, 105, 161, .45), transparent 60%),
+    linear-gradient(160deg, #022c22 0%, #064e3b 60%, #0c4a6e 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 34px 30px 22px;
+  scroll-margin-top: 76px;
+}
+.lecture-banner .lb-num {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: #6ee7b7;
+  border: 1px solid rgba(110, 231, 183, .5);
+  border-radius: 999px;
+  padding: 2px 16px;
+  margin-bottom: 10px;
+}
+.lecture-banner h2 { margin: 0 0 6px; font-size: 26px; }
+.lecture-banner p { margin: 0 0 14px; color: rgba(255,255,255,.8); font-size: 15px; }
+.lb-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.lb-nav a {
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.25);
+  transition: all .15s;
+}
+.lb-nav a:hover { background: rgba(255,255,255,.15); }
+
+/* ---------- 目录侧栏的分组标题 ---------- */
+.toc .grp {
+  margin: 12px 0 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--primary);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 3px;
+}
+
+/* ---------- 策略归类题（演示 8） ---------- */
+.match-q { margin: 12px 0; }
+.match-q .mt { font-size: 14.5px; margin-bottom: 6px; font-weight: 600; }
+.match-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.match-opts button {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .12s;
+  font-family: inherit;
+}
+.match-opts button.chosen { background: var(--primary); border-color: var(--primary); color: #fff; }
+.match-q.done .match-opts button { pointer-events: none; opacity: .55; }
+.match-q.done .match-opts button.chosen.right { background: #16a34a; border-color: #16a34a; opacity: 1; }
+.match-q.done .match-opts button.chosen.wrong { background: #dc2626; border-color: #dc2626; opacity: 1; }
+.match-explain {
+  display: none; margin-top: 8px; font-size: 13.5px; color: var(--ink-soft);
+  background: var(--blue-soft); border: 1px solid #bfdbfe; border-radius: 8px; padding: 8px 12px;
+}
+.match-q.done .match-explain { display: block; }
 h3 { margin: 28px 0 10px; font-size: 20px; color: var(--primary-deep); }
 h4 { margin: 20px 0 8px; font-size: 17px; }
 p { margin: 10px 0; }

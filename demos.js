@@ -19,16 +19,16 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({
   const scoreEl = document.getElementById('cia-score');
 
   const QUESTIONS = [
-    { q: '黑客窃取并公开了医院的病人病历', ans: 'C', exp: '病历被「未授权访问」——机密性（Confidentiality）被破坏：信息只应让授权实体看到。' },
-    { q: '网络转账页面的收款账号被攻击者替换', ans: 'I', exp: '数据被「未授权修改」——完整性（Integrity）被破坏：信息应准确、未被篡改。' },
-    { q: '勒索软件加密了公司所有文件，业务瘫痪', ans: 'A', exp: '文件在需要时「不可用」——可用性（Availability）被破坏。' },
-    { q: 'DDoS 攻击使在线考试系统无法访问', ans: 'A', exp: '拒绝服务攻击的典型目标：让系统/服务不可用——可用性被破坏。' },
-    { q: '员工偷偷把客户名单卖给了竞争对手', ans: 'C', exp: '客户名单被泄露给未授权方——机密性被破坏（内部威胁）。' },
-    { q: '攻击者把邮件中的「同意退款」改成「拒绝退款」', ans: 'I', exp: '消息内容被篡改——完整性被破坏。' },
-    { q: '机房空调故障导致服务器过热宕机', ans: 'A', exp: '系统不可用——可用性被破坏。注意：威胁可以是非人为的（设备故障、自然灾害）。' },
-    { q: '黑客在官网发布了一条虚假停业公告', ans: 'I', exp: '官网内容被未授权修改（伪造信息）——完整性被破坏，同时伴随真实性（Authenticity）问题。' },
-    { q: '快递员偷看包裹上打印的完整手机号', ans: 'C', exp: '个人信息被未授权查看——机密性被破坏，也涉及隐私（Privacy）。' },
-    { q: '管理员误操作删除了订单表，且没有备份', ans: 'A', exp: '数据永久丢失、无法在需要时使用——可用性被破坏（也提醒我们备份的重要性）。' },
+    { q: 'A hacker steals and publishes patients\' medical records.', ans: 'C', exp: 'Records accessed by unauthorized parties → Confidentiality is broken (information should be accessible only to authorized entities).' },
+    { q: 'The payee account on a bank transfer page was replaced by an attacker.', ans: 'I', exp: 'Unauthorized modification of data → Integrity is broken (data integrity).' },
+    { q: 'Ransomware encrypted all company files and business came to a halt.', ans: 'A', exp: 'Files unavailable when needed → Availability is broken.' },
+    { q: 'A DDoS attack made the online exam system inaccessible.', ans: 'A', exp: 'Denial of service targets Availability: the system must be available to authorized entities when needed.' },
+    { q: 'An employee secretly sold the customer list to a competitor.', ans: 'C', exp: 'The list was disclosed to unauthorized parties → Confidentiality (insider threat).' },
+    { q: 'An attacker changed "approve the refund" to "reject the refund" in an email.', ans: 'I', exp: 'Message content was tampered with → Integrity.' },
+    { q: 'A server room air-conditioning failure caused servers to overheat and shut down.', ans: 'A', exp: 'Systems unavailable → Availability. Note: threats can be non-human (equipment failure, natural disaster).' },
+    { q: 'A hacker posted a fake closure notice on the official website.', ans: 'I', exp: 'Unauthorized modification of official content → Integrity, also involving Authenticity.' },
+    { q: 'A courier peeked at the full phone numbers printed on parcels.', ans: 'C', exp: 'Personal information viewed by unauthorized person → Confidentiality and Privacy.' },
+    { q: 'An administrator mistakenly dropped the orders table and there was no backup.', ans: 'A', exp: 'Data permanently lost and unusable → Availability (a reminder of why backups matter).' },
   ];
 
   const st = { answered: false, wrong: new Set(), user: {} };
@@ -399,24 +399,24 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({
   const scoreEl = document.getElementById('quiz-score');
 
   const QUESTIONS = [
-    { q: 'NIST 对网络安全的定义是：保护或防御（　）免受网络攻击的能力。', opts: ['A. 网络设备', 'B. 网络空间的使用', 'C. 数据库系统', 'D. 密码算法'], ans: 1, exp: 'NIST：The ability to protect or defend the use of cyberspace from cyber attacks。' },
-    { q: 'ISO/IEC 27032 中，网络安全 = 在网络空间中保护信息的：', opts: ['A. 机密性、完整性、可用性', 'B. 速度、容量、成本', 'C. 认证、授权、审计', 'D. 加密、签名、哈希'], ans: 0, exp: 'ISO/IEC 27032 定义直接对应 CIA 三元组。' },
-    { q: '「客户名单被泄露给竞争对手」主要破坏了：', opts: ['A. 机密性', 'B. 完整性', 'C. 可用性', 'D. 问责性'], ans: 0, exp: '信息被未授权实体访问 = 机密性破坏。' },
-    { q: '「银行转账金额被篡改」主要破坏了：', opts: ['A. 机密性', 'B. 完整性', 'C. 可用性', 'D. 隐私'], ans: 1, exp: '数据被未授权修改 = 完整性破坏（数据完整性）。' },
-    { q: '「DDoS 攻击使网站瘫痪」主要破坏了：', opts: ['A. 机密性', 'B. 完整性', 'C. 可用性', 'D. 真实性'], ans: 2, exp: '需要时不可用 = 可用性破坏；DoS 是典型的可用性攻击。' },
-    { q: '以下哪一项属于主动攻击（Active Attack）？', opts: ['A. 流量分析', 'B. 窃听消息内容', 'C. 重放 Replay', 'D. 监视传输'], ans: 2, exp: '主动攻击：伪装、重放、修改消息、DoS；被动攻击：获取消息内容、流量分析。' },
-    { q: '下列哪一项不属于 X.800 的五大类安全服务？', opts: ['A. 认证', 'B. 访问控制', 'C. 数据机密性', 'D. 可用性'], ans: 3, exp: '五大类：认证、访问控制、数据机密性、数据完整性、不可抵赖——没有可用性（高频陷阱）。' },
-    { q: 'n 个实体两两安全通信，对称加密共需要多少把共享密钥？', opts: ['A. n', 'B. n²', 'C. n(n−1)/2', 'D. 2n'], ans: 2, exp: '每对实体一把：C(n,2) = n(n−1)/2，随 n 快速膨胀——密钥分发与管理难题。' },
-    { q: 'AES 不支持的密钥长度是（位）：', opts: ['A. 128', 'B. 192', 'C. 256', 'D. 320'], ans: 3, exp: 'AES 支持 128 / 192 / 256 位。' },
-    { q: 'RSA 的安全性基于哪个数学难题？', opts: ['A. 大整数分解', 'B. 离散对数', 'C. 椭圆曲线离散对数', 'D. 背包问题'], ans: 0, exp: 'RSA ← Factoring；DSA/DH ← 离散对数；ECC ← 椭圆曲线离散对数。' },
-    { q: '发送者用自己的私钥加密、接收者用对应公钥解密，可以实现：', opts: ['A. 机密性', 'B. 数字签名与不可抵赖', 'C. 可用性', 'D. 访问控制'], ans: 1, exp: '私钥只有发送者有 → 签名/真实性/不可抵赖；公钥加密才实现机密性。' },
-    { q: '哈希函数的特性不包括：', opts: ['A. 定长输出', 'B. 单向性', 'C. 无碰撞', 'D. 可逆性'], ans: 3, exp: '哈希是单向（one-way）的，不可逆；输出固定长度、碰撞难找。' },
-    { q: '数字签名验证时，Bob 计算出的 H1 与解密得到的 H2 不相等，应：', opts: ['A. 接受', 'B. 拒绝', 'C. 重发', 'D. 忽略'], ans: 1, exp: '哈希不一致说明消息被篡改或签名无效 → Reject。' },
-    { q: '使用 X.509 证书前，验证四步的第一步是：', opts: ['A. 检查 CRL', 'B. 验证 CA 签名', 'C. 检查有效期', 'D. 提取公钥'], ans: 2, exp: '顺序：有效期 → CRL → CA 签名 → 提取公钥（前三步完成前不能使用公钥）。' },
-    { q: 'X.509 PKI 中，把用户身份与公钥绑定在一起的是：', opts: ['A. 口令', 'B. 数字证书（CA 签名）', 'C. 访问控制列表', 'D. 会话密钥'], ans: 1, exp: '证书主体含身份+公钥，由 CA 签名担保。' },
-    { q: 'PGP 的信任模型是：', opts: ['A. 中心化 CA', 'B. 信任网络 Web of Trust', 'C. 交叉认证', 'D. 等级信任'], ans: 1, exp: 'PGP 无 CA，用户互相签名建立信任网络（Zimmermann 创建）。' },
-    { q: '最可靠的产品安全认证方式是：', opts: ['A. 厂商认证', 'B. 市场认证', 'C. 用户认证', 'D. 独立认证'], ans: 3, exp: '独立第三方无利益关系，最可信——呼应「功能正常 ≠ 安全」。' },
-    { q: 'Cryptanalysis（密码分析）研究的是：', opts: ['A. 设计密码算法', 'B. 破解密码系统', 'C. 隐藏信息', 'D. 密钥管理'], ans: 1, exp: 'Cryptography 设计、Cryptanalysis 破解、Steganography 隐藏。' },
+    { q: 'According to NIST, cybersecurity is the ability to protect or defend (　) from cyber attacks.', opts: ['A. network devices', 'B. the use of cyberspace', 'C. database systems', 'D. cryptographic algorithms'], ans: 1, exp: 'NIST: "The ability to protect or defend the use of cyberspace from cyber attacks".' },
+    { q: 'In ISO/IEC 27032, cybersecurity is the preservation of (　) of information in the Cyberspace.', opts: ['A. confidentiality, integrity and availability', 'B. speed, capacity and cost', 'C. authentication, authorization and auditing', 'D. encryption, signature and hashing'], ans: 0, exp: 'ISO/IEC 27032 directly refers to the C.I.A triad.' },
+    { q: '"The customer list was leaked to a competitor" mainly breaks:', opts: ['A. Confidentiality', 'B. Integrity', 'C. Availability', 'D. Accountability'], ans: 0, exp: 'Information accessed by unauthorized entities → Confidentiality.' },
+    { q: '"A bank transfer amount was tampered with" mainly breaks:', opts: ['A. Confidentiality', 'B. Integrity', 'C. Availability', 'D. Privacy'], ans: 1, exp: 'Unauthorized modification → Integrity (data integrity).' },
+    { q: '"A DDoS attack took the website down" mainly breaks:', opts: ['A. Confidentiality', 'B. Integrity', 'C. Availability', 'D. Authenticity'], ans: 2, exp: 'Not available when needed → Availability. DoS is a typical availability attack.' },
+    { q: 'Which of the following is an ACTIVE attack?', opts: ['A. Traffic analysis', 'B. Eavesdropping on message content', 'C. Replay', 'D. Monitoring transmissions'], ans: 2, exp: 'Active: masquerade, replay, modification, DoS. Passive: message content, traffic analysis.' },
+    { q: 'Which one is NOT among the five major categories of X.800 security services?', opts: ['A. Authentication', 'B. Access control', 'C. Data confidentiality', 'D. Availability'], ans: 3, exp: 'The five: Authentication, Access control, Data confidentiality, Data integrity, Non-repudiation — no Availability (a classic trap).' },
+    { q: 'For n entities communicating pairwise with symmetric encryption, how many shared keys are needed in total?', opts: ['A. n', 'B. n²', 'C. n(n−1)/2', 'D. 2n'], ans: 2, exp: 'One key per pair: C(n,2) = n(n−1)/2 — the key distribution and management problem.' },
+    { q: 'Which key size (in bits) is NOT supported by AES?', opts: ['A. 128', 'B. 192', 'C. 256', 'D. 320'], ans: 3, exp: 'AES supports 128 / 192 / 256 bits.' },
+    { q: 'The security of RSA is based on which mathematical problem?', opts: ['A. Integer factorization', 'B. Discrete logarithm', 'C. Elliptic curve discrete logarithm', 'D. Knapsack problem'], ans: 0, exp: 'RSA ← factoring; DSA/DH ← discrete log; ECC ← elliptic curve DL.' },
+    { q: 'Encrypting with the sender\'s PRIVATE key (decrypted with the public key) achieves:', opts: ['A. Confidentiality', 'B. Digital signature and non-repudiation', 'C. Availability', 'D. Access control'], ans: 1, exp: 'Only the sender holds the private key → signature / authenticity / non-repudiation. Public-key encryption gives confidentiality.' },
+    { q: 'Which is NOT a property of hash functions?', opts: ['A. Fixed-size output', 'B. One-way', 'C. Collision free', 'D. Reversible'], ans: 3, exp: 'Hash functions are one-way (irreversible) with fixed-size outputs and collision resistance.' },
+    { q: 'During digital signature verification, H1 computed by Bob does not equal H2 obtained by decrypting S. Bob should:', opts: ['A. Accept', 'B. Reject', 'C. Resend', 'D. Ignore'], ans: 1, exp: 'Hash mismatch means the message was tampered with or the signature is invalid → Reject.' },
+    { q: 'Before using a public key from an X.509 certificate, the FIRST verification step is to check:', opts: ['A. the CRL', 'B. the CA\'s signature', 'C. the validity period', 'D. the public key format'], ans: 2, exp: 'Order: validity period → CRL → CA signature → extract public key (steps 1–3 must be done first).' },
+    { q: 'In an X.509 PKI, the user\'s identity is bound to his/her public key by:', opts: ['A. A password', 'B. A digital certificate signed by the CA', 'C. An access control list', 'D. A session key'], ans: 1, exp: 'The certificate body contains identity + public key, signed by the CA.' },
+    { q: 'The trust model used by PGP is:', opts: ['A. Centralized CA', 'B. Web of trust', 'C. Cross certification', 'D. Hierarchical trust'], ans: 1, exp: 'PGP has no CA; users sign each other\'s certificates (created by Philip Zimmermann).' },
+    { q: 'The most reliable choice of product certification is:', opts: ['A. Vendor certification', 'B. Market certification', 'C. User certification', 'D. Independent certification'], ans: 3, exp: 'Independent third parties have no conflict of interest — echoing "functionality does not guarantee security".' },
+    { q: 'Cryptanalysis is the mathematical science that deals with:', opts: ['A. Designing cryptographic algorithms', 'B. Breaking cryptographic systems', 'C. Hiding information', 'D. Key management'], ans: 1, exp: 'Cryptography designs, Cryptanalysis breaks, Steganography hides.' },
   ];
 
   const st = { view: [], answered: false, wrongSet: new Set(), user: {} };
@@ -492,17 +492,439 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({
 })();
 
 /* ============================================================
-   页面级 UI：导航高亮 + 回到顶部
+   演示 7：ALE 计算器（Lecture 2）
+   SLE = AV × EF；ALE = SLE × ARO；缓解价值 = ALE − (ALE′ + 成本)
    ============================================================ */
 (function () {
-  const links = document.querySelectorAll('.nav a, .toc a');
+  const avEl = document.getElementById('ale-av');
+  const efEl = document.getElementById('ale-ef');
+  const efVal = document.getElementById('ale-ef-val');
+  const aroEl = document.getElementById('ale-aro');
+  const aroVal = document.getElementById('ale-aro-val');
+  const ef2El = document.getElementById('ale-ef2');
+  const ef2Val = document.getElementById('ale-ef2-val');
+  const costEl = document.getElementById('ale-cost');
+  const infoEl = document.getElementById('ale-info');
+
+  const money = (v) => '$' + Math.round(v).toLocaleString('en-US');
+
+  function update() {
+    const av = parseFloat(avEl.value.replace(/[,$\s]/g, '')) || 0;
+    const ef = parseInt(efEl.value, 10) / 100;
+    const aro = parseFloat(aroEl.value);
+    const ef2 = parseInt(ef2El.value, 10) / 100;
+    const cost = parseFloat(costEl.value.replace(/[,$\s]/g, '')) || 0;
+
+    const sle = av * ef;
+    const ale = sle * aro;
+    const ale2 = av * ef2 * aro;
+    const mitigation = ale - (ale2 + cost);
+    const good = mitigation > 0;
+
+    infoEl.innerHTML =
+      'SLE = AV × EF = ' + money(av) + ' × ' + fmt(ef * 100, 0) + '% = <b>' + money(sle) + '</b><br>' +
+      'ALE = SLE × ARO = ' + money(sle) + ' × ' + aro + ' = <b>' + money(ale) + '</b>（每年期望损失）<br>' +
+      '加防护后：ALE′ = ' + money(av) + ' × ' + fmt(ef2 * 100, 0) + '% × ' + aro + ' = <b>' + money(ale2) + '</b><br>' +
+      '期望缓解价值 = ALE − (ALE′ + 防护年均成本) = ' + money(ale) + ' − (' + money(ale2) + ' + ' + money(cost) + ') = ' +
+      '<b style="color:' + (good ? '#16a34a' : '#dc2626') + '">' + (mitigation >= 0 ? '+' : '−') + money(Math.abs(mitigation)) + '</b>' +
+      (good ? '　<b style="color:#16a34a">值得购买防护</b>' : '　<b style="color:#dc2626">防护比风险还贵，考虑其他方案或接受风险</b>');
+  }
+
+  efEl.addEventListener('input', () => { efVal.textContent = efEl.value + '%'; update(); });
+  aroEl.addEventListener('input', () => { aroVal.textContent = aroEl.value; update(); });
+  ef2El.addEventListener('input', () => { ef2Val.textContent = ef2El.value + '%'; update(); });
+  avEl.addEventListener('input', update);
+  costEl.addEventListener('input', update);
+  update();
+})();
+
+/* ============================================================
+   演示 8：策略层级归类（Lecture 3）
+   8 句话归类为 Policy / Standard / Guideline / Procedure
+   ============================================================ */
+(function () {
+  const boxEl = document.getElementById('match-box');
+  const submitBtn = document.getElementById('match-submit');
+  const resetBtn = document.getElementById('match-reset');
+  const scoreEl = document.getElementById('match-score');
+
+  const OPTS = ['Policy', 'Standard', 'Guideline', 'Procedure'];
+  const ITEMS = [
+    { t: 'Access to and use of departmental computing resources is restricted to authorized persons.', ans: 0, exp: '高层方向声明（restricted to authorized persons）→ Policy。' },
+    { t: 'Two-factor authentication mechanism will be used to authenticate users.', ans: 1, exp: '强制性的具体规则（must 语气、指定技术）→ Standard。' },
+    { t: 'Passwords/smartcard PINs should consist of at least 8 characters with a mix of alpha, numeric and special characters.', ans: 2, exp: '「should…at least 8 characters」是建议而非强制 → Guideline。' },
+    { t: 'Requests for user id and smartcard must be approved and signed by the relevant system owners.', ans: 3, exp: '具体操作步骤与审批流程 → Procedure。' },
+    { t: 'Information is an invaluable asset and should be appropriately protected.', ans: 0, exp: '组织安全愿景的高层陈述 → Policy（General Policy 例句）。' },
+    { t: 'All company information must be classified into Public or Confidential categories through a formal review process.', ans: 1, exp: '强制性的分类规则（must + 具体类别）→ Standard。' },
+    { t: 'It is recommended to review information classification at least once a year.', ans: 2, exp: '「recommended」= 建议 → Guideline。' },
+    { t: 'Internal auditors will perform periodic reviews; each department must submit a compliance report by the end of each quarter.', ans: 3, exp: '规定了谁在何时做什么（操作细节）→ Procedure。' },
+  ];
+
+  const st = { user: {}, answered: false };
+
+  function render() {
+    boxEl.innerHTML = ITEMS.map((it, i) =>
+      '<div class="match-q" id="mt-' + i + '" data-mi="' + i + '">' +
+      '<div class="mt">' + (i + 1) + '. ' + esc(it.t) + '</div>' +
+      '<div class="match-opts">' +
+      OPTS.map((o, k) => '<button data-k="' + k + '"' + (st.user[i] === k ? ' class="chosen"' : '') + '>' + o + '</button>').join('') +
+      '</div>' +
+      '<div class="match-explain"><b>答案：' + OPTS[it.ans] + '</b>　' + esc(it.exp) + '</div>' +
+      '</div>'
+    ).join('');
+    scoreEl.style.display = 'none';
+    st.answered = false;
+  }
+
+  boxEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-k]');
+    if (!btn || st.answered) return;
+    const i = parseInt(btn.closest('.match-q').dataset.mi, 10);
+    st.user[i] = parseInt(btn.dataset.k, 10);
+    const q = document.getElementById('mt-' + i);
+    q.querySelectorAll('button').forEach((b) => b.classList.toggle('chosen', b === btn));
+  });
+
+  submitBtn.addEventListener('click', () => {
+    if (st.answered) return;
+    let correct = 0;
+    ITEMS.forEach((it, i) => {
+      const el = document.getElementById('mt-' + i);
+      el.classList.add('done');
+      const btns = el.querySelectorAll('button');
+      btns.forEach((b, k) => {
+        if (k === it.ans) b.classList.add('right');
+        if (st.user[i] === k) {
+          if (k === it.ans) { correct++; }
+          else b.classList.add('wrong');
+        }
+      });
+    });
+    st.answered = true;
+    const pct = correct / ITEMS.length;
+    scoreEl.style.display = 'block';
+    scoreEl.innerHTML = '得分：<b>' + correct + ' / ' + ITEMS.length + '</b>　正确率 ' + fmt(pct * 100, 0) + '%' +
+      '<div class="bar"><div class="fill" style="width:' + fmt(pct * 100, 0) + '%"></div></div>' +
+      '<div style="font-size:14px;color:var(--ink-soft);margin-top:8px">' +
+      (pct === 1 ? '完美！层级概念已吃透。' : '提示：must 具体规则=Standard；should/建议=Guideline；审批步骤=Procedure；方向声明=Policy。') + '</div>';
+  });
+
+  resetBtn.addEventListener('click', () => { st.user = {}; render(); });
+  render();
+})();
+
+/* ============================================================
+   演示 9：模运算实验室（Lecture 4）
+   验证 (a+b) mod n、ab mod n、a^k mod n 的「先取模再算」性质
+   ============================================================ */
+(function () {
+  const aEl = document.getElementById('mod-a');
+  const bEl = document.getElementById('mod-b');
+  const nEl = document.getElementById('mod-n');
+  const kEl = document.getElementById('mod-k');
+  const goBtn = document.getElementById('mod-go');
+  const infoEl = document.getElementById('mod-info');
+
+  const mod = (x, n) => ((x % n) + n) % n;  // 处理负数：结果恒为非负余数
+  const modpow = (base, exp, m) => {
+    let r = 1n; base = mod(base, m);
+    while (exp > 0n) {
+      if (exp % 2n === 1n) r = mod(r * base, m);
+      base = mod(base * base, m);
+      exp /= 2n;
+    }
+    return r;
+  };
+
+  function calc() {
+    const A = BigInt(aEl.value || '0');
+    const B = BigInt(bEl.value || '0');
+    const N = BigInt(nEl.value || '1');
+    const K = BigInt(kEl.value || '1');
+    if (N <= 0n) { infoEl.innerHTML = '<b style="color:#dc2626">n 必须为正整数</b>'; return; }
+
+    const sum1 = mod(A + B, N), sum2 = mod(mod(A, N) + mod(B, N), N);
+    const prod1 = mod(A * B, N), prod2 = mod(mod(A, N) * mod(B, N), N);
+    const pow1 = modpow(A, K, N), pow2 = modpow(mod(A, N), K, N);
+
+    infoEl.innerHTML =
+      'a mod n = <b>' + mod(A, N) + '</b>　·　b mod n = <b>' + mod(B, N) + '</b><br>' +
+      '(a + b) mod n = <b>' + sum1 + '</b>；　((a mod n) + (b mod n)) mod n = <b>' + sum2 + '</b>　' +
+      (sum1 === sum2 ? '<b style="color:#16a34a">✓ 相等</b>' : '<b style="color:#dc2626">✗ 不等（检查输入）</b>') + '<br>' +
+      'ab mod n = <b>' + prod1 + '</b>；　((a mod n)(b mod n)) mod n = <b>' + prod2 + '</b>　' +
+      (prod1 === prod2 ? '<b style="color:#16a34a">✓ 相等</b>' : '') + '<br>' +
+      'a^k mod n = <b>' + pow1 + '</b>；　(a mod n)^k mod n = <b>' + pow2 + '</b>　' +
+      (pow1 === pow2 ? '<b style="color:#16a34a">✓ 相等</b>' : '') +
+      '<br><span style="color:var(--ink-faint)">结论：先取模再运算，结果不变——RSA 里的大数运算全靠这个性质。</span>';
+  }
+
+  goBtn.addEventListener('click', calc);
+  calc();
+})();
+
+/* ============================================================
+   演示 10：扩展欧几里得 & 模逆元求解器（Lecture 4）
+   ============================================================ */
+(function () {
+  const aEl = document.getElementById('eea-a');
+  const nEl = document.getElementById('eea-n');
+  const goBtn = document.getElementById('eea-go');
+  const infoEl = document.getElementById('eea-info');
+
+  // 迭代版扩展欧几里得（避免大数递归爆栈），返回 gcd 及系数 x、y 使 ax+by=g
+  function egcd(a, b) {
+    let r0 = a, r1 = b, x0 = 1n, x1 = 0n, y0 = 0n, y1 = 1n;
+    const steps = [];
+    while (r1 !== 0n) {
+      const q = r0 / r1;
+      steps.push(r0 + ' = ' + q + '×' + r1 + ' + ' + (r0 % r1));
+      [r0, r1] = [r1, r0 - q * r1];
+      [x0, x1] = [x1, x0 - q * x1];
+      [y0, y1] = [y1, y0 - q * y1];
+    }
+    return { g: r0, x: x0, y: y0, steps };
+  }
+
+  function calc() {
+    const a = BigInt(aEl.value || '0');
+    const n = BigInt(nEl.value || '1');
+    if (n <= 0n) { infoEl.innerHTML = '<b style="color:#dc2626">n 必须为正整数</b>'; return; }
+    const r = egcd(a, n);
+    let html = '<b>辗转相除过程：</b><br>' + r.steps.map((s) => esc(s)).join('<br>') + '<br>' +
+      '<b>gcd(' + a + ', ' + n + ') = ' + r.g + '</b>　·　' +
+      '线性组合：' + r.g + ' = (' + r.x + ')×' + a + ' + (' + r.y + ')×' + n;
+    if (r.g === 1n) {
+      const inv = ((r.x % n) + n) % n;
+      html += '<br><b style="color:#16a34a">' + a + '⁻¹ mod ' + n + ' = ' + inv + '</b>' +
+        '　（验证：' + a + '×' + inv + ' mod ' + n + ' = ' + ((a * inv) % n) + '）';
+    } else {
+      html += '<br><b style="color:#dc2626">gcd ≠ 1，' + a + ' 模 ' + n + ' 不存在逆元</b>' +
+        '<br><span style="color:var(--ink-faint)">这就是 RSA 要求 gcd(e, φ(n)) = 1 的原因。</span>';
+    }
+    infoEl.innerHTML = html;
+  }
+
+  goBtn.addEventListener('click', calc);
+  calc();
+})();
+
+/* ============================================================
+   演示 11：RSA 小型加解密实验室（Lecture 4）
+   p=13, q=11 → n=143, φ=120, e=7, d=103；全程 BigInt 运算
+   ============================================================ */
+(function () {
+  const pEl = document.getElementById('rsa-p');
+  const qEl = document.getElementById('rsa-q');
+  const eEl = document.getElementById('rsa-e');
+  const mEl = document.getElementById('rsa-m');
+  const goBtn = document.getElementById('rsa-go');
+  const infoEl = document.getElementById('rsa-info');
+
+  const gcd = (a, b) => (b === 0n ? a : gcd(b, a % b));
+  const modpow = (base, exp, m) => {
+    let r = 1n; base = ((base % m) + m) % m;
+    while (exp > 0n) {
+      if (exp % 2n === 1n) r = (r * base) % m;
+      base = (base * base) % m;
+      exp /= 2n;
+    }
+    return r;
+  };
+  function egcd(a, b) {
+    let r0 = a, r1 = b, x0 = 1n, x1 = 0n;
+    while (r1 !== 0n) {
+      const q = r0 / r1;
+      [r0, r1] = [r1, r0 - q * r1];
+      [x0, x1] = [x1, x0 - q * x1];
+    }
+    return { g: r0, x: x0 };
+  }
+
+  function calc() {
+    const p = BigInt(pEl.value || '0'), q = BigInt(qEl.value || '0');
+    const e = BigInt(eEl.value || '0'), m = BigInt(mEl.value || '0');
+    if (p < 2n || q < 2n || e < 1n) { infoEl.innerHTML = '<b style="color:#dc2626">请填入合法正整数</b>'; return; }
+    const n = p * q, phi = (p - 1n) * (q - 1n);
+
+    let html = '<b>密钥生成：</b>n = p×q = ' + n + '　·　φ(n) = (p−1)(q−1) = ' + phi;
+    if (gcd(e, phi) !== 1n) {
+      html += '<br><b style="color:#dc2626">gcd(e, φ(n)) ≠ 1！此 e 无法生成私钥 d，换一个与 φ(n) 互素的 e</b>';
+      infoEl.innerHTML = html;
+      return;
+    }
+    const r = egcd(e, phi);
+    const d = ((r.x % phi) + phi) % phi;
+    html += '<br>e = ' + e + '，d = e⁻¹ mod φ = <b>' + d + '</b>（验证：e×d mod φ = ' + ((e * d) % phi) + '）';
+    html += '<br>公钥 &lt;e, n&gt; = &lt;' + e + ', ' + n + '&gt;　·　私钥 &lt;d, n&gt; = &lt;' + d + ', ' + n + '&gt;';
+
+    if (m >= n) {
+      html += '<br><b style="color:#dc2626">消息 m = ' + m + ' ≥ n = ' + n + '，超出范围！明文必须 m &lt; n（课件重点）</b>';
+      infoEl.innerHTML = html;
+      return;
+    }
+    const c = modpow(m, e, n);
+    const m2 = modpow(c, d, n);
+    html += '<br><b>加密：</b>c = m^e mod n = ' + m + '^' + e + ' mod ' + n + ' = <b>' + c + '</b>' +
+      '<br><b>解密：</b>m = c^d mod n = ' + c + '^' + d + ' mod ' + n + ' = <b>' + m2 + '</b>' +
+      (m2 === m ? '　<b style="color:#16a34a">✓ 解密成功，原文恢复</b>' : '　<b style="color:#dc2626">✗ 出错</b>') +
+      '<br><span style="color:var(--ink-faint)">提示：真实 RSA 的 p、q 是几百位的大素数，这里用小数字演示数学原理。</span>';
+    infoEl.innerHTML = html;
+  }
+
+  goBtn.addEventListener('click', calc);
+  calc();
+})();
+
+/* ============================================================
+   演示 12/13/14：L2/L3/L4 自测（工厂函数，避免三份重复代码）
+   ============================================================ */
+function makeQuiz(suffix, QUESTIONS) {
+  const boxEl = document.getElementById('quiz-box' + suffix);
+  const submitBtn = document.getElementById('quiz-submit' + suffix);
+  const resetBtn = document.getElementById('quiz-reset' + suffix);
+  const wrongBtn = document.getElementById('quiz-wrong' + suffix);
+  const scoreEl = document.getElementById('quiz-score' + suffix);
+
+  const st = { view: [], answered: false, wrongSet: new Set(), user: {} };
+
+  function render() {
+    boxEl.innerHTML = st.view.map((qi, n) => {
+      const q = QUESTIONS[qi];
+      return '<div class="quiz-q" id="qz' + suffix + '-' + qi + '" data-qi="' + qi + '">' +
+        '<div class="qtext"><span class="qtag">Q' + (n + 1) + '</span>' + esc(q.q) + '</div>' +
+        q.opts.map((o, k) =>
+          '<label class="opt"><input type="radio" name="qz' + suffix + '-' + qi + '" value="' + k + '"' +
+          (st.user[qi] === k ? ' checked' : '') + '> ' + esc(o) + '</label>'
+        ).join('') +
+        '<div class="quiz-explain"><b>解析：</b>' + esc(q.exp) + '</div>' +
+        '</div>';
+    }).join('');
+    scoreEl.style.display = 'none';
+    st.answered = false;
+  }
+
+  function grade() {
+    let correct = 0;
+    st.wrongSet = new Set();
+    st.view.forEach((qi) => {
+      const q = QUESTIONS[qi];
+      const chosen = st.user[qi];
+      const el = document.getElementById('qz' + suffix + '-' + qi);
+      el.classList.add('done');
+      const opts = el.querySelectorAll('label.opt');
+      opts.forEach((lab, k) => { if (k === q.ans) lab.classList.add('correct'); });
+      if (chosen === q.ans) correct++;
+      else {
+        st.wrongSet.add(qi);
+        if (chosen !== undefined) opts[chosen].classList.add('wrong');
+      }
+    });
+    st.answered = true;
+    const pct = correct / st.view.length;
+    scoreEl.style.display = 'block';
+    scoreEl.innerHTML = 'Score: <b>' + correct + ' / ' + st.view.length + '</b>　(' + fmt(pct * 100, 0) + '%)' +
+      '<div class="bar"><div class="fill" style="width:' + fmt(pct * 100, 0) + '%"></div></div>' +
+      '<div style="font-size:14px;color:var(--ink-soft);margin-top:8px">' +
+      (pct >= 0.85 ? 'Excellent! This lecture is well understood.' :
+       pct >= 0.6 ? 'Good. Review the questions you missed before moving on.' :
+       'Go through the lecture content again — pay attention to the highlighted points.') + '</div>';
+  }
+
+  boxEl.addEventListener('change', (e) => {
+    if (e.target.type !== 'radio') return;
+    const qi = parseInt(e.target.closest('.quiz-q').dataset.qi, 10);
+    st.user[qi] = parseInt(e.target.value, 10);
+  });
+
+  submitBtn.addEventListener('click', () => { if (!st.answered) grade(); });
+  resetBtn.addEventListener('click', () => {
+    st.user = {};
+    st.view = QUESTIONS.map((_, i) => i);
+    render();
+  });
+  wrongBtn.addEventListener('click', () => {
+    if (st.wrongSet.size === 0) {
+      scoreEl.style.display = 'block';
+      scoreEl.innerHTML = 'No wrong answers yet — submit once first.';
+      return;
+    }
+    st.user = {};
+    st.view = Array.from(st.wrongSet);
+    render();
+  });
+
+  st.view = QUESTIONS.map((_, i) => i);
+  render();
+}
+
+// ---------- L2 自测（12 题） ----------
+makeQuiz('2', [
+  { q: 'In ISO 31000, "the overall structure of the planning and design of the risk management activities" refers to the:', opts: ['A. risk management process', 'B. risk management framework', 'C. risk assessment', 'D. safeguard'], ans: 1, exp: 'Framework = structure (planning & design); process = implementation of the activities.' },
+  { q: 'Which question corresponds to "Risk Evaluation"?', opts: ['A. What (and where) are the risks?', 'B. What are the current risk levels?', 'C. Are the current risk levels acceptable?', 'D. What does the organization need to do?'], ans: 2, exp: 'Identification → Analysis → Evaluation (acceptable?) → Treatment.' },
+  { q: 'Which is NOT a category of security controls used to limit the project scope?', opts: ['A. Administrative', 'B. Physical', 'C. Technical', 'D. Financial'], ans: 3, exp: 'Controls: Administrative, Physical, Technical. Assets: Tangible / Intangible.' },
+  { q: 'A customer list is an example of:', opts: ['A. A tangible asset', 'B. An intangible asset', 'C. A security control', 'D. A safeguard'], ans: 1, exp: 'Intangible = identifiable, non-monetary assets without physical substance (customer list, reputation, intellectual property).' },
+  { q: 'The elements of a threat include:', opts: ['A. Agent, motive and outcomes', 'B. Agent, vulnerability and risk', 'C. Motive, asset and control', 'D. Agent, exposure and cost'], ans: 0, exp: 'Agent (may not be human), Motive (accidental or intentional), Outcomes (undesirable).' },
+  { q: 'The two major categories of threats are:', opts: ['A. Accidental and intentional', 'B. Passive and active', 'C. Internal and external', 'D. Technical and physical'], ans: 0, exp: 'Accidental vs Intentional threats.' },
+  { q: 'RIIOT stands for:', opts: ['A. Review, Interview, Inspect, Observe, Test', 'B. Review, Identify, Inspect, Observe, Test', 'C. Read, Interview, Inspect, Observe, Track', 'D. Review, Interview, Index, Observe, Test'], ans: 0, exp: 'RIIOT = Review + Interview + Inspect + Observe + Test.' },
+  { q: 'The formula for Single Loss Expectancy (SLE) is:', opts: ['A. Asset Value × Exposure Factor', 'B. Asset Value × ARO', 'C. EF × ARO', 'D. ALE × EF'], ans: 0, exp: 'SLE = AV × EF; ALE = SLE × ARO.' },
+  { q: 'A threat occurs 2 times every 6 months. Its ARO is:', opts: ['A. 2', 'B. 0.25', 'C. 4', 'D. 1'], ans: 2, exp: '4 times per year → ARO = 4. (2 times every 8 years would be ARO = 0.25.)' },
+  { q: 'HQ valued at $3 million, EF estimated at 60%, 6 earthquakes in the past 4 years. The ALE is:', opts: ['A. $1.8 million', 'B. $2.7 million', 'C. $4.5 million', 'D. $900,000'], ans: 1, exp: 'ARO = 6/4 = 1.5; SLE = 3M × 60% = 1.8M; ALE = 1.8M × 1.5 = $2.7M.' },
+  { q: 'The expected risk mitigation value is:', opts: ['A. ALE before − (ALE after + safeguard annual cost)', 'B. ALE after − ALE before', 'C. SLE − safeguard cost', 'D. AV − (ALE + cost)'], ans: 0, exp: 'Mitigation value = ALE(before) − (ALE(after) + annual cost of safeguards). Positive → worth buying.' },
+  { q: 'Which is NOT one of the six primitive risk metric elements?', opts: ['A. Asset value', 'B. Threat frequency', 'C. Exposure factor', 'D. Encryption key length'], ans: 3, exp: 'Six elements: asset value, threat frequency, threat exposure factor, safeguard effectiveness, safeguard cost, confidence factor.' },
+]);
+
+// ---------- L3 自测（10 题） ----------
+makeQuiz('3', [
+  { q: 'Which statement about cyber security policies is NOT true?', opts: ['A. They are high level general descriptions', 'B. They are implementation specifications', 'C. They describe beliefs, goals and objectives', 'D. They provide blueprints for standards'], ans: 1, exp: 'Policies are NOT implementation specifications, nor standards/procedures/guidelines.' },
+  { q: 'A policy that "addresses a specific topic, focusing on one particular issue at a time" is a(n):', opts: ['A. General policy', 'B. Topic-specific policy', 'C. Application-specific policy', 'D. Procedure'], ans: 1, exp: 'General = overall vision; Topic-specific = one issue; Application-specific = a particular system.' },
+  { q: 'The FIRST step of the policy development process is:', opts: ['A. Understand the information infrastructure', 'B. Write the policy', 'C. Determine the scopes and objectives', 'D. Review'], ans: 2, exp: 'Process: scopes/objectives → infrastructure → write → review → approve → enforce.' },
+  { q: 'Which is NOT a key element of a good policy?', opts: ['A. Clear and easy to understand', 'B. Enforceable', 'C. Complex and technical', 'D. Proactive'], ans: 2, exp: 'Key elements: clear, applicable, doable, enforceable, proactive, phasing in.' },
+  { q: 'Mandatory specific rules that provide specific directions for policies are called:', opts: ['A. Standards', 'B. Guidelines', 'C. Procedures', 'D. Legislation'], ans: 0, exp: 'Standards = mandatory rules; Guidelines = suggestions; Procedures = implementation specifics.' },
+  { q: '"Passwords should consist of at least 8 characters with a mix of alpha, numeric and special characters" is a:', opts: ['A. Policy', 'B. Standard', 'C. Guideline', 'D. Procedure'], ans: 2, exp: '"should + recommendation" → Guideline (not mandatory).' },
+  { q: '"Requests for user id and smartcard must be approved and signed by the relevant system owners" is a:', opts: ['A. Policy', 'B. Standard', 'C. Guideline', 'D. Procedure'], ans: 3, exp: 'Concrete operational steps (approval and signing workflow) → Procedure.' },
+  { q: 'In the topic-specific policy example, who authorizes and removes information access rights?', opts: ['A. Information Owner', 'B. Information Custodian', 'C. Information User', 'D. The auditor'], ans: 0, exp: 'Owner: classification + authorization/removal of access; Custodian: maintains mechanisms; User: authorized access.' },
+  { q: 'According to Lecture 3, the correct hierarchy from top to bottom is:', opts: ['A. Legislation → Policy → Standards → Procedures → Guidelines', 'B. Legislation → Policy → Standards → Guidelines → Procedures', 'C. Policy → Legislation → Standards → Procedures → Guidelines', 'D. Legislation → Standards → Policy → Guidelines → Procedures'], ans: 1, exp: 'L3 order: Legislation, Corporate Policy, Standards, Guidelines, Procedures (note the L1 slide shows a different order).' },
+  { q: 'Information that "if disclosed could cause significant damage to the company" is classified as:', opts: ['A. Public', 'B. Confidential', 'C. Internal', 'D. Secret'], ans: 1, exp: 'Public = made available via authorized channels; Confidential = disclosure causes significant damage.' },
+]);
+
+// ---------- L4 自测（10 题） ----------
+makeQuiz('4', [
+  { q: '10 mod 7 = ?', opts: ['A. 3', 'B. 4', 'C. 1', 'D. 0'], ans: 0, exp: '10 = 1×7 + 3 → 10 mod 7 = 3.' },
+  { q: '−10 mod 7 = ?', opts: ['A. −3', 'B. 3', 'C. 4', 'D. −4'], ans: 2, exp: 'The residue must be a non-negative integer in {0,…,6}: −10 + 14 = 4 → −10 mod 7 = 4.' },
+  { q: 'gcd(68, 36) = ?', opts: ['A. 2', 'B. 4', 'C. 6', 'D. 8'], ans: 1, exp: '68 = 1×36 + 32; 36 = 1×32 + 4; 32 = 8×4 → gcd = 4.' },
+  { q: '28⁻¹ mod 51 = ?', opts: ['A. 20', 'B. 31', 'C. 41', 'D. 51'], ans: 1, exp: '1 = 11×51 + (−20)×28 → 28⁻¹ = (−20) mod 51 = 31 (31×28 mod 51 = 1).' },
+  { q: 'φ(10) = ? (Euler totient function)', opts: ['A. 2', 'B. 4', 'C. 5', 'D. 10'], ans: 1, exp: 'Integers 1–9 coprime to 10: 1, 3, 7, 9 → φ(10) = 4.' },
+  { q: 'Fermat\'s Little Theorem states that for a prime p and p ∤ a:', opts: ['A. a^p ≡ 1 (mod p)', 'B. a^(p−1) ≡ 1 (mod p)', 'C. a^(p−1) ≡ p (mod a)', 'D. a^p ≡ 0 (mod p)'], ans: 1, exp: 'a^(p−1) ≡ 1 (mod p). Also used for probabilistic primality testing.' },
+  { q: 'In RSA, the ciphertext c is computed by:', opts: ['A. c = m^d mod n', 'B. c = m^e mod n', 'C. c = e^m mod n', 'D. c = m mod φ(n)'], ans: 1, exp: 'Encrypt with public key <e, n>: c = m^e mod n; decrypt with private key: m = c^d mod n.' },
+  { q: 'The solution of x ≡ 2 (mod 5), x ≡ 3 (mod 13) is:', opts: ['A. 42 mod 65', 'B. 17 mod 65', 'C. 42 mod 18', 'D. 5 mod 65'], ans: 0, exp: 'M = 65; M₁⁻¹ mod 5 = 2, M₂⁻¹ mod 13 = 8; x = (2·13·2 + 3·5·8) mod 65 = 42.' },
+  { q: 'The Discrete Logarithm Problem is: given p, g and y, find x such that:', opts: ['A. y = g^x mod p', 'B. x = g^y mod p', 'C. y = x^g mod p', 'D. g = y^x mod p'], ans: 0, exp: 'DLP: find x with y = g^x mod p — computationally hard; the basis of DSA and Diffie-Hellman.' },
+  { q: 'In GF(2⁸) with the AES irreducible polynomial, {57} ⊕ {83} = ?', opts: ['A. {D4}', 'B. {C1}', 'C. {47}', 'D. {83}'], ans: 0, exp: '01010111 ⊕ 10000011 = 11010100 = {D4}. AES uses m(x) = x⁸+x⁴+x³+x+1.' },
+]);
+
+/* ============================================================
+   页面级 UI：导航高亮（按讲座分组）+ 回到顶部
+   ============================================================ */
+(function () {
+  const pills = document.querySelectorAll('.nav a[data-lecture]');
+  const tocLinks = document.querySelectorAll('.toc a');
   const sections = document.querySelectorAll('section.chapter');
+
+  // 由章节 id 判断所属讲座（L2/L3/L4 以 l2-/l3-/l4- 开头，其余归 L1）
+  function lectureOf(id) {
+    if (id.startsWith('l2-')) return 'L2';
+    if (id.startsWith('l3-')) return 'L3';
+    if (id.startsWith('l4-') || id === 'glossary-all') return 'L4';
+    return 'L1';
+  }
+
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (en.isIntersecting) {
-        links.forEach((a) => {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id);
-        });
+        const id = en.target.id;
+        // 顶部导航：按讲座高亮对应的讲座胶囊
+        pills.forEach((p) => p.classList.toggle('active', p.dataset.lecture === lectureOf(id)));
+        // 侧栏目录：按章节精确高亮
+        tocLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
       }
     });
   }, { rootMargin: '-15% 0px -70% 0px' });
