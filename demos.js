@@ -1006,6 +1006,61 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({
 })();
 
 /* ============================================================
+   演示 18：中国剩余定理求解器（Lecture 4）
+   两个同余式 x ≡ a1 (mod n1)、x ≡ a2 (mod n2)，逐步展示求解过程
+   ============================================================ */
+(function () {
+  const a1El = document.getElementById('crt-a1');
+  const n1El = document.getElementById('crt-n1');
+  const a2El = document.getElementById('crt-a2');
+  const n2El = document.getElementById('crt-n2');
+  const goBtn = document.getElementById('crt-go');
+  const infoEl = document.getElementById('crt-info');
+
+  const gcd = (a, b) => (b === 0n ? a : gcd(b, a % b));
+  const mod = (x, n) => ((x % n) + n) % n;
+  function egcd(a, b) {
+    let r0 = a, r1 = b, x0 = 1n, x1 = 0n;
+    while (r1 !== 0n) {
+      const q = r0 / r1;
+      [r0, r1] = [r1, r0 - q * r1];
+      [x0, x1] = [x1, x0 - q * x1];
+    }
+    return { g: r0, x: x0 };
+  }
+
+  function calc() {
+    const n1 = BigInt(n1El.value || '0'), n2 = BigInt(n2El.value || '0');
+    const a1 = BigInt(a1El.value || '0'), a2 = BigInt(a2El.value || '0');
+    if (n1 <= 1n || n2 <= 1n) { infoEl.innerHTML = '<b style="color:#dc2626">模数必须为大于 1 的整数</b>'; return; }
+    if (gcd(n1, n2) !== 1n) {
+      infoEl.innerHTML = '<b style="color:#dc2626">gcd(n₁, n₂) = ' + gcd(n1, n2) + ' ≠ 1，两个模数不互素，CRT 不适用！</b>';
+      return;
+    }
+    const M = n1 * n2;
+    const M1 = M / n1, M2 = M / n2;
+    const r1 = egcd(M1, n1), r2 = egcd(M2, n2);
+    const i1 = mod(r1.x, n1), i2 = mod(r2.x, n2);
+    const x = mod(a1 * M1 * i1 + a2 * M2 * i2, M);
+
+    infoEl.innerHTML =
+      '<b>第一步：</b>M = n₁×n₂ = ' + n1 + '×' + n2 + ' = <b>' + M + '</b><br>' +
+      '<b>第二步：</b>M₁ = M/n₁ = <b>' + M1 + '</b>，M₁⁻¹ mod ' + n1 + ' = <b>' + i1 + '</b>' +
+      '（验证：' + M1 + '×' + i1 + ' mod ' + n1 + ' = ' + mod(M1 * i1, n1) + '）<br>' +
+      '　　　　M₂ = M/n₂ = <b>' + M2 + '</b>，M₂⁻¹ mod ' + n2 + ' = <b>' + i2 + '</b>' +
+      '（验证：' + M2 + '×' + i2 + ' mod ' + n2 + ' = ' + mod(M2 * i2, n2) + '）<br>' +
+      '<b>第三步：</b>x = [a₁M₁(M₁⁻¹) + a₂M₂(M₂⁻¹)] mod M<br>' +
+      '　　　= [' + a1 + '×' + M1 + '×' + i1 + ' + ' + a2 + '×' + M2 + '×' + i2 + '] mod ' + M +
+      ' = <b style="color:#16a34a">' + x + '</b><br>' +
+      '验证：' + x + ' mod ' + n1 + ' = ' + mod(x, n1) + '（应为 ' + mod(a1, n1) + '）✓　' +
+      x + ' mod ' + n2 + ' = ' + mod(x, n2) + '（应为 ' + mod(a2, n2) + '）✓';
+  }
+
+  goBtn.addEventListener('click', calc);
+  calc();
+})();
+
+/* ============================================================
    演示 12/13/14：L2/L3/L4 自测（工厂函数，避免三份重复代码）
    ============================================================ */
 function makeQuiz(suffix, QUESTIONS) {
@@ -1129,6 +1184,9 @@ makeQuiz('4', [
   { q: 'The solution of x ≡ 2 (mod 5), x ≡ 3 (mod 13) is:', opts: ['A. 42 mod 65', 'B. 17 mod 65', 'C. 42 mod 18', 'D. 5 mod 65'], ans: 0, exp: 'M = 65; M₁⁻¹ mod 5 = 2, M₂⁻¹ mod 13 = 8; x = (2·13·2 + 3·5·8) mod 65 = 42.' },
   { q: 'The Discrete Logarithm Problem is: given p, g and y, find x such that:', opts: ['A. y = g^x mod p', 'B. x = g^y mod p', 'C. y = x^g mod p', 'D. g = y^x mod p'], ans: 0, exp: 'DLP: find x with y = g^x mod p — computationally hard; the basis of DSA and Diffie-Hellman.' },
   { q: 'In GF(2⁸) with the AES irreducible polynomial, {57} ⊕ {83} = ?', opts: ['A. {D4}', 'B. {C1}', 'C. {47}', 'D. {83}'], ans: 0, exp: '01010111 ⊕ 10000011 = 11010100 = {D4}. AES uses m(x) = x⁸+x⁴+x³+x+1.' },
+  { q: 'If p = 5 and q = 7, then φ(pq) = ?', opts: ['A. 24', 'B. 35', 'C. 12', 'D. 30'], ans: 0, exp: 'φ(pq) = (p−1)(q−1) = 4 × 6 = 24.' },
+  { q: 'Which property is NOT required for a group?', opts: ['A. Closure', 'B. Associativity', 'C. Commutativity', 'D. Existence of inverse'], ans: 2, exp: 'G1–G4: closure, associativity, identity, inverse. Commutativity (G5) only for abelian groups — a classic trap.' },
+  { q: 'In the CRT low-exponent attack, after merging three ciphertexts with CRT the attacker obtains:', opts: ['A. m mod n', 'B. m³ exactly (then takes cube root)', 'C. m² mod n', 'D. the private key d'], ans: 1, exp: 'CRT gives the unique M < n_A·n_B·n_C with M ≡ m³ (mod n_i); since m³ < product, M = m³, and m = ∛M. Countermeasure: random padding.' },
 ]);
 
 /* ============================================================

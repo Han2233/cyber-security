@@ -85,13 +85,20 @@
     <a href="#l3-11">L3-11 自测</a>
     <div class="grp">Lecture 4 · 数学基础</div>
     <a href="#l4-1">L4-1 模运算</a>
-    <a href="#l4-2">L4-2 欧几里得算法</a>
-    <a href="#l4-3">L4-3 费马与欧拉定理</a>
-    <a href="#l4-4">L4-4 RSA 数学</a>
-    <a href="#l4-5">L4-5 中国剩余定理</a>
-    <a href="#l4-6">L4-6 离散对数与群环域</a>
-    <a href="#l4-7">L4-7 多项式与 GF(2ⁿ)</a>
-    <a href="#l4-8">L4-8 自测</a>
+    <a href="#l4-2">L4-2 模运算实验室</a>
+    <a href="#l4-3">L4-3 欧几里得算法</a>
+    <a href="#l4-4">L4-4 扩展欧几里得</a>
+    <a href="#l4-5">L4-5 模逆元</a>
+    <a href="#l4-6">L4-6 费马小定理</a>
+    <a href="#l4-7">L4-7 欧拉函数与定理</a>
+    <a href="#l4-8">L4-8 RSA 密钥生成</a>
+    <a href="#l4-9">L4-9 RSA 加解密</a>
+    <a href="#l4-10">L4-10 中国剩余定理</a>
+    <a href="#l4-11">L4-11 CRT 低指数攻击</a>
+    <a href="#l4-12">L4-12 离散对数</a>
+    <a href="#l4-13">L4-13 群环域</a>
+    <a href="#l4-14">L4-14 多项式与 GF(2ⁿ)</a>
+    <a href="#l4-15">L4-15 自测</a>
     <a href="#glossary-all">总术语表</a>
   </aside></aside>
 
@@ -1949,29 +1956,71 @@ policy. Consequences of violating this policy are addressed in the Employee's Ha
     <h2>数学基础 · Mathematical Foundations</h2>
     <p>模运算、欧几里得算法、费马/欧拉定理、RSA、中国剩余定理、离散对数、群环域与 GF(2ⁿ)——密码学的全部数学地基，配三个动手实验室。</p>
     <div class="lb-nav">
-      <a href="#l4-1">1 模运算</a><a href="#l4-2">2 欧几里得算法</a><a href="#l4-3">3 费马与欧拉</a>
-      <a href="#l4-4">4 RSA 数学</a><a href="#l4-5">5 中国剩余定理</a><a href="#l4-6">6 离散对数与群环域</a>
-      <a href="#l4-7">7 多项式与 GF(2ⁿ)</a><a href="#l4-8">8 自测</a>
+      <a href="#l4-1">1 模运算</a><a href="#l4-2">2 模运算实验室</a><a href="#l4-3">3 欧几里得算法</a>
+      <a href="#l4-4">4 扩展欧几里得</a><a href="#l4-5">5 模逆元</a><a href="#l4-6">6 费马小定理</a>
+      <a href="#l4-7">7 欧拉函数与定理</a><a href="#l4-8">8 RSA 密钥生成</a><a href="#l4-9">9 RSA 加解密</a>
+      <a href="#l4-10">10 中国剩余定理</a><a href="#l4-11">11 CRT 低指数攻击</a><a href="#l4-12">12 离散对数</a>
+      <a href="#l4-13">13 群环域</a><a href="#l4-14">14 多项式与 GF(2ⁿ)</a><a href="#l4-15">15 自测</a>
     </div>
   </section>
 
   <!-- ======================= L4-1：模运算 ======================= -->
   <section class="chapter" id="l4-1">
-    <h2><span class="chapter-no">L4-1</span>模运算 Modular Arithmetic</h2>
-    <p class="chapter-sub">Definition and Basic Properties</p>
-    <p>对任意整数 a、b 和非零整数 n：若 <b>n | (a − b)</b>（n 整除 a−b），则称 a 与 b <strong>模 n 同余</strong>，记作 a ≡ b (mod n)。a mod n 表示 a 模 n 的<strong>非负最小余数</strong>（落在 {0, 1, …, n−1} 中）。</p>
+    <h2><span class="chapter-no">L4-1</span>模运算：定义与基本性质</h2>
+    <p class="chapter-sub">Modular Arithmetic</p>
+
+    <h3>同余的定义</h3>
+    <p>给定整数 a、b 和非零整数 n：若 <b>n | (a − b)</b>（n 整除 a−b），则称 a 与 b <strong>模 n 同余</strong>（congruent modulo n），记作 a ≡ b (mod n)。此时 b 称为 a 模 n 的一个<strong>剩余</strong>（residue）。</p>
+
+    <h3>完全剩余系与「a mod n」</h3>
+    <table class="tb">
+      <tr><th>概念</th><th>英文</th><th>定义（课件原文）</th></tr>
+      <tr><td>完全剩余系</td><td>Complete Set of Residues</td><td>整数集合 R = {r₁, r₂, …, rₙ} 若对任意整数 a 都存在唯一 rᵢ ∈ R 使 a ≡ rᵢ (mod n)，则 R 是模 n 的完全剩余系；特别地 <b>{0, 1, …, n−1}</b> 恒为完全剩余系</td></tr>
+      <tr><td>a mod n</td><td>—</td><td>a 模 n 在 {0, 1, …, n−1} 中的剩余，即 a 除以 n 的<strong>非负余数</strong>；把 k 化为与其同余的最小非负整数称为<strong>约化</strong>（reducing）</td></tr>
+    </table>
+
+    <h3>两条核心性质（所有大数运算的基础）</h3>
     <div class="formula">
-      <span class="fn">两条核心性质（做题神器）：</span>
-      (a + b) mod n = ((a mod n) + (b mod n)) mod n<br>
+      <span class="fn">性质一（加法）：</span>
+      (a + b) mod n = ((a mod n) + (b mod n)) mod n
+    </div>
+    <div class="formula">
+      <span class="fn">性质二（乘法）：</span>
       ab mod n = ((a mod n)(b mod n)) mod n
     </div>
-    <div class="analogy"><span class="tag">课件例题</span>10 mod 7 = 3；<b>−10 mod 7 = 4</b>（注意负数取模：−10 + 7 + 7 = 4，余数必须是 0 到 n−1 之间的非负数）。<br>
-    验证性质：a=234, b=87, n=5 → (234+87) mod 5 = 1 = (4+2) mod 5；234×87 mod 5 = 3 = (4×2) mod 5。推论：a<sup>k</sup> mod n = (a mod n)<sup>k</sup> mod n。</div>
+    <div class="formula">
+      <span class="fn">推论（幂运算，课件 Remark）：</span>
+      a<sup>k</sup> mod n = (a mod n)<sup>k</sup> mod n
+    </div>
+    <p>为什么重要？RSA 要算 m<sup>e</sup> mod n 这种天文数字级别的运算——有了这两条性质，就可以<strong>边算边取模</strong>，中间结果永远不超过 n²，计算机才处理得了。</p>
 
-    <h3>动手算：模运算实验室</h3>
+    <div class="analogy"><span class="tag">课件例题</span><b>10 mod 7 = 3</b>（10 = 1×7 + 3）；<b>−10 mod 7 = 4</b>（注意：余数必须是 {0,…,6} 中的非负数，−10 + 7 + 7 = 4）。<br>
+    <b>性质验证（a=234, b=87, n=5）</b>：<br>
+    (234+87) mod 5 = 321 mod 5 = <b>1</b>；((4)+(2)) mod 5 = <b>1</b> ✓<br>
+    234×87 mod 5 = 20358 mod 5 = <b>3</b>；((4)(2)) mod 5 = <b>3</b> ✓</div>
+
+    <h3>巩固练习（点开看答案）</h3>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习 1：负数取模</summary>
+      <p style="margin-top:8px">计算：15 mod 8；−3 mod 8；−17 mod 5。</p>
+      <p><b>答案：</b>7；5（−3 + 8 = 5）；3（−17 + 5×4 = 3）。口诀：一直加 n，加到非负且小于 n 为止。</p>
+    </details>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习 2：用性质简化运算</summary>
+      <p style="margin-top:8px">计算 2¹⁰⁰ mod 7（提示：先算 2³ mod 7）。</p>
+      <p><b>答案：</b>2³ mod 7 = 1，所以 2¹⁰⁰ = (2³)³³ × 2 ≡ 1³³ × 2 = <b>2</b> (mod 7)。</p>
+    </details>
+
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>a ≡ b (mod n) ⟺ n | (a−b)；a mod n 是 0..n−1 的非负余数。</li><li>负数的模：−10 mod 7 = 4（加 n 到非负）。</li><li>先取模再运算，结果不变——幂运算同理（a^k 推论）。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-2：模运算实验室 ======================= -->
+  <section class="chapter" id="l4-2">
+    <h2><span class="chapter-no">L4-2</span>动手算：模运算实验室</h2>
+    <p class="chapter-sub">Modular Arithmetic Lab</p>
     <div class="demo">
       <p class="demo-title">演示 9 · 模运算实验室</p>
-      <p class="demo-tip">输入任意大的整数（包括负数），验证同余性质：先整体算，再分开取模算，结果必然相同——这就是密码学里所有大数运算都能「先取模再算」的原因。</p>
+      <p class="demo-tip">输入任意大的整数（包括负数），验证同余性质：先整体算，再分开取模算，结果必然相同——这就是密码学里所有大数运算都能「先取模再算」的原因。试试课件例题：a=234, b=87, n=5。</p>
       <div class="controls">
         <div class="ctrl-group"><label>a</label><input type="text" id="mod-a" value="234"></div>
         <div class="ctrl-group"><label>b</label><input type="text" id="mod-b" value="87"></div>
@@ -1983,46 +2032,97 @@ policy. Consequences of violating this policy are addressed in the Employee's Ha
       </div>
       <div class="demo-info" id="mod-info"></div>
     </div>
-
-    <h3>定理：模 n 的逆元存在性</h3>
-    <p><strong>定理 1</strong>：若 gcd(a, n) = 1，则存在唯一的 b（0 ≤ b &lt; n）使得 ba mod n = 1，称 b 为 a 模 n 的<strong>逆元</strong>，记作 a⁻¹ mod n。逆元是 RSA 密钥生成的关键（e 的逆元就是 d）。</p>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>a ≡ b (mod n) ⟺ n | (a−b)；a mod n 是 0..n−1 的非负余数。</li><li>负数的模：−10 mod 7 = 4。</li><li>先取模再运算，结果不变——大数运算的基础。</li></ul></div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>动手验证 (a+b)、ab、a^k 三条性质的「先取模」版本。</li><li>想通这一点，RSA 的大数运算就不再神秘。</li></ul></div>
   </section>
 
-  <!-- ======================= L4-2：欧几里得算法 ======================= -->
-  <section class="chapter" id="l4-2">
-    <h2><span class="chapter-no">L4-2</span>欧几里得算法与模逆元</h2>
-    <p class="chapter-sub">Euclidean Algorithm · Multiplicative Inverse</p>
-    <h3>欧几里得算法（求最大公约数）</h3>
-    <p>反复使用带余除法：m = nq + r，且 gcd(a, b) = gcd(b, a mod b)。</p>
-    <div class="code"><span class="cap"># 求 gcd(68, 36)</span>
+  <!-- ======================= L4-3：欧几里得算法 ======================= -->
+  <section class="chapter" id="l4-3">
+    <h2><span class="chapter-no">L4-3</span>欧几里得算法：求最大公约数</h2>
+    <p class="chapter-sub">The Euclidean Algorithm</p>
+
+    <h3>基础：带余除法（The Division Algorithm）</h3>
+    <div class="formula">
+      <span class="fn">带余除法（算法 1）：对任意整数 m 和正整数 n，存在唯一表示</span>
+      m = nq + r　　（q = ⌊m/n⌋，0 ≤ r &lt; n；q 为商 quotient，r 为余数 remainder）
+    </div>
+
+    <h3>欧几里得算法（算法 2）</h3>
+    <p>反复带余除法，直到余数为 0：r₀ = m，r₁ = n，rᵢ₋₁ = qᵢrᵢ + rᵢ₊₁ …，<strong>最后一个非零余数就是 gcd(m, n)</strong>。其正确性依据：<strong>gcd(a, b) = gcd(b, a mod b)</strong>。</p>
+
+    <div class="code"><span class="cap"># 例题：求 gcd(68, 36)</span>
 68 = 1×36 + 32
 36 = 1×32 + 4
-32 = 8×4 + 0     <span class="cm"># 余数为 0，最后的非零余数 4 就是答案</span>
-gcd(68, 36) = 4</div>
-    <h3>扩展欧几里得算法（写成线性组合）</h3>
-    <p>把 gcd(m, n) 表示成 k₁m + k₂n 的形式——求逆元的必经之路：</p>
-    <div class="code"><span class="cap"># gcd(28, 51) = 1 的线性组合</span>
+32 = 8×4 + 0        <span class="cm"># 余数为 0，停止</span>
+gcd(68, 36) = <b>4</b>    <span class="cm"># 最后一个非零余数</span></div>
+
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习：求 gcd(48, 18) 与 gcd(100, 45)</summary>
+      <p style="margin-top:8px"><b>答案：</b><br>
+      gcd(48, 18)：48 = 2×18 + 12；18 = 1×12 + 6；12 = 2×6 → <b>6</b><br>
+      gcd(100, 45)：100 = 2×45 + 10；45 = 4×10 + 5；10 = 2×5 → <b>5</b></p>
+    </details>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>带余除法：m = nq + r（0 ≤ r &lt; n）。</li><li>欧几里得：辗转相除到余数 0，最后非零余数 = gcd。</li><li>原理：gcd(a, b) = gcd(b, a mod b)。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-4：扩展欧几里得 ======================= -->
+  <section class="chapter" id="l4-4">
+    <h2><span class="chapter-no">L4-4</span>扩展欧几里得算法：把 gcd 写成线性组合</h2>
+    <p class="chapter-sub">The Extended Euclidean Algorithm</p>
+    <p>扩展欧几里得算法（算法 3）回答：<strong>gcd(m, n) 如何表示成 k₁m + k₂n</strong>？做法是<strong>反向回代</strong>（backward substitution）欧几里得算法得到的方程组。</p>
+    <h3>课件例题 1：gcd(28, 51) = 1</h3>
+    <div class="code"><span class="cap"># 正向：辗转相除</span>
 51 = 1×28 + 23
 28 = 1×23 + 5
 23 = 4×5 + 3
 5 = 1×3 + 2
 3 = 1×2 + 1
-2 = 2×1
-<span class="cm"># 反向回代：</span>
-1 = 11×51 + (−20)×28</div>
-    <h3>求模逆元两步法</h3>
+2 = 2×1 + 0
+gcd(28, 51) = 1
+
+<span class="cap"># 反向：从最后一式回代</span>
+1 = 3 − 1×2
+  = 3 − 1×(5 − 1×3)      = 2×3 − 1×5
+  = 2×(23 − 4×5) − 1×5   = 2×23 − 9×5
+  = 2×23 − 9×(28 − 1×23) = 11×23 − 9×28
+  = 11×(51 − 1×28) − 9×28
+  = <b>11×51 + (−20)×28</b></div>
+    <h3>课件例题 2：gcd(68, 36) = 4</h3>
+    <div class="code"><span class="cap"># 反向回代</span>
+4 = 36 − 1×32
+  = 36 − 1×(68 − 1×36)
+  = <b>2×36 + (−1)×68</b></div>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习：把 gcd(48, 18) = 6 写成线性组合</summary>
+      <p style="margin-top:8px"><b>答案：</b>48 = 2×18 + 12；18 = 1×12 + 6。回代：6 = 18 − 1×12 = 18 − 1×(48 − 2×18) = <b>3×18 + (−1)×48</b>。</p>
+    </details>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>扩展欧几里得 = 正向辗转相除 + 反向逐步回代。</li><li>输出：k₁、k₂ 使 k₁m + k₂n = gcd(m, n)。</li><li>它是求模逆元的必经之路（下一节）。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-5：模逆元 ======================= -->
+  <section class="chapter" id="l4-5">
+    <h2><span class="chapter-no">L4-5</span>模逆元：RSA 密钥生成的关键一步</h2>
+    <p class="chapter-sub">Multiplicative Inverse</p>
+
+    <h3>为什么存在？</h3>
+    <p><strong>引理 1</strong>：若 gcd(a, n) = 1，则对 0 ≤ i &lt; j &lt; n 的 i、j，必有 aj mod n ≠ ai mod n（a 的 1 到 n−1 次倍两两不同余）。<strong>定理 1</strong>：因此存在唯一的 b（0 ≤ b &lt; n）使 <b>ba mod n = 1</b>，b 称为 a 模 n 的<strong>逆元</strong>，记作 a⁻¹ mod n。</p>
+
+    <h3>求解两步法（课件）</h3>
     <ol>
-      <li>用扩展欧几里得算法找 k₁、k₂ 使 k₁a + k₂n = 1；</li>
-      <li>计算 b = k₁ mod n，即得 a⁻¹ mod n。</li>
+      <li>用<strong>扩展欧几里得算法</strong>找 k₁、k₂ 使 k₁a + k₂n = 1（前提 gcd(a,n)=1）；</li>
+      <li>计算 <b>b = k₁ mod n</b>，即得 a⁻¹ mod n。</li>
     </ol>
-    <div class="analogy"><span class="tag">课件例题</span>求 28⁻¹ mod 51：由 1 = 11×51 + (−20)×28 得 28⁻¹ = (−20) mod 51 = <b>31</b>（验证：31×28 = 868，868 mod 51 = 1 ✓）。<br>
-    练习答案：12⁻¹ mod 61 = 56（1 = 61 + (−5)×12 → (−5) mod 61 = 56）。</div>
+    <div class="analogy"><span class="tag">课件例题</span>求 28⁻¹ mod 51：由 1 = 11×51 + (−20)×28，得 28⁻¹ = (−20) mod 51 = <b>31</b>（验证：31×28 = 868，868 mod 51 = 1 ✓）。<br>
+    <b>练习答案</b>：12⁻¹ mod 61 = <b>56</b>（61 = 5×12 + 1 → 1 = 61 + (−5)×12 → (−5) mod 61 = 56）。</div>
+
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习：求 5⁻¹ mod 7 和 3⁻¹ mod 11</summary>
+      <p style="margin-top:8px"><b>答案：</b>5⁻¹ mod 7 = 3（15 mod 7 = 1）；3⁻¹ mod 11 = 4（12 mod 11 = 1）。</p>
+    </details>
 
     <h3>动手算：逆元求解器</h3>
     <div class="demo">
       <p class="demo-title">演示 10 · 扩展欧几里得 & 模逆元求解器</p>
-      <p class="demo-tip">输入 a 和 n，计算 gcd(a, n)、线性组合表达式；若 gcd = 1，进一步算出逆元 a⁻¹ mod n（全程展示辗转相除的每一步）。</p>
+      <p class="demo-tip">输入 a 和 n，计算 gcd(a, n)、线性组合表达式；若 gcd = 1，进一步算出逆元 a⁻¹ mod n（全程展示辗转相除的每一步）。试试课件例题 a=28, n=51。</p>
       <div class="controls">
         <div class="ctrl-group"><label>a</label><input type="text" id="eea-a" value="28"></div>
         <div class="ctrl-group"><label>n</label><input type="text" id="eea-n" value="51"></div>
@@ -2031,53 +2131,132 @@ gcd(68, 36) = 4</div>
       <div class="demo-info" id="eea-info"></div>
     </div>
 
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>欧几里得：辗转相除到余数 0，最后非零余数 = gcd。</li><li>扩展版：反向回代写成 k₁a + k₂n = gcd。</li><li>逆元 = k₁ mod n；只有 gcd(a,n)=1 时逆元才存在。</li></ul></div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>逆元存在 ⟺ gcd(a, n) = 1（引理 1 + 定理 1）。</li><li>两步法：扩展欧几里得找系数 → k₁ mod n。</li><li>28⁻¹ mod 51 = 31；12⁻¹ mod 61 = 56——两道例题背下来。</li></ul></div>
   </section>
 
-  <!-- ======================= L4-3：费马与欧拉 ======================= -->
-  <section class="chapter" id="l4-3">
-    <h2><span class="chapter-no">L4-3</span>费马小定理与欧拉定理</h2>
-    <p class="chapter-sub">Fermat's Little Theorem · Euler's Theorem</p>
+  <!-- ======================= L4-6：费马小定理 ======================= -->
+  <section class="chapter" id="l4-6">
+    <h2><span class="chapter-no">L4-6</span>费马小定理</h2>
+    <p class="chapter-sub">Fermat's Little Theorem</p>
     <div class="formula">
-      <span class="fn">费马小定理（Fermat's Little Theorem，p 为素数且 p ∤ a）：</span>
-      <i>a</i><sup>p−1</sup> ≡ 1 (mod p)
+      <span class="fn">费马小定理（p 为素数，p ∤ a，即 p 不整除 a）：</span>
+      a<sup>p−1</sup> ≡ 1 (mod p)
     </div>
-    <div class="analogy"><span class="tag">课件练习</span>验证 a=3, p=11：3¹⁰ mod 11 = [(27 mod 11)(27 mod 11)(27 mod 11)(3 mod 11)] mod 11 = (5·5·5·3) mod 11 = 1 ✓。<br>
-    <b>应用</b>：费马定理反过来可用于<strong>素性检测</strong>——随机选 a，若 a^(N−1) mod N ≠ 1 则 N 必为合数；若 = 1 则 N「极可能」是素数（误判概率约 10⁻¹³，伪素数除外）。</div>
-    <p>欧拉函数（<span class="en">Euler Totient Function</span>）φ(n)：1 ≤ k &lt; n 且 gcd(k, n) = 1 的整数 k 的个数。例如 φ(10) = 4（1、3、7、9）。关键结论：<strong>若 n = pq（p、q 为素数），φ(n) = (p−1)(q−1)</strong>——RSA 的灵魂公式。</p>
+    <p><strong>证明思路</strong>（课件）：考虑集合 Z*ₚ = {1, 2, …, p−1}。由引理 1，当 i ≠ j 时 ia mod p ≠ ja mod p，所以 {(1a) mod p, (2a) mod p, …, ((p−1)a) mod p} 恰好是 Z*ₚ 的一个重排。两两相乘：</p>
     <div class="formula">
-      <span class="fn">欧拉定理（Euler's Theorem，gcd(a, n) = 1）：</span>
-      <i>a</i><sup>φ(n)</sup> ≡ 1 (mod n)
+      <span class="fn">(p−1)! ≡ a<sup>p−1</sup>·(p−1)! (mod p)　→　两边消去 (p−1)!（其逆元存在）得：</span>
+      a<sup>p−1</sup> ≡ 1 (mod p)
     </div>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>费马：a^(p−1) ≡ 1 (mod p)，还兼做素性检测。</li><li>φ(n)：小于 n 且与 n 互素的整数个数；φ(pq) = (p−1)(q−1)。</li><li>欧拉：a^φ(n) ≡ 1 (mod n)——RSA 解密正确性的证明基础。</li></ul></div>
+    <div class="analogy"><span class="tag">课件练习</span>验证 a=3, p=11：3¹⁰ mod 11 = [(27 mod 11)(27 mod 11)(27 mod 11)(3 mod 11)] mod 11 = (5×5×5×3) mod 11 = 375 mod 11 = <b>1</b> ✓</div>
+
+    <h3>应用：素性检测（Primality Testing）</h3>
+    <p>反过来用：随机选 a，若 a^(N−1) mod N <strong>≠ 1</strong>，则 N <strong>必为合数</strong>；若 = 1，则 N 「极可能」是素数——此时 N 不是素数的概率约为 <b>10⁻¹³</b>（注意：逆命题不总是成立，存在「伪素数」）。课件伪代码：</p>
+    <div class="code"><span class="cap"># 费马素性检测（概率算法）</span>
+Input: an integer N
+1. Select a random integer a such that 1 &lt; a &lt; N − 1
+2. If a^(N−1) mod N = 1 then return ("prime")
+3. else return ("composite")</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>费马：a^(p−1) ≡ 1 (mod p)——证明靠「乘积重排 + 消去」。</li><li>正向验证（3¹⁰ mod 11 = 1）与反向应用（素性检测）都要会。</li><li>素性检测误差约 10⁻¹³，是 RSA 生成大素数的实用工具。</li></ul></div>
   </section>
 
-  <!-- ======================= L4-4：RSA 数学 ======================= -->
-  <section class="chapter" id="l4-4">
-    <h2><span class="chapter-no">L4-4</span>RSA：密钥生成与加解密</h2>
-    <p class="chapter-sub">RSA Key Generation, Encryption and Decryption</p>
-    <h3>密钥生成四步（Key Generation）</h3>
-    <ol>
-      <li>生成大素数 p、q；</li>
-      <li>计算 n = pq，φ(n) = (p−1)(q−1)；</li>
-      <li>随机选 e（0 ≤ e &lt; φ(n) 且 gcd(e, φ(n)) = 1）；</li>
-      <li>计算 d = e⁻¹ mod φ(n)。</li>
-    </ol>
-    <p>然后<strong>安全销毁 p、q、φ(n)</strong>。公钥 = &lt;e, n&gt;，私钥 = &lt;d, n&gt;。备注：k 位 RSA 指模数 n 是 k 位整数（如 1024 位 RSA）；p、q 必须足够大以防暴力分解。</p>
+  <!-- ======================= L4-7：欧拉函数与欧拉定理 ======================= -->
+  <section class="chapter" id="l4-7">
+    <h2><span class="chapter-no">L4-7</span>欧拉函数与欧拉定理</h2>
+    <p class="chapter-sub">Euler Totient Function · Euler's Theorem</p>
+
+    <h3>欧拉函数 φ(n)</h3>
+    <p>定义（课件）：φ(n) = 满足 <b>1 ≤ k &lt; n 且 gcd(k, n) = 1</b> 的整数 k 的个数。</p>
+    <div class="analogy"><span class="tag">课件例题</span>φ(10) = <b>4</b>：1 到 9 中与 10 互素的是 1、3、7、9。</div>
+    <p>两个关键公式（Theorem 3 与 Theorem 4）：</p>
     <div class="formula">
-      <span class="fn">加密（公钥 &lt;e, n&gt;，明文块 m &lt; n）：</span>
+      <span class="fn">n = pq（p、q 为素数）时（RSA 的灵魂公式）：</span>
+      φ(n) = φ(p)·φ(q) = (p−1)(q−1)
+    </div>
+    <div class="formula">
+      <span class="fn">一般情况（n = p₁^e₁ · p₂^e₂ · … · pₖ^eₖ）：</span>
+      φ(n) = <span class="sigma"><span class="slim"><span>k</span><span>i=1</span></span><span class="sg">Π</span></span> p<sub>i</sub><sup>e<sub>i</sub>−1</sup>(p<sub>i</sub> − 1)
+    </div>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习：求 φ(35) 与 φ(9)</summary>
+      <p style="margin-top:8px"><b>答案：</b>φ(35) = φ(5·7) = (5−1)(7−1) = <b>24</b>；φ(9) = φ(3²) = 3^(2−1)·(3−1) = <b>6</b>（与 9 互素的是 1、2、4、5、7、8）。</p>
+    </details>
+
+    <h3>欧拉定理（费马小定理的推广）</h3>
+    <div class="formula">
+      <span class="fn">欧拉定理（gcd(a, n) = 1）：</span>
+      a<sup>φ(n)</sup> ≡ 1 (mod n)
+    </div>
+    <p>推论（RSA 解密正确性的核心）：设 n = pq，0 ≤ a &lt; n，则对任意整数 k，<b>a^(kφ(n)+1) mod n = a mod n</b>——证明分三种情况（a=0 显然；gcd(a,n)=1 用欧拉定理；gcd(a,n)≠1 时结合中国剩余式论证），课件要求「Exercise: Prove the general result by induction」。</p>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>φ(n)：小于 n 且与 n 互素的整数个数；φ(10)=4、φ(pq)=(p−1)(q−1)。</li><li>欧拉定理 a^φ(n) ≡ 1 (mod n) 是费马定理的推广。</li><li>推论 a^(kφ(n)+1) ≡ a (mod n) 直接保证「RSA 解密能还原明文」。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-8：RSA 密钥生成 ======================= -->
+  <section class="chapter" id="l4-8">
+    <h2><span class="chapter-no">L4-8</span>RSA：密钥生成</h2>
+    <p class="chapter-sub">RSA Key Generation</p>
+    <div class="pipeline">
+      <div class="pipe-step"><b>1</b>生成大素数 p、q</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>2</b>n = pq<br>φ(n) = (p−1)(q−1)</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>3</b>随机选 e<br>gcd(e, φ(n)) = 1</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>4</b>d = e⁻¹ mod φ(n)</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>销毁</b>p、q、φ(n)</div>
+    </div>
+    <p>完成后：<strong>公钥 = &lt;e, n&gt;</strong> 公开，<strong>私钥 = &lt;d, n&gt;</strong> 由用户保管；<b>p、q、φ(n) 被安全销毁</b>——留下它们就等于留下破解入口。</p>
+
+    <h3>四个备注（Remarks，全是考点）</h3>
+    <table class="tb">
+      <tr><th>#</th><th>课件备注</th><th>解读</th></tr>
+      <tr><td>1</td><td>n 称为模数（modulus）；「k 位 RSA」指模数 n 是 k 位整数（1024 位 RSA → n 是 1024 位）</td><td>位数的对象是 <b>n</b>，不是 p、不是密钥长度之和</td></tr>
+      <tr><td>2</td><td>RSA 安全依赖整数分解的困难性，p、q 必须<strong>足够大</strong>以防暴力攻击</td><td>p、q 是「大」素数</td></tr>
+      <tr><td>3</td><td>生成大素数需要素性检测：最原始的方法是试除所有 ≤ √N 的整数（若 N 是合数必有非平凡因子 ≤ √N）——但复杂度<strong>指数增长</strong>，不实用</td><td>试除法正确但慢；2004 年才出现确定性多项式算法（AKS）</td></tr>
+      <tr><td>4</td><td>实用方法是<strong>费马素性检测</strong>（见 L4-6）——快速但概率化</td><td>误判率约 10⁻¹³</td></tr>
+    </table>
+    <div class="code"><span class="cap"># 试除法素性检测（课件伪代码，正确但低效）</span>
+Input: A positive integer N &gt; 1
+Output: Tells whether N is prime
+1. for i = 2, …, ⌊√N⌋
+2.   { Compute N / i
+3.     if N / i is an integer
+4.       { output N is composite; go to 9; }
+5.     else
+6.       i = i + 1; }
+7. output N is prime
+8. end</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>四步：生成 p,q → 算 n,φ → 选互素的 e → 求逆元 d → 销毁 p,q,φ。</li><li>k 位 RSA 的 k 指模数 n 的位数；安全靠分解难，p、q 必须大。</li><li>素性检测：试除 √N 正确但指数慢；费马检测快但概率化（10⁻¹³）。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-9：RSA 加解密 ======================= -->
+  <section class="chapter" id="l4-9">
+    <h2><span class="chapter-no">L4-9</span>RSA：加密、解密与正确性</h2>
+    <p class="chapter-sub">RSA Encryption and Decryption</p>
+    <h3>加密（用公钥）</h3>
+    <p>明文分块，每块转成整数 m（必须 <b>m &lt; n</b>）。密文：</p>
+    <div class="formula">
+      <span class="fn">加密：</span>
       c = m<sup>e</sup> mod n
     </div>
+    <h3>解密（用私钥）</h3>
     <div class="formula">
-      <span class="fn">解密（私钥 &lt;d, n&gt;）：</span>
+      <span class="fn">解密：</span>
       m = c<sup>d</sup> mod n
     </div>
-    <p><strong>为什么能解回来？</strong>因为 de ≡ 1 (mod φ(n))，即 de = kφ(n) + 1，由欧拉定理的推论 a^(kφ(n)+1) ≡ a (mod n)，所以 c<sup>d</sup> = m<sup>ed</sup> = m<sup>kφ(n)+1</sup> ≡ m (mod n)。这就是「明文必须小于 n」的原因。</p>
+    <h3>为什么解密一定能还原？（课件完整证明链）</h3>
+    <ol>
+      <li>de ≡ 1 (mod φ(n)) → 存在整数 k 使 de = kφ(n) + 1；</li>
+      <li>c<sup>d</sup> = (m<sup>e</sup>)<sup>d</sup> = m<sup>ed</sup> = m<sup>kφ(n)+1</sup>；</li>
+      <li>由欧拉定理推论（L4-7）：m<sup>kφ(n)+1</sup> mod n = m mod n = m（因为 0 ≤ m &lt; n）。</li>
+    </ol>
+    <p>推论证明分三情形：a=0 显然；gcd(a,n)=1 用欧拉定理；gcd(a,n)≠1（a 是 p 或 q 的倍数但不同时是两者倍数）时，先用欧拉定理在模 q 下成立、再合并到模 n——这正是课件要求的归纳练习。</p>
+    <div class="think"><span class="tag">思考题（课件原问）</span>为什么明文块必须满足 m &lt; n？<br>（提示：模 n 的世界里只有 n 个不同的值 {0,…,n−1}，m ≥ n 时解密只会得到 m mod n，信息永久丢失。）</div>
 
     <h3>动手玩：RSA 迷你加解密</h3>
     <div class="demo">
       <p class="demo-title">演示 11 · RSA 小型加解密实验室</p>
-      <p class="demo-tip">用 p=13, q=11（n=143, φ=120, e=7, d=103）的真实密钥对，把消息 m 加密成 c，再解回来。试着改 p、q、e，观察：e 必须与 φ(n) 互素，否则无法生成 d。</p>
+      <p class="demo-tip">用 p=13, q=11（n=143, φ=120, e=7, d=103）的真实密钥对，把消息 m 加密成 c，再解回来。试着改 p、q、e，观察：e 必须与 φ(n) 互素，否则无法生成 d；m ≥ n 时会报错。</p>
       <div class="controls">
         <div class="ctrl-group"><label>p</label><input type="text" id="rsa-p" value="13"></div>
         <div class="ctrl-group"><label>q</label><input type="text" id="rsa-q" value="11"></div>
@@ -2088,79 +2267,157 @@ gcd(68, 36) = 4</div>
       <div class="demo-info" id="rsa-info"></div>
     </div>
 
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>密钥生成：p,q → n,φ → 选 e → 算 d，然后销毁 p,q,φ。</li><li>加密 c = m^e mod n；解密 m = c^d mod n；明文必须 m &lt; n。</li><li>安全靠「分解 n 很难」；d 的存在性靠 gcd(e, φ) = 1。</li></ul></div>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习：手算一个小 RSA</summary>
+      <p style="margin-top:8px">p=3, q=11, e=3。求 n、φ(n)、d；加密 m=4 得 c，再解密还原。</p>
+      <p><b>答案：</b>n = 33，φ = 20；d = 3⁻¹ mod 20 = 7（3×7 = 21 ≡ 1 mod 20）。c = 4³ mod 33 = 64 mod 33 = <b>31</b>；解密 31⁷ mod 33 = 4 ✓。</p>
+    </details>
+
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>加密 c = m^e mod n；解密 m = c^d mod n；明文必须 m &lt; n。</li><li>正确性链：de = kφ+1 → 欧拉推论 → m 还原。</li><li>考点：「为什么 m &lt; n」「为什么解密有效」两道思考题都要会答。</li></ul></div>
   </section>
 
-  <!-- ======================= L4-5：中国剩余定理 ======================= -->
-  <section class="chapter" id="l4-5">
-    <h2><span class="chapter-no">L4-5</span>中国剩余定理 CRT</h2>
-    <p class="chapter-sub">Chinese Remainder Theorem</p>
-    <p><strong>中国剩余定理</strong>：若 n₁, n₂, …, nₖ 两两互素，则同余方程组 x ≡ aᵢ (mod nᵢ) 在模 M = n₁n₂…nₖ 下有<strong>唯一解</strong>。解法：对每个 i，令 Mᵢ = M/nᵢ，求 Mᵢ⁻¹ mod nᵢ，则：</p>
+  <!-- ======================= L4-10：中国剩余定理 ======================= -->
+  <section class="chapter" id="l4-10">
+    <h2><span class="chapter-no">L4-10</span>中国剩余定理 CRT</h2>
+    <p class="chapter-sub">The Chinese Remainder Theorem</p>
     <div class="formula">
-      <span class="fn">CRT 解：</span>
-      x = [ <span class="sigma"><span class="slim"><span>k</span><span>i=1</span></span><span class="sg">Σ</span></span> a<sub>i</sub>·M<sub>i</sub>·(M<sub>i</sub><sup>−1</sup> mod n<sub>i</sub>) ] mod M
+      <span class="fn">定理（n₁, n₂, …, nₖ 两两互素）：同余方程组</span>
+      x ≡ a₁ (mod n₁)，x ≡ a₂ (mod n₂)，…，x ≡ aₖ (mod nₖ)　在模 M = n₁n₂…nₖ 下有<strong>唯一解</strong>
     </div>
-    <div class="analogy"><span class="tag">课件例题</span>x ≡ 2 (mod 5)，x ≡ 3 (mod 13)：M = 65；M₁ = 13，M₁⁻¹ mod 5 = 2；M₂ = 5，M₂⁻¹ mod 13 = 8。<br>
-    x = [2×13×2 + 3×5×8] mod 65 = [52 + 120] mod 65 = 172 mod 65 = <b>42</b>。验证：42 mod 5 = 2 ✓，42 mod 13 = 3 ✓。</div>
-    <h3>CRT 的应用：低指数攻击</h3>
-    <p>若三个用户 A、B、C 的公钥都是 (e=3, nᵢ)（nᵢ 两两互素），且有人把<strong>同一条消息 m</strong> 分别加密给他们：攻击者截获 m³ mod n_A、m³ mod n_B、m³ mod n_C 后，用 CRT 求出唯一的 M ≡ m³ (mod n_An_Bn_C)。由于 m³ 本来就小于这个乘积，<strong>M = m³，直接开立方得 m</strong>！对策：加密前引入随机性（填充）。</p>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>CRT：两两互素的同余方程组有唯一解 mod 乘积。</li><li>解题三步：算 M、算各 Mᵢ⁻¹、加权求和取模。</li><li>低指数攻击（e=3 广播同一条消息）被 CRT 破解。</li></ul></div>
+    <h3>求解三步法（课件）</h3>
+    <ol>
+      <li>计算 M = n₁n₂…nₖ；</li>
+      <li>对每个 i，计算 Mᵢ = M/nᵢ 及其逆元 Mᵢ⁻¹ mod nᵢ（扩展欧几里得或观察法）；</li>
+      <li>解为：x = [ Σ aᵢ·Mᵢ·(Mᵢ⁻¹ mod nᵢ) ] mod M。</li>
+    </ol>
+    <div class="analogy"><span class="tag">课件例题</span>求 x ≡ 2 (mod 5)，x ≡ 3 (mod 13) 的解：<br>
+    ① M = 5×13 = <b>65</b>；<br>
+    ② M₁ = 13，M₁⁻¹ mod 5 = 2；M₂ = 5，M₂⁻¹ mod 13 = 8（观察或扩展欧几里得）；<br>
+    ③ x = [2×13×2 + 3×5×8] mod 65 = [52 + 120] mod 65 = 172 mod 65 = <b>42</b>。<br>
+    验证：42 mod 5 = 2 ✓，42 mod 13 = 3 ✓</div>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习：x ≡ 1 (mod 3)，x ≡ 2 (mod 5)</summary>
+      <p style="margin-top:8px"><b>答案：</b>M = 15；M₁ = 5，5⁻¹ mod 3 = 2；M₂ = 3，3⁻¹ mod 5 = 2。x = (1×5×2 + 2×3×2) mod 15 = (10+12) mod 15 = <b>7</b>。验证：7 mod 3 = 1 ✓，7 mod 5 = 2 ✓。</p>
+    </details>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>两两互素的模下，同余方程组有唯一解（mod 乘积）。</li><li>三步：算 M → 求各 Mᵢ⁻¹ → 加权求和取模。</li><li>课件例题答案 42，验证步骤要会写。</li></ul></div>
   </section>
 
-  <!-- ======================= L4-6：离散对数与群环域 ======================= -->
-  <section class="chapter" id="l4-6">
-    <h2><span class="chapter-no">L4-6</span>离散对数与群、环、域</h2>
-    <p class="chapter-sub">Discrete Logarithms · Groups, Rings, Fields</p>
-    <h3>离散对数</h3>
-    <ul>
-      <li><strong>阶 order</strong>：使 a^m ≡ 1 (mod n) 的最小正整数 m；φ(n) 是阶的<strong>最大可能值</strong>。</li>
-      <li><strong>原根 primitive root</strong>：阶恰等于 φ(n) 的数。</li>
-      <li><strong>离散对数 dlog</strong>：对素数 p 的原根 a 和整数 b，存在唯一 i（0 ≤ i ≤ p−1）使 b ≡ a^i (mod p)，i 记作 dlog<sub>a,p</sub>(b)。</li>
-    </ul>
+  <!-- ======================= L4-11：CRT 低指数攻击 ======================= -->
+  <section class="chapter" id="l4-11">
+    <h2><span class="chapter-no">L4-11</span>CRT 应用：低公钥指数攻击</h2>
+    <p class="chapter-sub">Attacking Low Public Exponent</p>
+    <p>这是 CRT 最精彩的实战应用（课件原文场景）：</p>
+    <ol>
+      <li>用户 A、B、C 的公钥都是 <b>(e=3, nₐ)、(e=3, n_b)、(e=3, n_c)</b>，且三个模数<strong>两两互素</strong>；</li>
+      <li>有人把<strong>同一条消息 m</strong>（且 m 小于三个模数）分别加密给三人；</li>
+      <li>攻击者截获三份密文：m³ mod nₐ、m³ mod n_b、m³ mod n_c；</li>
+      <li>用 CRT 求出唯一的 M &lt; nₐn_bn_c 满足 M ≡ m³ (mod nᵢ)——而 m³ 本身满足这三个同余式且小于乘积，所以 <b>M = m³</b>；</li>
+      <li>开立方即得明文：<b>m = ∛M</b>。</li>
+    </ol>
+    <div class="notice"><span class="tag">防御措施</span>课件给出对策：<strong>加密前引入随机性</strong>（an element of randomness）——即现代 RSA 的标准填充（padding，如 OAEP），让同一明文每次加密结果都不同。</div>
+
+    <h3>动手算：CRT 求解器（两个同余式）</h3>
+    <div class="demo">
+      <p class="demo-title">演示 18 · 中国剩余定理求解器</p>
+      <p class="demo-tip">输入两个同余式 x ≡ a₁ (mod n₁)、x ≡ a₂ (mod n₂)（n₁、n₂ 必须互素），求解器逐步展示 M、M₁⁻¹、M₂⁻¹ 和最终 x。试试课件例题 a₁=2, n₁=5, a₂=3, n₂=13。</p>
+      <div class="controls">
+        <div class="ctrl-group"><label>x ≡</label><input type="text" id="crt-a1" value="2"><label>mod</label><input type="text" id="crt-n1" value="5"></div>
+        <div class="ctrl-group"><label>x ≡</label><input type="text" id="crt-a2" value="3"><label>mod</label><input type="text" id="crt-n2" value="13"></div>
+        <button class="btn primary" id="crt-go">求解</button>
+      </div>
+      <div class="demo-info" id="crt-info"></div>
+    </div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>e=3 广播同一条消息 → CRT 合并三份密文 → 开立方破解。</li><li>防御：加密前加随机填充（padding）。</li><li>这是「算法没问题、用法有问题」的经典案例。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-12：离散对数 ======================= -->
+  <section class="chapter" id="l4-12">
+    <h2><span class="chapter-no">L4-12</span>离散对数</h2>
+    <p class="chapter-sub">Discrete Logarithms</p>
+    <table class="tb">
+      <tr><th>概念</th><th>英文</th><th>定义（课件）</th></tr>
+      <tr><td>阶</td><td>Order</td><td>使 a^m ≡ 1 (mod n) 的<strong>最小</strong>正整数 m（存在性：a 与 n 互素时至少有一个）；φ(n) 是阶的<strong>最大可能值</strong></td></tr>
+      <tr><td>原根</td><td>Primitive Root</td><td>阶恰等于 φ(n) 的数</td></tr>
+      <tr><td>离散对数</td><td>dlog</td><td>对素数 p 的原根 a 和整数 b，存在唯一 i（0 ≤ i ≤ p−1）使 b ≡ a^i (mod p)，i 记作 dlog<sub>a,p</sub>(b)</td></tr>
+    </table>
+    <div class="formula">
+      <span class="fn">两条运算性质：</span>
+      dlog(xy) = dlog(x) + dlog(y)　·　dlog(y<sup>r</sup>) = r · dlog(y)
+    </div>
     <div class="formula">
       <span class="fn">离散对数问题 DLP（DSA、Diffie-Hellman 的安全根基）：</span>
-      给定 p、g、y，求 x 使得 y = g<sup>x</sup> mod p —— 计算上困难
+      给定 p、g、y，求 x 使得 y = g<sup>x</sup> mod p —— <b>正着算快，反着求难</b>（单向函数）
     </div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>阶 = 最小的 m 使 a^m ≡ 1；最大不超过 φ(n)；等于 φ(n) 就是原根。</li><li>离散对数像「模世界里的对数」：乘法变加法、幂变乘法。</li><li>DLP 难解 = DSA / DH 的安全性来源。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-13：群环域 ======================= -->
+  <section class="chapter" id="l4-13">
+    <h2><span class="chapter-no">L4-13</span>群、环、域</h2>
+    <p class="chapter-sub">Groups, Rings, Fields</p>
     <h3>群 Group（G1~G4 必背）</h3>
-    <ol>
-      <li><strong>封闭性 Closure</strong>：a•b ∈ G；</li>
-      <li><strong>结合律 Associative</strong>：(a•b)•c = a•(b•c)；</li>
-      <li><strong>单位元 Identity</strong>：存在 e 使 a•e = e•a = a；</li>
-      <li><strong>逆元 Inverse</strong>：每个 a 有 b 使 a•b = b•a = e。</li>
-    </ol>
-    <p>再加一条<strong>交换律（G5 Commutative）</strong>就是阿贝尔群（Abelian group）。若存在生成元 g 使所有元素都是 g 的幂，则为<strong>循环群</strong>（cyclic）。</p>
-    <h3>环 Ring（R1~R4）与域 Field</h3>
     <table class="tb">
-      <tr><th>结构</th><th>要求</th></tr>
-      <tr><td>环 Ring</td><td>加法构成阿贝尔群 + 乘法封闭 + 乘法结合 + <b>分配律</b>（(a+b)c = ac + bc）</td></tr>
-      <tr><td>交换环 / 整环</td><td>再加乘法交换律 → 交换环；再加乘法单位元 1 和「无零因子」→ 整环（Integral Domain）</td></tr>
-      <tr><td><b>域 Field</b></td><td>整环 + 每个非零元素都有乘法逆元（可做加减乘除）</td></tr>
+      <tr><th>公理</th><th>英文</th><th>内容</th></tr>
+      <tr><td>G1 封闭性</td><td>Closure</td><td>任意 a, b ∈ G，有 a•b ∈ G</td></tr>
+      <tr><td>G2 结合律</td><td>Associative</td><td>(a•b)•c = a•(b•c)</td></tr>
+      <tr><td>G3 单位元</td><td>Identity</td><td>存在 e ∈ G，使 a•e = e•a = a</td></tr>
+      <tr><td>G4 逆元</td><td>Inverse</td><td>每个 a 有 b 使 a•b = b•a = e（b 记作 a⁻¹，可证唯一）</td></tr>
     </table>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>离散对数：正着算（模幂）快，反着求（对数）难——单向函数。</li><li>群四公理：封闭、结合、单位元、逆元；+交换 = 阿贝尔群。</li><li>域 = 能四则运算的结构；GF(p)、GF(2ⁿ) 是密码学的常用域。</li></ul></div>
-  </section>
-
-  <!-- ======================= L4-7：多项式与有限域 ======================= -->
-  <section class="chapter" id="l4-7">
-    <h2><span class="chapter-no">L4-7</span>多项式算术与有限域 GF(2ⁿ)</h2>
-    <p class="chapter-sub">Polynomial Arithmetic · Finite Fields</p>
     <ul>
-      <li><strong>有限域 GF(p)</strong>：集合 {0, 1, …, p−1} 配模 p 的加减乘除。</li>
-      <li><strong>有限域 GF(pⁿ)</strong>：系数在 GF(p) 上、次数 ≤ n−1 的多项式；加法按系数模 p 逐位相加，乘法先按多项式乘、再除以一个<strong>不可约多项式</strong>（irreducible polynomial）取余。</li>
-      <li>AES 使用的不可约多项式：<b>m(x) = x⁸ + x⁴ + x³ + x + 1</b>（GF(2⁸)，考试必背）。</li>
+      <li><strong>阿贝尔群（G5）</strong>：再加<strong>交换律</strong> a•b = b•a——此时单位元写成 0、运算写成 +、逆元写成 −a；</li>
+      <li><strong>有限群 / 无限群</strong>：|G| 有限则称有限群，|G| 为群的阶（order）；</li>
+      <li><strong>循环群 Cyclic</strong>：存在生成元 g（generator），每个元素都是 g 的某次幂。</li>
     </ul>
-    <div class="analogy"><span class="tag">课件例题（Stallings）</span>{57} ⊕ {83} = {D4}：<br>
-    多项式：x⁶+x⁴+x²+x+1 ⊕ x⁷+x+1 = x⁷+x⁶+x⁴+x²<br>
-    二进制：01010111 ⊕ 10000011 = 11010100；十六进制：{57} ⊕ {83} = {D4}。<br>
-    乘法的关键技巧：x⁸ mod m(x) = x⁴+x³+x+1（因为 x⁸ ≡ m(x)−x⁸）。</div>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>GF(2ⁿ) 的多项式乘法要做「模不可约多项式」运算。</li><li>AES 多项式 m(x) = x⁸+x⁴+x³+x+1 必背。</li><li>加法 = 异或（系数模 2），{57}⊕{83}={D4}。</li></ul></div>
+    <h3>环 Ring（R1~R5）与域 Field</h3>
+    <table class="tb">
+      <tr><th>结构</th><th>要求（课件）</th></tr>
+      <tr><td>环 Ring</td><td>(R1) 加法构成阿贝尔群；(R2) 乘法封闭；(R3) 乘法结合；(R4) <b>分配律</b> (a+b)•c = a•c + b•c 及 a•(b+c) = a•b + a•c</td></tr>
+      <tr><td>交换环 Commutative Ring</td><td>再加 (R5) 乘法交换律</td></tr>
+      <tr><td>整环 Integral Domain</td><td>再加 (R6) 乘法单位元 1；(R7) <b>无零因子</b>（ab = 0 → a = 0 或 b = 0）</td></tr>
+      <tr><td><b>域 Field</b></td><td>整环 + (F2) 每个非零元素都有乘法逆元——即<strong>能做加减乘除</strong></td></tr>
+    </table>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习：哪个性质不是群的要求？</summary>
+      <p style="margin-top:8px"><b>答案：交换律（commutativity）</b>——它是「阿贝尔群」的附加条件 G5，不是群的 G1~G4。判断题高频陷阱。</p>
+    </details>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>群四公理：封闭、结合、单位元、逆元；+交换 = 阿贝尔群。</li><li>环 = 群 + 乘法 + 分配律；域 = 整环 + 非零元可逆（可四则运算）。</li><li>密码学常用域：GF(p) 与 GF(2ⁿ)（下一节）。</li></ul></div>
   </section>
 
-  <!-- ======================= L4-8：自测 ======================= -->
-  <section class="chapter" id="l4-8">
-    <h2><span class="chapter-no">L4-8</span>Lecture 4 自测</h2>
+  <!-- ======================= L4-14：多项式与 GF(2ⁿ) ======================= -->
+  <section class="chapter" id="l4-14">
+    <h2><span class="chapter-no">L4-14</span>多项式算术与有限域 GF(2ⁿ)</h2>
+    <p class="chapter-sub">Polynomial Arithmetic · Finite Fields</p>
+    <h3>基本概念</h3>
+    <ul>
+      <li>系数集为域 F 时，称多项式<strong>定义在域 F 上</strong>；</li>
+      <li><strong>不可约多项式</strong>（irreducible）：不能分解为两个更低次多项式之积——相当于多项式的「素数」；</li>
+      <li><strong>GF(p)</strong>：集合 {0, 1, …, p−1} 配模 p 运算构成域；</li>
+      <li><strong>GF(pⁿ)</strong>：系数在 GF(p) 上、次数 ≤ n−1 的多项式全体；加法按系数模 p 逐位加，乘法先多项式相乘、再对不可约多项式取余。</li>
+    </ul>
+    <div class="formula">
+      <span class="fn">AES 使用的不可约多项式（必背）：</span>
+      m(x) = x⁸ + x⁴ + x³ + x + 1　（GF(2⁸)）
+    </div>
+    <h3>课件例题 1：加法 = 逐位异或</h3>
+    <div class="analogy"><span class="tag">例题（Stallings）</span>{57} ⊕ {83} = {D4}：<br>
+    多项式：(x⁶+x⁴+x²+x+1) + (x⁷+x+1) = x⁷+x⁶+x⁴+x²<br>
+    二进制：01010111 ⊕ 10000011 = 11010100<br>
+    十六进制：{57} ⊕ {83} = <b>{D4}</b></div>
+    <h3>课件例题 2：乘法（用「乘 x」技巧递推）</h3>
+    <p>关键事实：在 GF(2ⁿ) 中，<b>x⁸ mod m(x) = m(x) − x⁸ = x⁴+x³+x+1</b>（因为 x⁸ ≡ m(x)−x⁸）。由此每次「乘以 x」若最高位 b₇ = 1，就左移一位并异或 00011011。课件逐步算出：(01010111)×(10000011) = (00111000) ⊕ (10101110) ⊕ (01010111) = <b>(11000001)</b>。</p>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习：计算 {A9} ⊕ {37}（二进制异或）</summary>
+      <p style="margin-top:8px"><b>答案：</b>10101001 ⊕ 00110111 = 10011110 = <b>{9E}</b>。</p>
+    </details>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>GF(2ⁿ) 乘法 = 多项式乘 + 模不可约多项式。</li><li>AES 多项式 x⁸+x⁴+x³+x+1、{57}⊕{83}={D4} 必背。</li><li>加法就是异或——GF(2ⁿ) 的「加」没有进位。</li></ul></div>
+  </section>
+
+  <!-- ======================= L4-15：自测 ======================= -->
+  <section class="chapter" id="l4-15">
+    <h2><span class="chapter-no">L4-15</span>Lecture 4 自测</h2>
     <p class="chapter-sub">Quiz</p>
     <div class="demo">
-      <p class="demo-title">演示 14 · L4 自测（10 题 · English）</p>
+      <p class="demo-title">演示 14 · L4 自测（13 题 · English）</p>
       <div id="quiz-box4"></div>
       <div class="controls">
         <button class="btn primary" id="quiz-submit4">Submit / 交卷</button>
@@ -2169,6 +2426,7 @@ gcd(68, 36) = 4</div>
       </div>
       <div class="quiz-score" id="quiz-score4" style="display:none"></div>
     </div>
+    <div class="takeaway"><span class="tag">自测后行动</span><ul><li>正确率 ≥ 85%：数学基础扎实，可以去做 Review Exercise Sets。</li><li>60%~85%：重点回看 L4-5（逆元）、L4-9（RSA 正确性）、L4-10（CRT）。</li><li>&lt; 60%：按 L4-1 到 L4-14 顺序通读，每个实验室都动手玩一遍。</li></ul></div>
   </section>
 
   <!-- ======================= 总术语表（L2-L4） ======================= -->
