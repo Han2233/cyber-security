@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网络安全概述 · 互动式学习（COMP7906 Lecture 1）</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ======================= 顶部横幅 ======================= -->
+<header class="hero">
+  <h1>网络安全概述</h1>
+  <p>Cyber Security Overview —— 从「为什么需要安全」到「CIA 三元组」，从风险周期、安全策略到密码学、数字签名与 PKI。基于课件内容重新编排的互动学习版：每个概念配图解、演示和小测。</p>
+  <div class="badges">
+    <span class="badge">6 个交互式演示</span>
+    <span class="badge">中英术语对照</span>
+    <span class="badge">含 16 题自测</span>
+    <span class="badge">离线可用</span>
+  </div>
+  <span class="course">COMP7906 Introduction to Cyber Security · Lecture 1 · Russell Yiu · 2026</span>
+</header>
+
+<!-- ======================= 顶部导航 ======================= -->
+<nav class="nav">
+  <div class="nav-inner" id="topNav">
+    <a href="#sec1">1 为什么需要安全</a>
+    <a href="#sec2">2 CIA 三元组</a>
+    <a href="#sec3">3 安全的挑战</a>
+    <a href="#sec4">4 框架与管理</a>
+    <a href="#sec5">5 攻击·威胁·风险</a>
+    <a href="#sec6">6 服务与机制</a>
+    <a href="#sec7">7 风险管理周期</a>
+    <a href="#sec8">8 安全策略</a>
+    <a href="#sec9">9 密码学总览</a>
+    <a href="#sec10">10 三类密码算法</a>
+    <a href="#sec11">11 数字签名</a>
+    <a href="#sec12">12 PKI</a>
+    <a href="#sec13">13 应用·认证·监控</a>
+    <a href="#sec14">14 复习自测</a>
+    <a href="#glossary">术语表</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ======================= 目录侧栏 ======================= -->
+  <aside class="toc" id="tocSide">
+    <h2>目录 Contents</h2>
+    <a href="#sec1">1 为什么需要安全</a>
+    <a href="#sec2">2 CIA 三元组</a>
+    <a href="#sec3">3 安全的挑战</a>
+    <a href="#sec4">4 框架与管理</a>
+    <a href="#sec5">5 攻击·威胁·风险</a>
+    <a href="#sec6">6 服务与机制</a>
+    <a href="#sec7">7 风险管理周期</a>
+    <a href="#sec8">8 安全策略</a>
+    <a href="#sec9">9 密码学总览</a>
+    <a href="#sec10">10 三类密码算法</a>
+    <a href="#sec11">11 数字签名</a>
+    <a href="#sec12">12 PKI</a>
+    <a href="#sec13">13 应用·认证·监控</a>
+    <a href="#sec14">14 复习自测</a>
+    <a href="#glossary">附录 · 术语表</a>
+  </aside>
+
+  <main class="content">
+
+  <!-- ======================= 第一章：为什么需要网络安全 ======================= -->
+  <section class="chapter" id="sec1">
+    <h2><span class="chapter-no">1</span>为什么需要网络安全</h2>
+    <p class="chapter-sub">The Needs of Cyber Security</p>
+
+    <p>今天几乎一切活动——数据处理、传输、存储——都发生在网络空间（<span class="en">Cyberspace</span>）里。计算机和信息基础设施因此成了犯罪分子的<strong>首要目标</strong>，网络犯罪（<span class="en">Cyber Crime</span>）在全球持续上升。这就是学习网络安全的根本原因。</p>
+
+    <h3>1.1 网络安全的定义</h3>
+    <table class="tb">
+      <tr><th>来源</th><th>定义</th></tr>
+      <tr>
+        <td><b>NIST</b><br>美国国家标准与技术研究院</td>
+        <td>保护或防御网络空间的使用，使其免受网络攻击（<span class="en">cyber attacks</span>）的能力。<br><em>"The ability to protect or defend the use of cyberspace from cyber attacks"</em></td>
+      </tr>
+      <tr>
+        <td><b>ISO/IEC 27032:2012</b></td>
+        <td>网络安全 = 在网络空间中<strong>保护信息的机密性、完整性和可用性</strong>（C.I.A.）。<br>网络空间 = 由人、软件、服务在互联网上通过技术设备和网络相互交互形成的<strong>复杂环境，不以任何物理形式存在</strong>。</td>
+      </tr>
+      <tr>
+        <td><b>CISA</b><br>美国网络安全与基础设施安全局</td>
+        <td>保护网络、设备和数据免受未经授权的访问或犯罪使用的艺术（the art of protecting networks, devices, and data）。</td>
+      </tr>
+    </table>
+    <p>注意 ISO 的定义已经点出了核心：<strong>机密性、完整性、可用性</strong>——这就是下一章的 CIA 三元组。</p>
+
+    <h3>1.2 信息安全 vs 网络安全</h3>
+    <div class="cards3">
+      <div class="card">
+        <h4><span class="dot green"></span>信息安全</h4>
+        <p><span class="en">Information Security</span>：处理<strong>信息本身</strong>的保护问题——无论信息存放在哪里（纸上、硬盘、云端）。</p>
+      </div>
+      <div class="card">
+        <h4><span class="dot blue"></span>网络安全</h4>
+        <p><span class="en">Network Security</span>：处理<strong>网络及其服务</strong>的保护问题——路由器、交换机、传输链路、网络协议。</p>
+      </div>
+      <div class="card">
+        <h4><span class="dot orange"></span>还有其他吗？</h4>
+        <p>课件留了一个开放问题：想想还有哪些安全？例如应用安全（Application Security）、端点安全、云安全、物联网安全……</p>
+      </div>
+    </div>
+
+    <div class="analogy"><span class="tag">通俗理解</span>信息安全是「保护文件柜里的文件」，网络安全是「保护送文件的邮路和邮局」。文件（信息）与邮路（网络）都保护好了，才是完整的网络安全。</div>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>网络犯罪随基础设施依赖加深而增长，网络安全是刚需。</li>
+        <li>NIST 定义强调「保护网络空间的使用」；ISO 定义直接指向 CIA 三性。</li>
+        <li>信息安全保护「信息」，网络安全保护「网络与服务」——两者互补。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第二章：CIA 三元组 ======================= -->
+  <section class="chapter" id="sec2">
+    <h2><span class="chapter-no">2</span>CIA 三元组：网络安全的三大目标</h2>
+    <p class="chapter-sub">The C.I.A Triad</p>
+
+    <p><span class="hot">核心概念</span>CIA 三元组（<span class="en">C.I.A Triad</span>）是整个课程的地基，几乎每道题、每个方案最终都要回到这三个词上：</p>
+
+    <div class="demo" style="padding:10px">
+      <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CIA 三元组" style="width:100%;max-width:480px;margin:0 auto;display:block">
+        <!-- 三角形 -->
+        <polygon points="260,30 90,250 430,250" fill="none" stroke="#047857" stroke-width="4"/>
+        <!-- 中心文字 -->
+        <text x="260" y="190" text-anchor="middle" font-size="16" font-weight="800" fill="#065f46">C.I.A Triad</text>
+        <!-- 机密性 -->
+        <circle cx="260" cy="30" r="38" fill="#ecfdf5" stroke="#047857" stroke-width="2.5"/>
+        <text x="260" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">机密性</text>
+        <text x="260" y="42" text-anchor="middle" font-size="11" fill="#047857">Confidentiality</text>
+        <!-- 完整性 -->
+        <circle cx="90" cy="250" r="38" fill="#eff6ff" stroke="#0369a1" stroke-width="2.5"/>
+        <text x="90" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#0c4a6e">完整性</text>
+        <text x="90" y="262" text-anchor="middle" font-size="11" fill="#0369a1">Integrity</text>
+        <!-- 可用性 -->
+        <circle cx="430" cy="250" r="38" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+        <text x="430" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">可用性</text>
+        <text x="430" y="262" text-anchor="middle" font-size="11" fill="#d97706">Availability</text>
+      </svg>
+    </div>
+
+    <table class="tb">
+      <tr><th>属性</th><th>英文</th><th>定义（课件原文）</th><th>通俗例子</th></tr>
+      <tr>
+        <td><b>机密性</b></td><td><span class="en">Confidentiality</span></td>
+        <td>确保信息<strong>只被授权实体访问</strong></td>
+        <td>客户名单只有销售部能看到；别人看你的微信聊天就是泄密</td>
+      </tr>
+      <tr>
+        <td><b>完整性</b></td><td><span class="en">Integrity</span></td>
+        <td>① 信息<strong>没有未经授权的或意外的修改</strong>（数据完整性、时序正确性）；② 信息系统<strong>准确且一致</strong>（系统完整性）</td>
+        <td>银行转账金额 100 元不能被改成 10000 元；交易记录不能被中途篡改</td>
+      </tr>
+      <tr>
+        <td><b>可用性</b></td><td><span class="en">Availability</span></td>
+        <td>确保信息、系统或资源在<strong>需要时对授权实体可用</strong></td>
+        <td>查成绩时教务系统不能瘫痪；DDoS 攻击就是在破坏可用性</td>
+      </tr>
+    </table>
+
+    <h3>2.1 CIA 之外的其他安全要求</h3>
+    <p>课件还列出了一组同样重要的属性（考试常考连线题）：</p>
+    <table class="tb">
+      <tr><th>术语</th><th>含义</th></tr>
+      <tr><td>身份识别 Identification</td><td>你是谁？——用户声明自己的身份（报用户名）</td></tr>
+      <tr><td>认证 Authentication</td><td>证明「你是谁」——验证身份声明（输密码、刷指纹）</td></tr>
+      <tr><td>授权 Authorization</td><td>你能做什么？——授予已认证用户的权限</td></tr>
+      <tr><td>问责 / 可审计 Accountability</td><td>操作留痕，出了事能追查到人（日志、审计）</td></tr>
+      <tr><td>真实性 Authenticity</td><td>消息确实来自声明的发送者，内容真实未被伪造</td></tr>
+      <tr><td>不可抵赖 Non-repudiation</td><td>做过的事赖不掉——发送方不能否认自己发过（数字签名实现）</td></tr>
+      <tr><td>隐私 Privacy</td><td>个人信息的收集、使用受保护，不被滥用</td></tr>
+    </table>
+
+    <h3>2.2 动手练：判断破坏了哪个属性</h3>
+    <div class="demo">
+      <p class="demo-title">演示 1 · CIA 情景判断</p>
+      <p class="demo-tip">每个情景判断「主要破坏了 C/I/A 中的哪一个」。做完点交卷看解析——这是考试单选题的常见考法。</p>
+      <div id="cia-box"></div>
+      <div class="controls">
+        <button class="btn primary" id="cia-submit">交卷判分</button>
+        <button class="btn" id="cia-reset">重新作答</button>
+      </div>
+      <div class="quiz-score" id="cia-score" style="display:none"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>CIA = 机密性（只给授权者看）+ 完整性（不被篡改）+ 可用性（需要时能用）。</li>
+        <li>注意「认证（证明你是谁）」与「授权（你能干什么）」是两个不同步骤。</li>
+        <li>不可抵赖需要数字签名，隐私与安全并重——后面章节都会展开。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第三章：网络安全的挑战 ======================= -->
+  <section class="chapter" id="sec3">
+    <h2><span class="chapter-no">3</span>网络安全的挑战：功能正确 ≠ 安全</h2>
+    <p class="chapter-sub">The Cyber Security Challenges</p>
+
+    <h3>3.1 一句最重要的话</h3>
+    <div class="notice"><span class="tag">核心观点</span><b>Functionality does not guarantee security</b>——产品功能正常，不代表它安全。β 测试（Beta Testing）发现不了安全缺陷；必须做专门的安全测试（Security Testing）、产品认证（Product Certification），并且要问「在什么情境下安全？」（Secure in what context）。</div>
+
+    <div class="analogy"><span class="tag">通俗理解</span>一扇门能正常开关、看起来漂亮（功能正常），但锁芯用牙签一捅就开（不安全）。「能用」和「安全」是两套完全不同的测试标准。</div>
+
+    <h3>3.2 常见误解</h3>
+    <p>课件提醒：信息安全是一门<strong>古老的学科</strong>，但误解依然普遍。三个必须清醒的认识：</p>
+    <ul>
+      <li><strong>技术不是唯一的因素</strong>——Technical aspect is not the only issue（人、流程、管理同样关键）。</li>
+      <li><strong>信息安全是一个过程</strong>——Information security is a process（不是买一个产品就一劳永逸）。</li>
+      <li><strong>编程不是安全开发的唯一技能</strong>——Programming is not the only skill needed（还要懂网络、懂需求）。</li>
+    </ul>
+
+    <h3>3.3 案例学习：一家安全产品公司的真实问题</h3>
+    <table class="tb">
+      <tr><th>角色</th><th>暴露的问题</th></tr>
+      <tr><td>CTO（技术总监）</td><td>分不清文件加密（File Encryption）和数据库加密（Database Encryption）的区别；只强调编程技巧；不理解信息安全周期</td></tr>
+      <tr><td>工程团队</td><td>网络知识不足；理解用户需求的能力不够</td></tr>
+    </table>
+    <div class="think"><span class="tag">思考题（课件原文）</span>你试用了他们的产品，功能一切正常——这意味着产品是安全的吗？为什么？<br>（提示：回顾 3.1 的结论，并想想「安全在什么情境下成立」这个问题。）</div>
+
+    <h3>3.4 再读一遍产品说明书</h3>
+    <p>课件两次引导我们重读一段产品声明：<em>「我们的产品提供端到端电子文档处理，具有加密和数字签名功能，实现基于开放标准。」</em>——读完本章，你会问出什么问题？（例如：加密用的是对称还是非对称算法？密钥怎么管理？「端到端」具体指哪两端？基于哪个开放标准、是否经过独立认证？）带着问题往下学，第 9~12 章会给出回答工具。</p>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>功能正常 ≠ 安全；安全测试、认证、情境三者缺一不可。</li>
+        <li>安全 = 技术 + 人 + 流程 + 管理，且是一个持续的过程。</li>
+        <li>做安全产品，编程之外还要懂网络、懂用户需求、懂安全周期。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第四章：框架与管理 ======================= -->
+  <section class="chapter" id="sec4">
+    <h2><span class="chapter-no">4</span>应对挑战：框架与安全管理</h2>
+    <p class="chapter-sub">Meeting the Cyber Security Challenges</p>
+
+    <h3>4.1 影响安全项目的三大要素</h3>
+    <div class="demo" style="padding:10px">
+      <svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="影响安全项目的三要素" style="width:100%;max-width:460px;margin:0 auto;display:block">
+        <!-- 三角 -->
+        <polygon points="260,30 70,230 450,230" fill="none" stroke="#047857" stroke-width="3.5"/>
+        <circle cx="260" cy="40" r="46" fill="#ecfdf5" stroke="#047857" stroke-width="2.5"/>
+        <text x="260" y="36" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">合规要求</text>
+        <text x="260" y="52" text-anchor="middle" font-size="10.5" fill="#047857">Compliance Requirements</text>
+        <circle cx="70" cy="230" r="46" fill="#eff6ff" stroke="#0369a1" stroke-width="2.5"/>
+        <text x="70" y="226" text-anchor="middle" font-size="12" font-weight="700" fill="#0c4a6e">技术</text>
+        <text x="70" y="242" text-anchor="middle" font-size="10.5" fill="#0369a1">Technology</text>
+        <circle cx="450" cy="230" r="46" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+        <text x="450" y="226" text-anchor="middle" font-size="12" font-weight="700" fill="#92400e">人·组织·预算</text>
+        <text x="450" y="242" text-anchor="middle" font-size="10.5" fill="#d97706">People, Organization &amp; Budget</text>
+        <!-- 中心 -->
+        <rect x="180" y="105" width="160" height="44" rx="10" fill="#0f172a"/>
+        <text x="260" y="123" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6ee7b7">有效的</text>
+        <text x="260" y="139" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6ee7b7">网络安全框架</text>
+      </svg>
+    </div>
+    <p>有效的网络安全框架（<span class="en">Effective Cyber Security Framework</span>）由三股力量共同支撑：<strong>合规要求</strong>（法律与行业规范）、<strong>技术</strong>、<strong>人/组织/预算</strong>。任何一角缺失，框架都会塌。</p>
+
+    <h3>4.2 常见安全框架</h3>
+    <p>框架提供了一套<strong>共同的语言、标准和最佳实践</strong>，让安全管理有章可循：</p>
+    <table class="tb">
+      <tr><th>框架</th><th>全称 / 要点</th></tr>
+      <tr><td><b>ISO/IEC 27001 / 27002</b></td><td>信息安全管理体系（ISMS）标准：27001 是认证要求，27002 是控制措施指南（课件为 2013 版）</td></tr>
+      <tr><td><b>NIST RMF + SP 800-53</b></td><td>美国 NIST 风险管理框架（Risk Management Framework）+ 安全控制目录 800-53</td></tr>
+      <tr><td><b>CISSP CBK</b></td><td>(ISC)² 认证的公共知识体系（Common Body of Knowledge）——业内最有名的安全认证之一</td></tr>
+    </table>
+
+    <h3>4.3 信息安全管理（ISM）的目标</h3>
+    <ul>
+      <li><strong>确保业务连续性</strong>——Ensure business continuity（出事不停摆）</li>
+      <li><strong>最小化业务损失</strong>——Minimize business damage</li>
+      <li><strong>最大化投资回报与商业机会</strong>——Maximize return on investments and business opportunities</li>
+    </ul>
+
+    <h3>4.4 ITU-T X.800：定义安全需求的系统方法</h3>
+    <p>ITU-T X.800《OSI 安全架构》给出了一套系统性方法：先定义安全需求，再刻画满足需求的途径。它聚焦三个核心概念（第 5、6 章展开）：</p>
+    <div class="pipeline">
+      <div class="pipe-step"><b>安全攻击</b>Security Attack</div>
+      <div class="pipe-step"><b>安全机制</b>Security Mechanism</div>
+      <div class="pipe-step"><b>安全服务</b>Security Service</div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>有效框架 = 合规 + 技术 + 人/组织/预算 三足鼎立。</li>
+        <li>三大主流框架：ISO 27001/2、NIST RMF/800-53、CISSP CBK。</li>
+        <li>安全管理的目标：业务连续、损失最小、回报最大。</li>
+        <li>X.800 三概念（攻击/机制/服务）是后续章节的分析框架。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第五章：攻击·威胁·脆弱性·风险 ======================= -->
+  <section class="chapter" id="sec5">
+    <h2><span class="chapter-no">5</span>攻击 · 威胁 · 脆弱性 · 风险：四个词的关系</h2>
+    <p class="chapter-sub">Attack · Threat · Vulnerability · Risk</p>
+
+    <p>这四个词经常被混用，但它们有严格定义（X.800 / 课件原文），考试爱考：</p>
+
+    <table class="tb">
+      <tr><th>术语</th><th>英文</th><th>定义</th></tr>
+      <tr><td>安全攻击</td><td><span class="en">Security Attack</span></td><td>任何<strong>危及组织所拥有信息安全</strong>的行为</td></tr>
+      <tr><td>脆弱性</td><td><span class="en">Vulnerability</span></td><td>安全系统中的<strong>弱点</strong>（如软件缺陷、配置错误）</td></tr>
+      <tr><td>威胁</td><td><span class="en">Threat</span></td><td>具有<strong>潜在违反安全</strong>可能的一组情形——人为（人为失误、黑客）或非人为（软件缺陷、自然灾害）</td></tr>
+      <tr><td>威胁主体</td><td><span class="en">Threat Agent</span></td><td>制造威胁的主体（黑客、内部员工、大自然）</td></tr>
+      <tr><td>资产</td><td><span class="en">Assets</span></td><td>组织拥有的有价值事物（数据、系统、声誉……）</td></tr>
+      <tr><td>风险</td><td><span class="en">Risk</span></td><td>资产暴露后<strong>可能造成</strong>的损失与影响</td></tr>
+    </table>
+
+    <div class="formula">
+      <span class="fn">课件中的核心关系（一句话）：</span>
+      威胁主体 <i>利用</i> 脆弱性 &#8594; 导致 安全攻击
+    </div>
+
+    <h3>5.1 动手看：关系图</h3>
+    <div class="demo">
+      <p class="demo-title">演示 4 · 攻击·威胁·风险关系图</p>
+      <p class="demo-tip">点击图中任意节点查看定义与解释，观察箭头如何把「威胁主体 → 威胁 → 脆弱性 → 攻击 → 资产 → 风险」串成一条链。</p>
+      <div class="rel-box">
+        <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- 节点 -->
+          <rect class="rel-el" data-idx="0" x="15" y="40" width="130" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+          <text x="80" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">威胁主体</text>
+          <text x="80" y="82" text-anchor="middle" font-size="11" fill="#64748b">Threat Agent</text>
+
+          <rect class="rel-el" data-idx="1" x="195" y="40" width="130" height="56" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+          <text x="260" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">威胁</text>
+          <text x="260" y="82" text-anchor="middle" font-size="11" fill="#64748b">Threat</text>
+
+          <rect class="rel-el" data-idx="2" x="375" y="40" width="130" height="56" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+          <text x="440" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">脆弱性</text>
+          <text x="440" y="82" text-anchor="middle" font-size="11" fill="#64748b">Vulnerability</text>
+
+          <rect class="rel-el" data-idx="3" x="555" y="40" width="130" height="56" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+          <text x="620" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">安全攻击</text>
+          <text x="620" y="82" text-anchor="middle" font-size="11" fill="#64748b">Attack</text>
+
+          <rect class="rel-el" data-idx="4" x="375" y="170" width="130" height="56" rx="10" fill="#ecfdf5" stroke="#047857" stroke-width="2"/>
+          <text x="440" y="193" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">资产</text>
+          <text x="440" y="212" text-anchor="middle" font-size="11" fill="#64748b">Assets</text>
+
+          <rect class="rel-el" data-idx="5" x="650" y="170" width="150" height="56" rx="10" fill="#fff1f2" stroke="#be123c" stroke-width="2"/>
+          <text x="725" y="193" text-anchor="middle" font-size="13" font-weight="700" fill="#881337">风险</text>
+          <text x="725" y="212" text-anchor="middle" font-size="11" fill="#64748b">Risk</text>
+
+          <!-- 箭头 -->
+          <line x1="145" y1="68" x2="190" y2="68" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr5)"/>
+          <text x="168" y="58" text-anchor="middle" font-size="11" fill="#64748b">引起 causes</text>
+          <line x1="325" y1="68" x2="370" y2="68" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr5)"/>
+          <text x="348" y="58" text-anchor="middle" font-size="11" fill="#64748b">利用 exploits</text>
+          <line x1="505" y1="68" x2="550" y2="68" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr5)"/>
+          <text x="528" y="58" text-anchor="middle" font-size="11" fill="#64748b">导致 results in</text>
+          <line x1="620" y1="100" x2="520" y2="170" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr5)"/>
+          <text x="585" y="140" text-anchor="middle" font-size="11" fill="#64748b">损害 damages</text>
+          <line x1="510" y1="198" x2="645" y2="198" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr5)"/>
+          <text x="578" y="188" text-anchor="middle" font-size="11" fill="#64748b">暴露 exposure 可能导致 may result in</text>
+          <defs><marker id="arr5" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#94a3b8"/></marker></defs>
+        </svg>
+      </div>
+      <div class="rel-detail" id="rel-detail">点击图中任意节点查看定义</div>
+    </div>
+
+    <h3>5.2 被动攻击 vs 主动攻击</h3>
+    <p>X.800 把安全攻击分为两大类——这是「看到攻击名就要会归类」的高频考点：</p>
+    <table class="tb">
+      <tr><th></th><th>被动攻击 Passive Attack</th><th>主动攻击 Active Attack</th></tr>
+      <tr><td>本质</td><td>对传输进行<strong>窃听或监视</strong>，不改变数据</td><td>对数据流进行<strong>修改或伪造</strong>假数据流</td></tr>
+      <tr><td>子类型</td><td>① 获取消息内容（Message Content）；② 流量分析（Traffic Analysis，只看通信模式）</td><td>① 伪装 Masquerade；② 重放 Replay；③ 修改消息 Modification；④ 拒绝服务 Denial of Service（DoS）</td></tr>
+      <tr><td>特点</td><td>极难检测（因为它不改数据），重点是<strong>防</strong></td><td>可被检测，重点是<strong>检测 + 恢复</strong></td></tr>
+      <tr><td>类比</td><td>偷听者藏在暗处听你打电话</td><td>冒充你朋友打电话、挂断你的电话线</td></tr>
+    </table>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>链条：威胁主体 → 威胁 →（利用）脆弱性 →（导致）攻击 →（损害）资产 → 风险。</li>
+        <li>被动攻击 = 窃听/流量分析，难检测；主动攻击 = 伪装/重放/修改/DoS，可检测。</li>
+        <li>脆弱性是系统的弱点，威胁是潜在可能性，风险是资产暴露后可能造成的损失。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第六章：安全服务与机制 ======================= -->
+  <section class="chapter" id="sec6">
+    <h2><span class="chapter-no">6</span>安全服务与安全机制</h2>
+    <p class="chapter-sub">Security Services & Mechanisms</p>
+
+    <h3>6.1 安全服务（Security Service）</h3>
+    <p>两个经典定义：</p>
+    <ul>
+      <li><strong>X.800</strong>：由通信开放系统的<strong>协议层</strong>提供的服务，确保系统或数据传输的充分安全。</li>
+      <li><strong>RFC 2828</strong>：由系统提供的<strong>处理或通信服务</strong>，为系统资源提供特定类型的保护。</li>
+    </ul>
+
+    <h3>6.2 X.800 五大类安全服务（共 14 种具体服务）</h3>
+    <div class="cards3">
+      <div class="card"><h4><span class="dot green"></span>认证 Authentication</h4><p>验证通信对方的身份（对等实体认证 + 数据源认证）。</p></div>
+      <div class="card"><h4><span class="dot blue"></span>访问控制 Access Control</h4><p>限制和控制对资源的访问权限。</p></div>
+      <div class="card"><h4><span class="dot orange"></span>数据机密性 Data Confidentiality</h4><p>防止数据被未授权披露（连接/无连接/选择字段/流量机密性）。</p></div>
+      <div class="card"><h4><span class="dot purple"></span>数据完整性 Data Integrity</h4><p>确保收到的数据未被修改、插入、删除或重放。</p></div>
+      <div class="card"><h4><span class="dot red"></span>不可抵赖 Non-repudiation</h4><p>防止发送方或接收方否认发生过通信。</p></div>
+    </div>
+    <p>注意：五大类<strong>没有「可用性 Availability」</strong>——X.800 的 5 类 14 种服务不含可用性（辨析/单选陷阱）。</p>
+
+    <h3>6.3 安全机制（Security Mechanism）</h3>
+    <p>机制是<strong>实现服务的手段</strong>（mechanisms implement services）。X.800 分两类：</p>
+    <table class="tb">
+      <tr><th>类型</th><th>说明</th><th>例子</th></tr>
+      <tr><td>特定安全机制 Specific</td><td>针对特定协议层的机制</td><td>加密（Encipherment）、数字签名、访问控制、数据完整性、认证交换、流量填充、路由控制、公证</td></tr>
+      <tr><td>普遍安全机制 Pervasive</td><td>不限于特定协议层或服务的机制</td><td>可信功能、安全标签、事件检测、安全审计跟踪、安全恢复</td></tr>
+    </table>
+
+    <div class="analogy"><span class="tag">通俗理解</span>「服务」是承诺（我保证消息不被偷看），「机制」是实现（我用 AES 加密）。客户买服务，工程师建机制——X.800 就是让你把两者分开思考。</div>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>五大类服务：认证、访问控制、数据机密性、数据完整性、不可抵赖（共 14 种具体服务）。</li>
+        <li>机制分特定（specific）与普遍（pervasive）两类，机制是实现服务的手段。</li>
+        <li>考点陷阱：可用性不在 X.800 五大类服务中。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第七章：风险管理周期 ======================= -->
+  <section class="chapter" id="sec7">
+    <h2><span class="chapter-no">7</span>风险管理周期</h2>
+    <p class="chapter-sub">The Risk Management Cycle</p>
+
+    <p>安全管理不是一次性的，而是一个<strong>不断循环的过程</strong>（课件图）：</p>
+
+    <div class="demo" style="padding:10px">
+      <svg viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="风险管理周期" style="width:100%;max-width:520px;margin:0 auto;display:block">
+        <!-- 环上的五个环节 -->
+        <circle cx="280" cy="50" r="60" fill="#ecfdf5" stroke="#047857" stroke-width="2.5"/>
+        <text x="280" y="45" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">风险评估</text>
+        <text x="280" y="62" text-anchor="middle" font-size="10.5" fill="#047857">Risk Assessment</text>
+
+        <circle cx="500" cy="190" r="60" fill="#eff6ff" stroke="#0369a1" stroke-width="2.5"/>
+        <text x="500" y="185" text-anchor="middle" font-size="13" font-weight="700" fill="#0c4a6e">策略制定</text>
+        <text x="500" y="202" text-anchor="middle" font-size="10.5" fill="#0369a1">Policy Development</text>
+
+        <circle cx="380" cy="335" r="60" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+        <text x="380" y="330" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">实施</text>
+        <text x="380" y="347" text-anchor="middle" font-size="10.5" fill="#d97706">Implementation</text>
+
+        <circle cx="180" cy="335" r="60" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.5"/>
+        <text x="180" y="330" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">监控与事件响应</text>
+        <text x="180" y="347" text-anchor="middle" font-size="10.5" fill="#7c3aed">Monitoring &amp; Incidents Response</text>
+
+        <circle cx="60" cy="190" r="60" fill="#fef2f2" stroke="#dc2626" stroke-width="2.5"/>
+        <text x="60" y="185" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">安全审计</text>
+        <text x="60" y="202" text-anchor="middle" font-size="10.5" fill="#dc2626">Security Audit</text>
+
+        <!-- 循环箭头 -->
+        <line x1="320" y1="95" x2="462" y2="150" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr7)"/>
+        <line x1="492" y1="255" x2="415" y2="293" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr7)"/>
+        <line x1="320" y1="320" x2="238" y2="310" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr7)"/>
+        <line x1="122" y1="313" x2="105" y2="250" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr7)"/>
+        <line x1="68" y1="125" x2="240" y2="80" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr7)"/>
+        <text x="280" y="205" text-anchor="middle" font-size="12" fill="#64748b">持续循环</text>
+        <defs><marker id="arr7" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#94a3b8"/></marker></defs>
+      </svg>
+    </div>
+    <p>顺序：<strong>风险评估 → 策略制定 → 实施 → 监控与事件响应 → 安全审计 →（回到）风险评估</strong>。审计发现新风险，重新评估，循环往复——因为技术在变、威胁在变、防护措施的有效性也在变。</p>
+
+    <h3>7.1 风险评估的目标（5 条）</h3>
+    <ol>
+      <li>确保尽职调查被履行（Ensure due diligence is performed）；</li>
+      <li>建立对组织系统与基础设施的理解；</li>
+      <li>为建立恰当的安全策略与程序提供基础；</li>
+      <li>为选择与实施有效防护措施（safeguards）提供基础；</li>
+      <li>为评估现有防护措施的有效性提供基础。</li>
+    </ol>
+
+    <h3>7.2 风险分析的步骤</h3>
+    <div class="pipeline">
+      <div class="pipe-step"><b>资产识别与估价</b>Asset identification &amp; valuation</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>威胁识别与分析</b>Threat identification</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>脆弱性分析</b>Vulnerability analysis</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>风险评价</b>Risk evaluation</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>缓解风险</b>防护措施选择 + 成本效益分析</div>
+    </div>
+
+    <h3>7.3 定量 vs 定性</h3>
+    <table class="tb">
+      <tr><th>方法</th><th>做法</th><th>优点 / 缺点</th></tr>
+      <tr><td>定量 Quantitative</td><td>给风险要素赋值：资产价值、威胁频率、不确定性</td><td>可比较、可算投资回报；但数字难估准</td></tr>
+      <tr><td>定性 Qualitative</td><td>用「高/中/低」分级（ranking）描述风险</td><td>快速直观；但主观、粒度粗</td></tr>
+      <tr><td><b>混合 Mixed</b></td><td>两者结合——现实中最常用</td><td>取长补短</td></tr>
+    </table>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>风险管理五环节循环：评估 → 策略 → 实施 → 监控响应 → 审计。</li>
+        <li>风险分析从资产估价开始，最终落到防护措施与成本效益分析。</li>
+        <li>定量给数值、定性给等级，实践中常混合使用。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第八章：安全策略 ======================= -->
+  <section class="chapter" id="sec8">
+    <h2><span class="chapter-no">8</span>安全策略制定</h2>
+    <p class="chapter-sub">Policy Development</p>
+
+    <h3>8.1 为什么需要安全策略</h3>
+    <ul>
+      <li>表明管理层支持（Demonstrate management support）；</li>
+      <li>定义安全角色与职责（roles and responsibilities）；</li>
+      <li>规避责任风险（Avoid liabilities）；</li>
+      <li>确保防护措施被恰当且一致地实施——并为<strong>标准、程序、指南</strong>的制定和产品选型提供蓝图。</li>
+    </ul>
+
+    <h3>8.2 策略是什么 / 不是什么</h3>
+    <p>安全策略是对安全实施<strong>目标的总体描述</strong>。它<strong>不是</strong>实现规范（implementation specifications），也不等同于标准、程序和指南——它们位于策略之下的层级：</p>
+
+    <div class="demo" style="padding:10px">
+      <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="策略层级金字塔" style="width:100%;max-width:440px;margin:0 auto;display:block">
+        <polygon points="260,20 380,70 140,70" fill="#be123c" stroke="#881337"/>
+        <text x="260" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">立法 Legislation</text>
+        <polygon points="175,78 345,78 420,128 100,128" fill="#e11d48" stroke="#881337"/>
+        <text x="260" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">组织策略 Corporate Policy</text>
+        <polygon points="130,136 390,136 440,186 80,186" fill="#f43f5e" stroke="#881337"/>
+        <text x="260" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">标准 Standards</text>
+        <polygon points="100,194 420,194 450,244 70,244" fill="#fb7185" stroke="#881337"/>
+        <text x="260" y="226" text-anchor="middle" font-size="13" font-weight="700" fill="#4c0519">程序 Procedures</text>
+        <polygon points="80,252 440,252 460,290 60,290" fill="#fda4af" stroke="#881337"/>
+        <text x="260" y="278" text-anchor="middle" font-size="13" font-weight="700" fill="#4c0519">指南 Guidelines</text>
+      </svg>
+    </div>
+    <p>自上而下越来越具体：立法 → 组织策略 → 标准（必须遵守）→ 程序（怎么做）→ 指南（建议做法）。策略定「方向」，下层文件定「细节」。</p>
+
+    <h3>8.3 策略制定流程</h3>
+    <div class="pipeline">
+      <div class="pipe-step"><b>确定范围与目标</b>Scopes &amp; objectives</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>了解信息基础设施</b>Understand infrastructure</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>撰写策略</b>Write</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>评审</b>Review</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>批准</b>Approve</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>执行</b>Enforce</div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>策略表明管理层态度、定义职责、规避责任、指导实施。</li>
+        <li>策略是「目标描述」，标准/程序/指南是下层「怎么做」。</li>
+        <li>层级金字塔：立法 → 策略 → 标准 → 程序 → 指南；制定流程六步走。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第九章：密码学总览 ======================= -->
+  <section class="chapter" id="sec9">
+    <h2><span class="chapter-no">9</span>密码学总览：三大分支与加密解密</h2>
+    <p class="chapter-sub">Cryptology · Encryption & Decryption</p>
+
+    <h3>9.1 Cryptology 的三个学科</h3>
+    <div class="cards3">
+      <div class="card">
+        <h4><span class="dot green"></span>密码学 Cryptography</h4>
+        <p>研究<strong>设计</strong>信息保护算法与协议的数学科学（设计密码系统）。</p>
+      </div>
+      <div class="card">
+        <h4><span class="dot red"></span>密码分析 Cryptanalysis</h4>
+        <p>研究<strong>破解</strong>密码系统的数学科学（攻方）。</p>
+      </div>
+      <div class="card">
+        <h4><span class="dot blue"></span>隐写术 Steganography</h4>
+        <p><strong>信息隐藏</strong>的科学——把信息藏进图片、音频等载体里，让人察觉不到信息的存在。</p>
+      </div>
+    </div>
+
+    <h3>9.2 什么是密码学（RFC 2828）</h3>
+    <p>「对数据进行变换，以隐藏其语义内容、防止未被察觉的修改、或防止未授权使用的数学科学。若变换可逆，密码学还研究把变换后的数据恢复成原样。」</p>
+    <p><strong>密码学本身不能提供网络安全</strong>——还记得吗？网络安全不能只用技术解决（第 3 章）。密码学只是信息保护的<strong>工具之一</strong>：</p>
+    <table class="tb">
+      <tr><th>密码学能帮助实现</th><th>密码学帮不上</th></tr>
+      <tr><td>机密性 Confidentiality、完整性 Integrity、真实性 Authenticity、不可抵赖 Non-repudiation</td><td><b>可用性 Availability</b>——密码学几乎无法直接保证可用性（课件思考题）</td></tr>
+    </table>
+
+    <h3>9.3 加密与解密的一般模型</h3>
+    <div class="demo" style="padding:10px">
+      <svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="加密解密模型" style="width:100%;max-width:640px;margin:0 auto;display:block">
+        <rect x="20" y="75" width="120" height="56" rx="10" fill="#ecfdf5" stroke="#047857" stroke-width="2"/>
+        <text x="80" y="109" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46">明文 P</text>
+        <rect x="215" y="45" width="130" height="60" rx="10" fill="#eff6ff" stroke="#0369a1" stroke-width="2"/>
+        <text x="280" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#0c4a6e">加密算法 E</text>
+        <text x="280" y="90" text-anchor="middle" font-size="11" fill="#64748b">Encryption Algorithm</text>
+        <rect x="215" y="140" width="130" height="30" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+        <text x="280" y="160" text-anchor="middle" font-size="12" fill="#92400e">加密密钥 Key</text>
+        <rect x="415" y="75" width="120" height="56" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+        <text x="475" y="109" text-anchor="middle" font-size="14" font-weight="700" fill="#6d28d9">密文 C</text>
+        <rect x="590" y="75" width="90" height="56" rx="10" fill="#ecfdf5" stroke="#047857" stroke-width="2"/>
+        <text x="635" y="109" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46">明文 P</text>
+        <line x1="140" y1="103" x2="215" y2="85" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr9)"/>
+        <line x1="215" y1="110" x2="415" y2="103" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr9)"/>
+        <line x1="535" y1="103" x2="590" y2="103" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr9)"/>
+        <text x="395" y="95" text-anchor="middle" font-size="11" fill="#64748b">解密 Decryption</text>
+        <defs><marker id="arr9" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#94a3b8"/></marker></defs>
+      </svg>
+    </div>
+    <p>四个关键事实（课件强调）：</p>
+    <ul>
+      <li><strong>加密（Encryption）</strong>是把明文（Plaintext）变成密文（Ciphertext / Cryptogram）的密码学运算；逆运算叫<strong>解密（Decryption）</strong>。</li>
+      <li>加密/解密算法是对运算的<strong>逐步数学描述</strong>。</li>
+      <li>加密密钥和解密密钥<strong>不必相同</strong>（对称/非对称的伏笔）。</li>
+      <li>加密算法和解密算法<strong>也不必相同</strong>。</li>
+    </ul>
+
+    <h3>9.4 动手玩：凯撒密码实验室</h3>
+    <div class="demo">
+      <p class="demo-title">演示 2 · 凯撒密码（Caesar Cipher）</p>
+      <p class="demo-tip">凯撒密码是加密概念的最小玩具：每个字母按固定位数在字母表上平移。注意观察：① 密钥（位移量）决定变换；② 密钥只有 25 种可能——暴力穷举秒破，这就是「密钥空间太小不安全」的直观体验。</p>
+      <div class="controls">
+        <div class="ctrl-group"><label for="cs-text">文本（英文）</label>
+          <input type="text" id="cs-text" value="CYBER SECURITY"></div>
+      </div>
+      <div class="controls">
+        <div class="ctrl-group"><label for="cs-shift">位移量 K</label>
+          <input type="range" id="cs-shift" min="1" max="25" step="1" value="3">
+          <span class="val" id="cs-shift-val">3</span></div>
+        <button class="btn primary" id="cs-enc">加密</button>
+        <button class="btn" id="cs-dec">解密</button>
+      </div>
+      <div class="caesar-out" id="cs-out">加密结果将显示在这里</div>
+      <div class="caesar-map" id="cs-map"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>Cryptology = 密码学（设计）+ 密码分析（破解）+ 隐写术（隐藏）。</li>
+        <li>密码学能实现 C、I、真实性、不可抵赖；无法直接保证可用性。</li>
+        <li>加密解密是互逆运算；两把密钥、两个算法都可以不同。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第十章：三类密码算法 ======================= -->
+  <section class="chapter" id="sec10">
+    <h2><span class="chapter-no">10</span>三类密码算法：对称 · 非对称 · 哈希</h2>
+    <p class="chapter-sub">Symmetric · Asymmetric · Hash Algorithms</p>
+
+    <h3>10.1 算法家族</h3>
+    <p>密码算法分三大家族：<strong>对称算法</strong>（Symmetric）、<strong>非对称算法</strong>（Asymmetric）、<strong>哈希算法</strong>（Hash）。每一类算法又有<strong>公开（published）</strong>与<strong>未公开（unpublished）</strong>之分——<strong>公开算法更可信</strong>，因为未公开的专有算法可能没有经过专家的充分分析。</p>
+
+    <h3>10.2 对称密码算法（Symmetric）</h3>
+    <p>特征：从一个密钥<strong>计算上可行地</strong>推出另一个密钥；最常见情形是<strong>加密密钥 = 解密密钥</strong>（同一个秘密密钥 K）。</p>
+    <table class="tb">
+      <tr><th>优点</th><th>缺点</th><th>主要用途</th></tr>
+      <tr><td>比非对称算法<strong>快得多</strong></td><td>① 密钥分发问题（怎么把 K 安全地交给对方）；② 密钥管理复杂——n 个实体两两通信需要 <b>n(n−1)/2</b> 把密钥</td><td>大批量数据的加密（mass encryption），实现机密性</td></tr>
+    </table>
+
+    <h4>常见对称算法（考试记密钥长度）</h4>
+    <table class="tb">
+      <tr><th>算法</th><th>密钥长度（位）</th><th>备注</th></tr>
+      <tr><td>DES</td><td>56</td><td>已不安全，仅历史意义</td></tr>
+      <tr><td>3DES（2 密钥 / 3 密钥）</td><td>112 / 168</td><td>DES 的补救升级</td></tr>
+      <tr><td>IDEA</td><td>128</td><td>PGP 曾使用</td></tr>
+      <tr><td><b>AES</b></td><td><b>128 / 192 / 256</b></td><td>当今标准（Advanced Encryption Standard）</td></tr>
+    </table>
+
+    <h3>10.3 非对称密码算法（Asymmetric）</h3>
+    <p>特征：使用<strong>两把不同的密钥</strong>，从一把推算另一把<strong>计算上不可行</strong>；即私钥（Private Key）与公钥（Public Key）的概念。两种使用场景：</p>
+    <table class="tb">
+      <tr><th>场景</th><th>做法</th><th>实现的安全目标</th></tr>
+      <tr><td><b>用私钥加密</b>，公钥解密</td><td>发送者用自己的私钥加密，任何人都能用他的公钥解密验证</td><td><b>数字签名 / 真实性 / 不可抵赖</b>（因为只有发送者持有私钥）</td></tr>
+      <tr><td><b>用公钥加密</b>，私钥解密</td><td>发送者用接收者的公钥加密，只有接收者能用私钥解开</td><td><b>机密性</b></td></tr>
+    </table>
+    <table class="tb">
+      <tr><th>优点</th><th>缺点</th><th>主要用途</th></tr>
+      <tr><td>除机密性、完整性、真实性外，还能实现<strong>不可抵赖</strong></td><td>比对称算法<strong>慢得多</strong>；密钥生成过程复杂</td><td>① 密钥交换（交换对称密钥）；② 数字签名</td></tr>
+    </table>
+
+    <h4>常见非对称算法（记底层数学问题）</h4>
+    <table class="tb">
+      <tr><th>算法</th><th>底层难题</th><th>密钥长度（位）</th></tr>
+      <tr><td>RSA</td><td>大整数分解 Factoring</td><td>1024 / 2048</td></tr>
+      <tr><td>DSA（DSS）</td><td>离散对数 Discrete Logarithm</td><td>1024</td></tr>
+      <tr><td>Diffie-Hellman</td><td>离散对数 Discrete Logarithm</td><td>1024</td></tr>
+      <tr><td>ECC</td><td>椭圆曲线离散对数 Elliptic Curve DL</td><td>160 / 210</td></tr>
+    </table>
+
+    <h3>10.4 哈希函数（Hash Functions）</h3>
+    <p>特征：<strong>无论输入多大，输出总是固定长度</strong>。两大类别：<strong>单向</strong>（one-way，不可逆）与<strong>无碰撞</strong>（collision free）。用途：为电子文档生成「<strong>数字指纹</strong>」（digital fingerprint）。</p>
+    <table class="tb">
+      <tr><th>函数</th><th>输出长度（位）</th><th>函数</th><th>输出长度（位）</th></tr>
+      <tr><td>MD2</td><td>128</td><td>MD5</td><td>128</td></tr>
+      <tr><td>RIPEMD-160</td><td>160</td><td>SHA-1</td><td>160</td></tr>
+      <tr><td colspan="2"><b>SHA-2</b>：224 / 256 / 384 / 512 六种变体</td><td colspan="2">当今主流（如 SHA-256）</td></tr>
+    </table>
+
+    <h3>10.5 动手算：密钥数量问题</h3>
+    <div class="demo">
+      <p class="demo-title">演示 3 · 密钥数量计算器：为什么对称密钥「管理爆炸」</p>
+      <p class="demo-tip">拖动人数 n，看对称加密所需的密钥数 n(n−1)/2 如何爆炸式增长；对比非对称加密：n 个人只需要 n 对密钥（每人一对公私钥）。这就是「对称快但密钥难管、非对称慢但密钥好管」的量化证据。</p>
+      <div class="controls">
+        <div class="ctrl-group"><label for="kc-n">人数 n</label>
+          <input type="range" id="kc-n" min="2" max="30" step="1" value="10">
+          <span class="val" id="kc-n-val">10</span></div>
+      </div>
+      <div class="demo-info" id="kc-info"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>对称：一把密钥，快，但密钥分发/管理难（n(n−1)/2）；代表 AES（128/192/256）。</li>
+        <li>非对称：公私钥对，慢，但能实现不可抵赖；私钥加密=签名，公钥加密=机密；代表 RSA（分解难题）。</li>
+        <li>哈希：定长输出、单向、无碰撞，产出数字指纹；代表 SHA-2。</li>
+        <li>实际系统：非对称交换密钥 + 对称加密数据 + 哈希做完整性——三者配合（第 11 章）。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第十一章：数字签名 ======================= -->
+  <section class="chapter" id="sec11">
+    <h2><span class="chapter-no">11</span>数字签名：哈希 + 非对称的合体</h2>
+    <p class="chapter-sub">Digital Signature</p>
+
+    <h3>11.1 不要求机密性：只签名</h3>
+    <p><strong>签名（Alice）</strong>：对消息 P 求哈希 H = SHA-2(P)，再用 Alice 的<strong>私钥</strong>对 H 做 RSA 运算，得到 Alice 对 P 的数字签名 S。把 P 和 S 一起发给 Bob。</p>
+    <p><strong>验证（Bob）</strong>：Bob 对收到的 P 重新算哈希 H₁；用 Alice 的<strong>公钥</strong>对 S 解密得 H₂；比较 H₁ 与 H₂——<strong>相等则接受（Accept），不等则拒绝（Reject）</strong>。</p>
+    <div class="analogy"><span class="tag">通俗理解</span>哈希是「文件指纹」，私钥是「私人印章」。Alice 给指纹盖章（签名）；Bob 用 Alice 公开的印鉴比对章印真伪（验证）。指纹变了（内容被改）或章印不对（伪造），都过不了关。</div>
+
+    <h3>11.2 要求机密性：先签名，再加密</h3>
+    <p>完整的保密传输（课件 slide 51-52）在签名之外再加一层加密：</p>
+    <ol>
+      <li>Alice 生成一个随机会话密钥（<span class="en">Session Key</span>）K；</li>
+      <li>用对称算法 AES + K 加密消息 P 得密文；</li>
+      <li>用 Bob 的<strong>公钥</strong>（RSA）加密 K 本身；</li>
+      <li>Alice 对 P 计算数字签名 S（SHA-2 + 自己的私钥）；</li>
+      <li>发送：密文 + 加密后的 K + S 给 Bob；</li>
+      <li>Bob 用自己的<strong>私钥</strong>解开 K → 用 K 解密出 P → 再验证签名。</li>
+    </ol>
+    <p>注意这里的「混合密码」思路：<strong>非对称加密只加密小小的会话密钥，对称加密处理大批量消息</strong>——兼顾安全与速度。</p>
+
+    <h3>11.3 动手看：签名与验证分步动画</h3>
+    <div class="demo">
+      <p class="demo-title">演示 5 · 数字签名分步动画</p>
+      <p class="demo-tip">切换「只签名 / 签名+加密」两种模式，点「下一步」逐步走完 Alice 签名、Bob 验证的完整流程。绿色高亮 = 当前执行的操作。</p>
+      <div class="ds-tabs">
+        <button class="btn on" id="ds-tab1">模式一 · 只签名（无机密性）</button>
+        <button class="btn" id="ds-tab2">模式二 · 签名 + 加密</button>
+      </div>
+      <div class="ds-box" id="ds-box"></div>
+      <div class="controls">
+        <button class="btn primary" id="ds-next">下一步</button>
+        <button class="btn" id="ds-reset">重置</button>
+      </div>
+      <div class="demo-info" id="ds-info">点击「下一步」开始</div>
+    </div>
+
+    <h3>11.4 思考题（课件原文，考试爱考）</h3>
+    <div class="think"><span class="tag">思考 1</span>光靠数字签名就能实现不可抵赖（non-repudiation）吗？还缺什么关键要素？<br>（提示：怎么把用户和公钥<strong>绑定</strong>？公钥如何可靠获取？谁来管理公钥？如果用户否认自己的公钥怎么办？——答案指向第 12 章 PKI。）</div>
+    <div class="think"><span class="tag">思考 2</span>为什么 Alice <strong>先签名、后加密</strong>？能不能先加密后签名？<br>（提示：先签名保证签名绑定的是<strong>原文</strong>，且接收方验证签名时不需要先解密；若先加密再签名，签名针对的是密文，攻击者可能移除签名后用新签名重加密，混淆承诺对象。）</div>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>签名 = 哈希（指纹）+ 私钥加密（盖章）；验证 = 公钥解密 + 哈希比对。</li>
+        <li>机密 + 签名：会话密钥（AES 加密数据）+ 公钥加密会话密钥（RSA）+ 数字签名。</li>
+        <li>不可抵赖的前提是「公钥与身份的绑定」——这正是 PKI 存在的理由。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第十二章：PKI ======================= -->
+  <section class="chapter" id="sec12">
+    <h2><span class="chapter-no">12</span>公钥基础设施 PKI</h2>
+    <p class="chapter-sub">Public Key Infrastructure</p>
+
+    <h3>12.1 PKI 是什么</h3>
+    <p>公钥基础设施（<span class="en">Public Key Infrastructure</span>）是解决「公钥与身份绑定」问题的<strong>一整套体系</strong>，包括五要素：</p>
+    <div class="pipeline">
+      <div class="pipe-step"><b>硬件</b>Hardware</div>
+      <div class="pipe-step"><b>软件</b>Software</div>
+      <div class="pipe-step"><b>策略与流程</b>Policies &amp; Procedures</div>
+      <div class="pipe-step"><b>人员</b>Personnel</div>
+      <div class="pipe-step"><b>法律框架</b>Legal Framework</div>
+    </div>
+    <p>两种类型：<strong>基于 X.509 的 PKI</strong>（有中心 CA）和<strong>基于 PGP 的 PKI</strong>（无中心，web of trust）。</p>
+
+    <h3>12.2 X.509 数字证书</h3>
+    <p>X.509 PKI 用<strong>数字证书</strong>（Digital Certificate）把用户身份与公钥绑定：证书主体（body）包含身份与公钥信息，然后由签发机构——<strong>证书颁发机构 CA</strong>（Certificate Authority）——签名。当前版本为 <b>X.509 v3</b>。</p>
+    <div class="demo" style="padding:10px">
+      <svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="X.509 v3 证书结构" style="width:100%;max-width:430px;margin:0 auto;display:block">
+        <rect x="60" y="10" width="400" height="320" rx="12" fill="#fff" stroke="#0369a1" stroke-width="2.5"/>
+        <text x="260" y="38" text-anchor="middle" font-size="14" font-weight="800" fill="#0c4a6e">X.509 v3 证书</text>
+        <g font-size="12.5">
+          <rect x="80" y="50" width="360" height="28" rx="6" fill="#eff6ff"/><text x="95" y="69" fill="#334155">版本号 Version Number</text>
+          <rect x="80" y="84" width="360" height="28" rx="6" fill="#eff6ff"/><text x="95" y="103" fill="#334155">序列号 Serial Number</text>
+          <rect x="80" y="118" width="360" height="28" rx="6" fill="#eff6ff"/><text x="95" y="137" fill="#334155">签名算法 Signature Algorithm</text>
+          <rect x="80" y="152" width="360" height="28" rx="6" fill="#eff6ff"/><text x="95" y="171" fill="#334155">签发者 Issuer Name</text>
+          <rect x="80" y="186" width="360" height="28" rx="6" fill="#fef9c3"/><text x="95" y="205" fill="#713f12">有效期 Validity Period（验证第一步查这里！）</text>
+          <rect x="80" y="220" width="360" height="28" rx="6" fill="#eff6ff"/><text x="95" y="239" fill="#334155">主体名称 Subject Name</text>
+          <rect x="80" y="254" width="360" height="28" rx="6" fill="#dcfce7"/><text x="95" y="273" fill="#14532d">主体公钥信息 Subject Public Key Info</text>
+          <rect x="80" y="288" width="360" height="28" rx="6" fill="#fff1f2"/><text x="95" y="307" fill="#881337">CA 的数字签名 Signature of CA</text>
+        </g>
+      </svg>
+    </div>
+
+    <h3>12.3 PKI 四大组件</h3>
+    <table class="tb">
+      <tr><th>组件</th><th>英文</th><th>作用</th></tr>
+      <tr><td>证书颁发机构</td><td><span class="en">Certificate Authority (CA)</span></td><td>签发证书、用自身签名担保「身份 ↔ 公钥」绑定</td></tr>
+      <tr><td>注册机构</td><td><span class="en">Registration Authority (RA)</span></td><td>验证申请者身份、受理注册（CA 的「前台」）</td></tr>
+      <tr><td>证书库</td><td><span class="en">Certificate Repository</span></td><td>存放已签发证书，供查询下载</td></tr>
+      <tr><td>证书吊销列表</td><td><span class="en">Certificate Revocation List (CRL)</span></td><td>已失效证书的「黑名单」（如私钥泄露）</td></tr>
+    </table>
+
+    <h3>12.4 使用证书前的验证四步（考试常考顺序）</h3>
+    <ol>
+      <li>检查证书<strong>是否在有效期内</strong>（Validity Period）；</li>
+      <li>查 <b>CRL</b>，确认证书<strong>没有被吊销</strong>；</li>
+      <li>验证 <b>CA 的数字签名</b>；</li>
+      <li>从证书中提取公钥，用于验证签名或加密会话密钥。</li>
+    </ol>
+    <p>前 1~3 步完成之前，<strong>不能</strong>使用该公钥。</p>
+
+    <h3>12.5 交叉认证与落地障碍</h3>
+    <p>若 A 信任 CA1、B 信任 CA2，A 如何验证 B 的签名？方案是<strong>交叉认证</strong>（Cross Certification）——但现实中实施困难。X.509 PKI 推广的两类障碍：<strong>非技术</strong>（理解不足、法律问题）与<strong>技术</strong>（部署难度、交叉认证、密钥管理、互操作性、产品不成熟）。</p>
+
+    <h3>12.6 香港认可的 CA</h3>
+    <p>香港《电子交易条例》（<span class="en">Electronic Transaction Ordinance, ETO</span>）2002 年 1 月 5 日生效（2004 年 6 月更新）：赋予电子文档与数字签名<strong>与纸质同等法律地位</strong>，并建立自愿认可的 CA 认可机制。当前认可的 CA：</p>
+    <ul>
+      <li><b>香港邮政核证机关</b>（Hongkong Post CA，e-Cert，2023.7.1–2026.6.30 外包予 Certizen Limited）；</li>
+      <li><b>电子核证服务有限公司</b>（Digi-Sign Certification Services Limited，ID-Cert）。</li>
+    </ul>
+
+    <h3>12.7 PGP：没有 CA 的另一种选择</h3>
+    <p>PGP（<span class="en">Pretty Good Privacy</span>，Philip Zimmermann 创建）<strong>不设证书颁发机构</strong>：用户自己管理证书，通过<strong>信任网络</strong>（<span class="en">Web of Trust</span>）——熟人互相签名担保——建立信任。对比记忆：X.509 = 中央集权（CA），PGP = 去中心化（熟人背书）。</p>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>PKI = 绑定「身份 ↔ 公钥」的体系；五要素：硬件/软件/政策流程/人员/法律。</li>
+        <li>X.509 证书由 CA 签名；四大组件 CA/RA/证书库/CRL。</li>
+        <li>验证四步顺序：有效期 → CRL → CA 签名 → 提取公钥。</li>
+        <li>PGP 无 CA，靠信任网络；香港 ETO 认可 e-Cert 与 ID-Cert。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第十三章：应用·认证·监控 ======================= -->
+  <section class="chapter" id="sec13">
+    <h2><span class="chapter-no">13</span>密码学应用、认证与监控</h2>
+    <p class="chapter-sub">Applications · Evaluation · Monitoring</p>
+
+    <h3>13.1 密码学应用（本课程将学习）</h3>
+    <table class="tb">
+      <tr><th>应用</th><th>英文</th><th>用途</th></tr>
+      <tr><td>Kerberos</td><td>Kerberos</td><td>网络认证协议（票据式单点登录）</td></tr>
+      <tr><td>传输层安全</td><td><span class="en">TLS</span>（Transport Layer Security）</td><td>保护网页/应用通信（HTTPS 的基础）</td></tr>
+      <tr><td>IPSec</td><td><span class="en">IPSec</span></td><td>IP 层安全（VPN 常用）</td></tr>
+      <tr><td>S/MIME</td><td><span class="en">S/MIME</span></td><td>电子邮件签名与加密</td></tr>
+      <tr><td>SET</td><td><span class="en">SET</span>（Secure Electronic Transaction）</td><td>信用卡安全电子交易</td></tr>
+      <tr><td>后量子密码</td><td><span class="en">Post-quantum Cryptography</span></td><td>抵抗量子计算机攻击的新一代算法（前沿）</td></tr>
+    </table>
+
+    <h3>13.2 产品评估与认证</h3>
+    <p>四种认证方式：<strong>厂商认证</strong>（Vendor）、<strong>市场认证</strong>（Market）、<strong>用户认证</strong>（User）、<strong>独立认证</strong>（Independent）。<b>最可靠的选择是独立认证</b>——由没有利益关系的第三方机构评测（对应第 3 章「功能正常 ≠ 安全」）。</p>
+
+    <h3>13.3 监控与事件响应</h3>
+    <table class="tb">
+      <tr><th>主题</th><th>内容</th></tr>
+      <tr><td>事件响应 Incident Response</td><td>识别（Identify）、响应（Response）、调查（Investigation）事件，并从事件中恢复（Recovery）</td></tr>
+      <tr><td>监控 Monitoring</td><td>① 传统告警系统；② 安全情报（Security Intelligence：数据分析技术做行为分析、社交媒体分析）；③ <b>机器学习技术</b>（Machine Learning）——注意 ML 在安全监控中的应用</td></tr>
+    </table>
+
+    <h3>13.4 还有什么？（What Else）</h3>
+    <div class="cards3">
+      <div class="card">
+        <h4><span class="dot green"></span>业务连续性计划 BCP</h4>
+        <p><span class="en">Business Continuity Plan</span>：监控与事件响应、灾难恢复（Disaster Recovery）——出事之后企业还能继续运转。</p>
+      </div>
+      <div class="card">
+        <h4><span class="dot orange"></span>安全意识 Security Awareness</h4>
+        <p>许多安全事件源于<strong>用户的无知</strong>；工具再先进，用户没意识也白搭——安全意识培训必不可少。</p>
+      </div>
+      <div class="card">
+        <h4><span class="dot blue"></span>安全审计 Security Audit</h4>
+        <p>信息技术变化快、风险与威胁随时间演变、防护措施的有效性也会改变——所以需要持续审计。</p>
+      </div>
+    </div>
+
+    <h3>13.5 本课程后续内容</h3>
+    <div class="notice"><span class="tag">课程地图</span>Lecture 1 是总览。后续讲座：<b>Lecture 2</b> 风险评估详解、<b>Lecture 3</b> 安全策略与程序、<b>Lecture 4</b> 数学基础（密码学需要的数论等），另有 Review Exercise Set 1 / 2 两套练习题。本章学完可继续用同款互动页学习后续内容。</div>
+
+    <div class="takeaway"><span class="tag">本章小结</span>
+      <ul>
+        <li>应用五件套：Kerberos、TLS、IPSec、S/MIME、SET + 后量子密码。</li>
+        <li>认证最可靠 = 独立认证；事件响应四步：识别→响应→调查→恢复。</li>
+        <li>监控三层次：传统告警 → 安全情报 → 机器学习；别忘了 BCP、安全意识与安全审计。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 第十四章：复习自测 ======================= -->
+  <section class="chapter" id="sec14">
+    <h2><span class="chapter-no">14</span>复习自测：18 题全章扫盲</h2>
+    <p class="chapter-sub">Self-check Quiz</p>
+
+    <div class="demo">
+      <p class="demo-title">演示 6 · 全章自测（18 题）</p>
+      <p class="demo-tip">覆盖 Lecture 1 全部重点：CIA、攻击分类、服务机制、风险、密码算法、数字签名、PKI。做完交卷看解析，错题自动进错题本，可单独重做。</p>
+      <div id="quiz-box"></div>
+      <div class="controls">
+        <button class="btn primary" id="quiz-submit">交卷判分</button>
+        <button class="btn" id="quiz-reset">重新作答</button>
+        <button class="btn" id="quiz-wrong">只重做错题</button>
+      </div>
+      <div class="quiz-score" id="quiz-score" style="display:none"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">自测后行动</span>
+      <ul>
+        <li>正确率 ≥ 85%：概念已掌握，可以去做 Review Exercise Set 1、2。</li>
+        <li>60%~85%：回看错题对应的章节，重点复习第 5、10、11、12 章。</li>
+        <li>&lt; 60%：按第 1~13 章顺序通读一遍，配合演示动手操作。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= 附录：术语表 ======================= -->
+  <section class="chapter" id="glossary">
+    <h2><span class="chapter-no">附</span>中英术语速查表</h2>
+    <p class="chapter-sub">Glossary</p>
+
+    <table class="tb glossary">
+      <tr><th>中文</th><th>English</th><th>一句话解释</th></tr>
+      <tr><td>网络空间</td><td>Cyberspace</td><td>人、软件、服务在互联网上交互形成的复杂环境，无物理形态</td></tr>
+      <tr><td>网络犯罪</td><td>Cyber Crime</td><td>利用计算机/网络实施的犯罪</td></tr>
+      <tr><td>机密性</td><td>Confidentiality</td><td>信息只被授权实体访问</td></tr>
+      <tr><td>完整性</td><td>Integrity</td><td>信息未被未授权/意外修改，系统准确一致</td></tr>
+      <tr><td>可用性</td><td>Availability</td><td>需要时对授权实体可用</td></tr>
+      <tr><td>身份识别</td><td>Identification</td><td>声明身份（你是谁）</td></tr>
+      <tr><td>认证</td><td>Authentication</td><td>验证身份声明（证明你是谁）</td></tr>
+      <tr><td>授权</td><td>Authorization</td><td>授予已认证用户的权限</td></tr>
+      <tr><td>不可抵赖</td><td>Non-repudiation</td><td>不能否认自己做过的事（数字签名实现）</td></tr>
+      <tr><td>安全攻击</td><td>Security Attack</td><td>危及组织信息安全的任何行为</td></tr>
+      <tr><td>脆弱性</td><td>Vulnerability</td><td>安全系统中的弱点</td></tr>
+      <tr><td>威胁</td><td>Threat</td><td>具有潜在违反安全可能的情形（人为/非人为）</td></tr>
+      <tr><td>威胁主体</td><td>Threat Agent</td><td>制造威胁的主体（黑客/内部员工/自然灾害）</td></tr>
+      <tr><td>资产</td><td>Asset</td><td>组织有价值的事物（数据/系统/声誉）</td></tr>
+      <tr><td>风险</td><td>Risk</td><td>资产暴露后可能造成的损失</td></tr>
+      <tr><td>被动攻击</td><td>Passive Attack</td><td>窃听/流量分析，不改数据、难检测</td></tr>
+      <tr><td>主动攻击</td><td>Active Attack</td><td>伪装/重放/修改/DoS，可检测</td></tr>
+      <tr><td>拒绝服务</td><td>Denial of Service (DoS)</td><td>让服务不可用的攻击（破坏可用性）</td></tr>
+      <tr><td>安全服务</td><td>Security Service</td><td>X.800：协议层提供的安全保证（5 大类 14 种）</td></tr>
+      <tr><td>安全机制</td><td>Security Mechanism</td><td>实现安全服务的手段（特定/普遍两类）</td></tr>
+      <tr><td>风险评估</td><td>Risk Assessment</td><td>识别并度量风险，为防护决策提供基础</td></tr>
+      <tr><td>防护措施</td><td>Safeguard</td><td>降低风险的控制措施</td></tr>
+      <tr><td>成本效益分析</td><td>Cost-Benefit Analysis</td><td>比较防护成本与收益，辅助选型</td></tr>
+      <tr><td>尽职调查</td><td>Due Diligence</td><td>合理谨慎地履行职责（风险评估目标之一）</td></tr>
+      <tr><td>业务连续性计划</td><td>BCP</td><td>保障灾难/事件后业务持续运转的计划</td></tr>
+      <tr><td>灾难恢复</td><td>Disaster Recovery</td><td>灾难后的恢复流程（BCP 的一部分）</td></tr>
+      <tr><td>密码学</td><td>Cryptography</td><td>设计信息保护算法的数学科学</td></tr>
+      <tr><td>密码分析</td><td>Cryptanalysis</td><td>破解密码系统的数学科学</td></tr>
+      <tr><td>隐写术</td><td>Steganography</td><td>信息隐藏的科学</td></tr>
+      <tr><td>明文 / 密文</td><td>Plaintext / Ciphertext</td><td>加密前 / 加密后的数据</td></tr>
+      <tr><td>对称算法</td><td>Symmetric Algorithm</td><td>一把密钥（或可互推），快，难管理</td></tr>
+      <tr><td>非对称算法</td><td>Asymmetric Algorithm</td><td>公私钥对，慢，可实现不可抵赖</td></tr>
+      <tr><td>公钥 / 私钥</td><td>Public / Private Key</td><td>可公开 / 必须保密的一对密钥</td></tr>
+      <tr><td>会话密钥</td><td>Session Key</td><td>一次会话使用的临时对称密钥</td></tr>
+      <tr><td>哈希函数</td><td>Hash Function</td><td>定长输出、单向、无碰撞，产出数字指纹</td></tr>
+      <tr><td>数字指纹</td><td>Digital Fingerprint</td><td>文档的哈希值，代表文档内容</td></tr>
+      <tr><td>数字签名</td><td>Digital Signature</td><td>私钥对哈希值加密，实现真实性/不可抵赖</td></tr>
+      <tr><td>证书颁发机构</td><td>Certificate Authority (CA)</td><td>签发并担保数字证书的可信第三方</td></tr>
+      <tr><td>注册机构</td><td>Registration Authority (RA)</td><td>验证身份、受理证书申请</td></tr>
+      <tr><td>证书吊销列表</td><td>CRL</td><td>已失效证书的黑名单</td></tr>
+      <tr><td>数字证书</td><td>Digital Certificate</td><td>CA 签名的「身份+公钥」绑定（X.509 v3）</td></tr>
+      <tr><td>信任网络</td><td>Web of Trust</td><td>PGP 的信任模型：熟人互相签名担保</td></tr>
+      <tr><td>交叉认证</td><td>Cross Certification</td><td>CA 之间互相认证，打通信任域</td></tr>
+      <tr><td>独立认证</td><td>Independent Certification</td><td>第三方机构认证，最可靠的认证方式</td></tr>
+      <tr><td>事件响应</td><td>Incident Response</td><td>识别、响应、调查、恢复安全事件</td></tr>
+      <tr><td>安全情报</td><td>Security Intelligence</td><td>用数据分析/行为分析/社交媒体分析做监控</td></tr>
+      <tr><td>安全审计</td><td>Security Audit</td><td>定期审查安全状况（技术威胁都在变）</td></tr>
+      <tr><td>后量子密码</td><td>Post-quantum Cryptography</td><td>抵抗量子计算攻击的密码技术</td></tr>
+      <tr><td>电子交易条例</td><td>ETO</td><td>香港 2002 年生效：电子签名与纸质同效</td></tr>
+    </table>
+
+    <p style="text-align:center;color:var(--ink-faint);font-size:13px">本页内容基于 COMP7906 Lecture 1 课件整理，仅供课程学习参考。</p>
+  </section>
+
+  </main>
+</div>
+
+<button class="to-top" id="toTop" title="回到顶部">&#8593;</button>
+<footer id="foot">网络安全概述互动学习页 · 基于 COMP7906 Lecture 1 课件整理 · 仅供学习参考</footer>
+
+<script src="demos.js"></script>
+</body>
+</html>
