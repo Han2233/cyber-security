@@ -227,6 +227,62 @@ section.chapter > h2 { margin: 0 0 6px; font-size: 26px; display: flex; align-it
   background: var(--blue-soft); border: 1px solid #bfdbfe; border-radius: 8px; padding: 8px 12px;
 }
 .match-q.done .match-explain { display: block; }
+
+/* ---------- 层级排序（演示 15） ---------- */
+.rank-pool, .rank-list { display: flex; flex-wrap: wrap; gap: 8px; min-height: 46px; }
+.rank-pool { margin-top: 10px; }
+.rank-list {
+  margin-top: 12px; padding: 10px 12px;
+  background: var(--primary-soft); border: 1px dashed #6ee7b7; border-radius: 10px;
+}
+.rank-item {
+  border: 1px solid var(--line);
+  background: #fff; color: var(--ink-soft);
+  font-size: 13.5px; padding: 6px 14px;
+  border-radius: 999px; cursor: pointer;
+  transition: all .12s; font-family: inherit;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.rank-item:hover { border-color: var(--primary); color: var(--primary); }
+.rank-item .rk-no {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--primary); color: #fff; font-size: 11px; font-weight: 700;
+}
+.rank-item.done-r .rk-no { background: #16a34a; }
+.rank-item.done-w .rk-no { background: #dc2626; }
+
+/* ---------- 填空练习（演示 16） ---------- */
+.cloze-text {
+  background: #fff; border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px 18px; font-size: 15px; line-height: 2.2;
+}
+.cloze-blank {
+  display: inline-block;
+  min-width: 110px;
+  border-bottom: 2px dashed var(--primary);
+  color: var(--primary-deep);
+  font-weight: 700;
+  text-align: center;
+  padding: 0 6px;
+  cursor: pointer;
+  margin: 0 2px;
+  vertical-align: bottom;
+}
+.cloze-blank.sel { background: var(--primary-soft); border-bottom: 2px solid var(--primary); }
+.cloze-blank.ok { color: #16a34a; border-bottom: 2px solid #16a34a; }
+.cloze-blank.bad { color: #dc2626; border-bottom: 2px solid #dc2626; }
+.cloze-blank.empty { color: var(--ink-faint); }
+.wordbank { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.wb-word {
+  border: 1px solid var(--line);
+  background: var(--primary-soft); color: var(--primary-deep);
+  font-size: 13.5px; padding: 5px 14px;
+  border-radius: 999px; cursor: pointer;
+  transition: all .12s; font-family: inherit;
+}
+.wb-word:hover { border-color: var(--primary); }
+.wb-word.used { opacity: .35; pointer-events: none; }
 h3 { margin: 28px 0 10px; font-size: 20px; color: var(--primary-deep); }
 h4 { margin: 20px 0 8px; font-size: 17px; }
 p { margin: 10px 0; }

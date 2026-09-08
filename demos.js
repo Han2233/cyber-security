@@ -776,6 +776,236 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({
 })();
 
 /* ============================================================
+   演示 15：层级排序（Lecture 3）
+   按从高到低点击词条，搭出策略层级金字塔
+   ============================================================ */
+(function () {
+  const listEl = document.getElementById('rank-list');
+  const poolEl = document.getElementById('rank-pool');
+  const submitBtn = document.getElementById('rank-submit');
+  const resetBtn = document.getElementById('rank-reset');
+  const scoreEl = document.getElementById('rank-score');
+
+  const CORRECT = ['Legislation', 'Corporate Policy', 'Standards', 'Guidelines', 'Procedures'];
+  const st = { ordered: [], answered: false };  // ordered 存词条索引（按用户点击顺序）
+
+  function render() {
+    listEl.innerHTML = st.ordered.length === 0
+      ? '<span style="color:var(--ink-faint);font-size:13.5px">（点击下方词条，按从高到低排列——最顶层是 Legislation）</span>'
+      : st.ordered.map((i, k) =>
+          '<button class="rank-item' + (st.answered ? (i === CORRECT.indexOf(CORRECT[i]) ? '' : '') : '') + '" data-idx="' + i + '">' +
+          '<span class="rk-no">' + (k + 1) + '</span>' + CORRECT[i] + '</button>'
+        ).join('');
+    poolEl.innerHTML = CORRECT.map((t, i) =>
+      st.ordered.includes(i) ? '' :
+      '<button class="rank-item" data-idx="' + i + '">' + t + '</button>'
+    ).join('');
+    scoreEl.style.display = 'none';
+  }
+
+  // 事件委托：点池中词条 → 入列；点列表中词条 → 撤回到池
+  poolEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-idx]');
+    if (!btn || st.answered) return;
+    st.ordered.push(parseInt(btn.dataset.idx, 10));
+    render();
+  });
+  listEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-idx]');
+    if (!btn || st.answered) return;
+    st.ordered = st.ordered.filter((i) => i !== parseInt(btn.dataset.idx, 10));
+    render();
+  });
+
+  submitBtn.addEventListener('click', () => {
+    if (st.answered || st.ordered.length < CORRECT.length) {
+      if (st.ordered.length < CORRECT.length) {
+        scoreEl.style.display = 'block';
+        scoreEl.innerHTML = '还有 ' + (CORRECT.length - st.ordered.length) + ' 个词条没有排入，先排完再交卷。';
+      }
+      return;
+    }
+    st.answered = true;
+    const correct = st.ordered.every((t, k) => t === CORRECT.indexOf(CORRECT[t]));
+    // 统计每个位置是否放对
+    let right = 0;
+    st.ordered.forEach((t, k) => { if (t === k) right++; });
+    listEl.innerHTML = st.ordered.map((i, k) => {
+      const ok = i === k;
+      return '<span class="rank-item done-' + (ok ? 'r' : 'w') + '"><span class="rk-no">' + (k + 1) + '</span>' + CORRECT[i] +
+        (ok ? '' : ' <span style="font-size:11px;color:#dc2626">← 应为 ' + CORRECT[k] + '</span>') + '</span>';
+    }).join('');
+    scoreEl.style.display = 'block';
+    scoreEl.innerHTML = 'Score: <b>' + right + ' / ' + CORRECT.length + '</b>' +
+      '<div class="bar"><div class="fill" style="width:' + (right / CORRECT.length * 100) + '%"></div></div>' +
+      (correct ? '<div style="font-size:14px;margin-top:8px;color:#16a34a">Perfect! 层级顺序：立法 → 策略 → 标准 → 指南 → 程序。</div>' :
+       '<div style="font-size:14px;margin-top:8px">提示：只有 Standards 是强制的（mandatory），Guidelines 是建议，Procedures 是执行细节。</div>');
+  });
+
+  resetBtn.addEventListener('click', () => { st.ordered = []; st.answered = false; render(); });
+  render();
+})();
+
+/* ============================================================
+   演示 16：策略填空（Lecture 3）
+   General Policy 挖空版：点空格 → 点词库填词
+   ============================================================ */
+(function () {
+  const textEl = document.getElementById('cloze-text');
+  const bankEl = document.getElementById('cloze-bank');
+  const submitBtn = document.getElementById('cloze-submit');
+  const resetBtn = document.getElementById('cloze-reset');
+  const scoreEl = document.getElementById('cloze-score');
+
+  // 挖空模板：{0} 等占位符会被替换为空格
+  const SEGMENTS = [
+    { t: 'Information is an invaluable {0} and should be appropriately protected. ', key: 'asset' },
+    { t: 'All {1} are responsible for protecting the organization\'s information from (intentional and accidental) unauthorized {2}, modification, duplication, destruction, or disclosure. ', key: null },
+    { t: 'Internal {3} will perform periodic reviews to ensure the compliance of this policy. Consequences of violating this policy are addressed in the Employee\'s {4}.', key: null },
+  ];
+  const BLANKS = ['asset', 'employees', 'access', 'auditors', 'Handbook'];
+  // 词库（含 3 个干扰项）
+  const BANK = ['asset', 'employees', 'access', 'auditors', 'Handbook', 'customers', 'managers', 'software'];
+
+  const st = { fill: {}, sel: -1, answered: false };  // fill: 空格编号 → 词
+
+  function render() {
+    // 拼接文本：把 {i} 换成空格组件
+    let html = '';
+    SEGMENTS.forEach((seg) => {
+      let segHtml = esc(seg.t);
+      segHtml = segHtml.replace(/\{(\d)\}/g, (m, i) => {
+        const w = st.fill[i];
+        const cls = st.answered
+          ? (w === BLANKS[i] ? 'ok' : 'bad')
+          : (w ? '' : 'empty');
+        return '<span class="cloze-blank ' + cls + (Number(i) === st.sel ? ' sel' : '') + '" data-blank="' + i + '">' +
+          (w ? esc(w) : '____') + '</span>';
+      });
+      html += segHtml;
+    });
+    textEl.innerHTML = html;
+
+    const used = new Set(Object.values(st.fill));
+    bankEl.innerHTML = BANK.map((w) =>
+      '<button class="wb-word' + (used.has(w) ? ' used' : '') + '" data-word="' + w + '">' + w + '</button>'
+    ).join('');
+    scoreEl.style.display = 'none';
+  }
+
+  textEl.addEventListener('click', (e) => {
+    const b = e.target.closest('.cloze-blank');
+    if (!b || st.answered) return;
+    const i = parseInt(b.dataset.blank, 10);
+    // 已填的空格再点一下 = 清空
+    if (st.sel === i && st.fill[i]) { delete st.fill[i]; st.sel = -1; render(); return; }
+    st.sel = i;
+    render();
+  });
+  bankEl.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-word]');
+    if (!b || st.answered || st.sel < 0) return;
+    st.fill[st.sel] = b.dataset.word;
+    st.sel = -1;
+    render();
+  });
+
+  submitBtn.addEventListener('click', () => {
+    if (st.answered) return;
+    const done = BLANKS.every((_, i) => st.fill[i]);
+    if (!done) {
+      scoreEl.style.display = 'block';
+      scoreEl.innerHTML = '还有空格没填完（' + BLANKS.filter((_, i) => !st.fill[i]).length + ' 个），先填完再交卷。';
+      return;
+    }
+    st.answered = true;
+    let right = 0;
+    BLANKS.forEach((ans, i) => { if (st.fill[i] === ans) right++; });
+    render();
+    scoreEl.style.display = 'block';
+    scoreEl.innerHTML = 'Score: <b>' + right + ' / ' + BLANKS.length + '</b>' +
+      '<div class="bar"><div class="fill" style="width:' + (right / BLANKS.length * 100) + '%"></div></div>' +
+      '<div style="font-size:14px;margin-top:8px">' +
+      (right === BLANKS.length ? 'Perfect! 完整版原文见上方 L3-9 的代码块。' : '对照 L3-9 的原文订正红色空格——注意「auditors 负责审查」「Handbook 写违规后果」。') + '</div>';
+  });
+
+  resetBtn.addEventListener('click', () => { st.fill = {}; st.sel = -1; st.answered = false; render(); });
+  render();
+})();
+
+/* ============================================================
+   演示 17：角色职责匹配（Lecture 3）
+   Owner / Custodian / User / Management × 5 条职责
+   ============================================================ */
+(function () {
+  const boxEl = document.getElementById('role-box');
+  const submitBtn = document.getElementById('role-submit');
+  const resetBtn = document.getElementById('role-reset');
+  const scoreEl = document.getElementById('role-score');
+
+  const OPTS = ['Owner', 'Custodian', 'User', 'Management'];
+  const ITEMS = [
+    { t: 'Identify the classification of the relevant information.', ans: 0, exp: '确定信息分类是 Information Owner 的第一职责。' },
+    { t: 'Authorize and remove information access rights.', ans: 0, exp: '授权与撤销访问权——Owner 第 (iv) 条职责，最高频考点。' },
+    { t: 'Maintain the protection mechanisms established by the Information Owner.', ans: 1, exp: 'Custodian 由 Owner 指定，负责「维护」机制（不是制定）。' },
+    { t: 'Access the information and use the protection mechanisms as authorized.', ans: 2, exp: 'User 经授权「使用」信息和机制。' },
+    { t: 'Ensure all employees understand their obligations in protecting the company\'s information.', ans: 3, exp: '确保员工理解义务属于 Compliance 部分的管理层（Management）责任。' },
+  ];
+
+  const st = { user: {}, answered: false };
+
+  function render() {
+    boxEl.innerHTML = ITEMS.map((it, i) =>
+      '<div class="match-q" id="rm-' + i + '" data-mi="' + i + '">' +
+      '<div class="mt">' + (i + 1) + '. ' + esc(it.t) + '</div>' +
+      '<div class="match-opts">' +
+      OPTS.map((o, k) => '<button data-k="' + k + '"' + (st.user[i] === k ? ' class="chosen"' : '') + '>' + o + '</button>').join('') +
+      '</div>' +
+      '<div class="match-explain"><b>答案：' + OPTS[it.ans] + '</b>　' + esc(it.exp) + '</div>' +
+      '</div>'
+    ).join('');
+    scoreEl.style.display = 'none';
+    st.answered = false;
+  }
+
+  boxEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-k]');
+    if (!btn || st.answered) return;
+    const i = parseInt(btn.closest('.match-q').dataset.mi, 10);
+    st.user[i] = parseInt(btn.dataset.k, 10);
+    const q = document.getElementById('rm-' + i);
+    q.querySelectorAll('button').forEach((b) => b.classList.toggle('chosen', b === btn));
+  });
+
+  submitBtn.addEventListener('click', () => {
+    if (st.answered) return;
+    let correct = 0;
+    ITEMS.forEach((it, i) => {
+      const el = document.getElementById('rm-' + i);
+      el.classList.add('done');
+      const btns = el.querySelectorAll('button');
+      btns.forEach((b, k) => {
+        if (k === it.ans) b.classList.add('right');
+        if (st.user[i] === k) {
+          if (k === it.ans) correct++;
+          else b.classList.add('wrong');
+        }
+      });
+    });
+    st.answered = true;
+    const pct = correct / ITEMS.length;
+    scoreEl.style.display = 'block';
+    scoreEl.innerHTML = 'Score: <b>' + correct + ' / ' + ITEMS.length + '</b>　(' + fmt(pct * 100, 0) + '%)' +
+      '<div class="bar"><div class="fill" style="width:' + fmt(pct * 100, 0) + '%"></div></div>' +
+      '<div style="font-size:14px;color:var(--ink-soft);margin-top:8px">' +
+      (pct === 1 ? 'Perfect! 三个角色的职责边界已吃透。' : '提示：Owner 管「定规则和授权」，Custodian 管「维护」，User 管「使用」，Management 管「宣贯与纠正」。') + '</div>';
+  });
+
+  resetBtn.addEventListener('click', () => { st.user = {}; render(); });
+  render();
+})();
+
+/* ============================================================
    演示 12/13/14：L2/L3/L4 自测（工厂函数，避免三份重复代码）
    ============================================================ */
 function makeQuiz(suffix, QUESTIONS) {

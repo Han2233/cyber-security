@@ -73,11 +73,16 @@
     <a href="#l2-17">L2-17 自测</a>
     <div class="grp">Lecture 3 · 策略与程序</div>
     <a href="#l3-1">L3-1 为什么需要策略</a>
-    <a href="#l3-2">L3-2 三类策略</a>
-    <a href="#l3-3">L3-3 制定与要素</a>
-    <a href="#l3-4">L3-4 层级：策略到程序</a>
-    <a href="#l3-5">L3-5 策略实例</a>
-    <a href="#l3-6">L3-6 自测</a>
+    <a href="#l3-2">L3-2 什么是策略</a>
+    <a href="#l3-3">L3-3 三类策略</a>
+    <a href="#l3-4">L3-4 制定流程</a>
+    <a href="#l3-5">L3-5 策略组成部分</a>
+    <a href="#l3-6">L3-6 六个关键要素</a>
+    <a href="#l3-7">L3-7 层级体系</a>
+    <a href="#l3-8">L3-8 四连示例与练习</a>
+    <a href="#l3-9">L3-9 总体策略实例</a>
+    <a href="#l3-10">L3-10 专题策略实例</a>
+    <a href="#l3-11">L3-11 自测</a>
     <div class="grp">Lecture 4 · 数学基础</div>
     <a href="#l4-1">L4-1 模运算</a>
     <a href="#l4-2">L4-2 欧几里得算法</a>
@@ -1607,90 +1612,158 @@
     <h2>网络安全策略与程序 · Cyber Security Policies and Procedures</h2>
     <p>策略定方向，标准定规则，程序定动作。本讲把「策略 → 标准 → 指南 → 程序」的层级讲透，并给出真实策略范例。</p>
     <div class="lb-nav">
-      <a href="#l3-1">1 为什么需要策略</a><a href="#l3-2">2 三类策略</a><a href="#l3-3">3 制定与要素</a>
-      <a href="#l3-4">4 层级与归类练习</a><a href="#l3-5">5 策略实例</a><a href="#l3-6">6 自测</a>
+      <a href="#l3-1">1 为什么需要策略</a><a href="#l3-2">2 什么是策略</a><a href="#l3-3">3 三类策略</a>
+      <a href="#l3-4">4 制定流程</a><a href="#l3-5">5 策略组成部分</a><a href="#l3-6">6 六个关键要素</a>
+      <a href="#l3-7">7 层级体系</a><a href="#l3-8">8 四连示例与练习</a><a href="#l3-9">9 总体策略实例</a>
+      <a href="#l3-10">10 专题策略实例</a><a href="#l3-11">11 自测</a>
     </div>
   </section>
 
-  <!-- ======================= L3-1 ======================= -->
+  <!-- ======================= L3-1：为什么需要策略 ======================= -->
   <section class="chapter" id="l3-1">
-    <h2><span class="chapter-no">L3-1</span>为什么需要策略 & 什么是策略</h2>
-    <p class="chapter-sub">Why Policies · What is a Policy</p>
-    <h3>为什么需要策略（5 条）</h3>
-    <ol>
-      <li>表明管理层支持（Demonstrate management support）；</li>
-      <li>定义安全角色与职责（roles and responsibilities）；</li>
-      <li>规避责任风险（Avoid liabilities）；</li>
-      <li>确保防护措施被恰当一致地实施；</li>
-      <li>为标准、程序、指南的制定以及产品选型提供蓝图（blueprints）。</li>
-    </ol>
-    <h3>什么是策略</h3>
-    <p>策略是组织网络安全姿态的<strong>信念、目标和目的的高层描述</strong>。它不是实现规范（implementation specifications），也不等同于标准、程序和指南。</p>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>策略 = 高层声明（方向），不是操作手册（细节）。</li><li>五条理由：管理支持、职责、责任、一致性、蓝图。</li></ul></div>
+    <h2><span class="chapter-no">L3-1</span>为什么需要策略</h2>
+    <p class="chapter-sub">Why Policies</p>
+    <p>课件给出五条理由——每一条背后都是一个真实的组织痛点：</p>
+    <table class="tb">
+      <tr><th>#</th><th>理由（课件原文）</th><th>解读</th></tr>
+      <tr>
+        <td>1</td>
+        <td>Demonstrate management support</td>
+        <td>表明<strong>管理层支持</strong>——策略是最高层签字背书的文件。没有管理层支持，安全员喊破喉咙也没人听</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Define cyber security roles and responsibilities</td>
+        <td>定义<strong>角色与职责</strong>——谁负责什么白纸黑字写清楚，出事后不再互相推诿</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Avoid liabilities</td>
+        <td>规避<strong>责任风险</strong>——有策略且执行了，法律纠纷中就是「已尽管理义务」的证据</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Assure proper and consistent safeguard implementations</td>
+        <td>确保防护措施被<strong>恰当且一致地</strong>实施——没有策略，各部门各装各的，标准五花八门</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Provide the blueprints for standards / procedures / guidelines, and for development and product selection</td>
+        <td>为<strong>标准、程序、指南</strong>以及<strong>开发与产品选型</strong>提供蓝图——策略是母文件，下层文件都由它派生</td>
+      </tr>
+    </table>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>五条理由：管理支持、角色职责、规避责任、一致实施、蓝图。</li><li>其中「蓝图」作用最重要——它连接了策略与标准/程序/指南（本讲后半部分）。</li></ul></div>
   </section>
 
-  <!-- ======================= L3-2 ======================= -->
+  <!-- ======================= L3-2：什么是策略 ======================= -->
   <section class="chapter" id="l3-2">
-    <h2><span class="chapter-no">L3-2</span>三类策略</h2>
+    <h2><span class="chapter-no">L3-2</span>什么是策略（以及它不是什么）</h2>
+    <p class="chapter-sub">What is a Policy</p>
+    <p>定义（课件）：策略是组织网络安全姿态的<strong>信念、目标和目的的高层描述</strong>（a general high level description of the beliefs, goals, and objectives）。</p>
+    <h3>重点：策略「不是」什么</h3>
+    <table class="tb">
+      <tr><th>策略不是……</th><th>英文</th><th>为什么容易混</th></tr>
+      <tr><td>实现规范</td><td>implementation specifications</td><td>策略只定方向，不定技术细节——「必须保护数据」是策略，「必须用 AES-256」是规范</td></tr>
+      <tr><td>标准</td><td>standards</td><td>标准是强制规则，策略是高层声明（详见 L3-7）</td></tr>
+      <tr><td>程序</td><td>procedures</td><td>程序是操作步骤，策略不教「怎么做」</td></tr>
+      <tr><td>指南</td><td>guidelines</td><td>指南是建议，策略是必须遵守的方向</td></tr>
+    </table>
+    <div class="analogy"><span class="tag">通俗理解</span>策略像宪法：说「公民的合法财产不受侵犯」（方向、信念）；标准像法律细则：规定什么算侵犯；程序像执法手册：接到报案后第一步做什么。宪法不会写「报案后 24 小时内出警」。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>策略 = 高层（beliefs/goals/objectives），不是实现规范，不等于标准/程序/指南。</li><li>考点：判断题「Policy is an implementation specification」→ False。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-3：三类策略 ======================= -->
+  <section class="chapter" id="l3-3">
+    <h2><span class="chapter-no">L3-3</span>三类策略</h2>
     <p class="chapter-sub">Types of Policies</p>
     <div class="cards3">
       <div class="card">
         <h4><span class="dot green"></span>总体策略 General Policy</h4>
-        <p><span class="en">General Policy</span>：建立组织整体网络安全愿景（vision），覆盖面最广、层级最高。</p>
+        <p><span class="en">General Policy</span>：创建组织整体网络安全<strong>愿景</strong>（vision），层级最高、覆盖面最广。</p>
       </div>
       <div class="card">
         <h4><span class="dot blue"></span>专题策略 Topic-Specific</h4>
-        <p><span class="en">Topic-Specific Policy</span>：一次聚焦一个具体议题（如密码策略、远程访问策略）。</p>
+        <p><span class="en">Topic-Specific Policy</span>：针对一个具体议题（specific topic），<strong>一次只聚焦一个问题</strong>——如密码策略、远程访问策略。</p>
       </div>
       <div class="card">
         <h4><span class="dot orange"></span>应用专属策略 Application-Specific</h4>
-        <p><span class="en">Application-Specific Policy</span>：针对某个特定系统或应用的保护（如财务系统使用策略）。</p>
+        <p><span class="en">Application-Specific Policy</span>：针对<strong>某个特定系统或应用</strong>的保护——如财务系统使用策略。</p>
       </div>
     </div>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>三层结构：总体（愿景）→ 专题（议题）→ 应用（系统）。</li></ul></div>
+    <table class="tb">
+      <tr><th>类型</th><th>粒度</th><th>举例</th></tr>
+      <tr><td>General</td><td>整个组织</td><td>「信息是组织的宝贵资产，所有员工都有责任保护它」（见 L3-9 实例）</td></tr>
+      <tr><td>Topic-Specific</td><td>一个议题</td><td>「所有信息必须按敏感度分类为 Public / Confidential」（见 L3-10 实例）</td></tr>
+      <tr><td>Application-Specific</td><td>一个系统</td><td>「财务系统只能由财务部授权人员访问，且必须双人复核」</td></tr>
+    </table>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>三层结构：总体（愿景）→ 专题（议题）→ 应用（系统），粒度逐级变细。</li><li>判断策略类型：看它管的是「整个组织」「一个议题」还是「一个系统」。</li></ul></div>
   </section>
 
-  <!-- ======================= L3-3 ======================= -->
-  <section class="chapter" id="l3-3">
-    <h2><span class="chapter-no">L3-3</span>制定流程、组成部分与关键要素</h2>
-    <p class="chapter-sub">Policy Development · Components · Key Elements</p>
-    <h3>制定流程（六步，与 L1 一致）</h3>
-    <div class="pipeline">
-      <div class="pipe-step"><b>确定范围与目标</b></div>
-      <div class="pipe-arrow">&#8594;</div>
-      <div class="pipe-step"><b>了解基础设施</b></div>
-      <div class="pipe-arrow">&#8594;</div>
-      <div class="pipe-step"><b>撰写</b>Write</div>
-      <div class="pipe-arrow">&#8594;</div>
-      <div class="pipe-step"><b>评审</b>Review</div>
-      <div class="pipe-arrow">&#8594;</div>
-      <div class="pipe-step"><b>批准</b>Approve</div>
-      <div class="pipe-arrow">&#8594;</div>
-      <div class="pipe-step"><b>执行</b>Enforce</div>
-    </div>
-    <h3>策略的组成部分（Components）</h3>
-    <ul>
-      <li><strong>主题 / 论点陈述</strong>（Topic / Thesis statement）；</li>
-      <li><strong>范围与相关性</strong>（Scope and relevance）；</li>
-      <li><strong>角色与职责</strong>（Roles and Responsibilities）；</li>
-      <li><strong>合规与纪律处分</strong>（Compliance and disciplinary actions）；</li>
-      <li><strong>附加信息</strong>（Additional information）。</li>
-    </ul>
-    <h3>好策略的关键要素（6 条）</h3>
-    <div class="pipeline">
-      <div class="pipe-step"><b>清晰易懂</b>Clear</div>
-      <div class="pipe-step"><b>契合组织</b>Applicable</div>
-      <div class="pipe-step"><b>可行</b>Doable</div>
-      <div class="pipe-step"><b>可执行</b>Enforceable</div>
-      <div class="pipe-step"><b>前瞻性</b>Proactive</div>
-      <div class="pipe-step"><b>分阶段</b>Phasing in</div>
-    </div>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>六步流程：范围目标 → 基础设施 → 撰写 → 评审 → 批准 → 执行。</li><li>组成部分五件套：主题、范围、职责、合规纪律、附加信息。</li><li>关键要素：清楚、适用、可行、可执行、前瞻、分阶段。</li></ul></div>
-  </section>
-
-  <!-- ======================= L3-4 ======================= -->
+  <!-- ======================= L3-4：制定流程 ======================= -->
   <section class="chapter" id="l3-4">
-    <h2><span class="chapter-no">L3-4</span>层级：从立法到程序</h2>
+    <h2><span class="chapter-no">L3-4</span>策略制定流程（六步）</h2>
+    <p class="chapter-sub">Policy Development Process</p>
+    <div class="pipeline">
+      <div class="pipe-step"><b>1 确定范围与目标</b>Scopes &amp; objectives</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>2 了解信息基础设施</b>Understand infrastructure</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>3 撰写</b>Write</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>4 评审</b>Review</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>5 批准</b>Approve</div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-step"><b>6 执行</b>Enforce</div>
+    </div>
+    <table class="tb">
+      <tr><th>步骤</th><th>英文</th><th>要点</th></tr>
+      <tr><td>1 确定范围与目标</td><td>Determine the scopes and objectives</td><td>这份策略管什么范围、要达到什么目标——和风险评估的「项目定义」异曲同工</td></tr>
+      <tr><td>2 了解信息基础设施</td><td>Understand the information infrastructure</td><td>不清楚家底写不出接地气的策略（呼应 Lecture 2 的业务审查）</td></tr>
+      <tr><td>3 撰写</td><td>Write the policy</td><td>按组成部分撰写（见 L3-5），语言要清晰易懂</td></tr>
+      <tr><td>4 评审</td><td>Review</td><td>相关方审阅：法务、业务、技术都要过目</td></tr>
+      <tr><td>5 批准</td><td>Approve</td><td>管理层正式签发——没有这一步，策略没有「法律效力」</td></tr>
+      <tr><td>6 执行</td><td>Enforce</td><td>落地执行 + 合规检查 + 纪律处分（策略不用来执行就是废纸）</td></tr>
+    </table>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>六步：范围目标 → 基础设施 → 撰写 → 评审 → 批准 → 执行。</li><li>前两步「摸底」，中两步「成文」，后两步「生效」。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-5：策略组成部分 ======================= -->
+  <section class="chapter" id="l3-5">
+    <h2><span class="chapter-no">L3-5</span>策略的五个组成部分</h2>
+    <p class="chapter-sub">Components of a Policy</p>
+    <table class="tb">
+      <tr><th>组成部分</th><th>英文</th><th>写什么</th></tr>
+      <tr><td>主题 / 论点陈述</td><td>Topic / Thesis statement</td><td>这份策略的核心声明——一句话说清管什么事、持什么立场</td></tr>
+      <tr><td>范围与相关性</td><td>Scope and relevance</td><td>策略适用于谁、适用于哪些系统和活动，边界画清楚</td></tr>
+      <tr><td>角色与职责</td><td>Roles and Responsibilities</td><td>谁负责什么——如 L3-10 的信息所有者/保管者/使用者三层职责</td></tr>
+      <tr><td>合规与纪律处分</td><td>Compliance and disciplinary actions</td><td>怎么检查合规、违规有什么后果——让策略「有牙齿」</td></tr>
+      <tr><td>附加信息</td><td>Additional information</td><td>相关标准、定义表、联系方式等补充材料</td></tr>
+    </table>
+    <div class="analogy"><span class="tag">通俗理解</span>一份完整策略像一份合同：标题（主题）、适用范围（scope）、双方权利义务（roles）、违约条款（compliance &amp; disciplinary）、附件（additional info）。五件套缺一不可。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>五组成部分：主题、范围、职责、合规纪律、附加信息。</li><li>对照 L3-10 的实例，这五个部分都能一一找到。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-6：六个关键要素 ======================= -->
+  <section class="chapter" id="l3-6">
+    <h2><span class="chapter-no">L3-6</span>好策略的六个关键要素</h2>
+    <p class="chapter-sub">Key Elements</p>
+    <table class="tb">
+      <tr><th>要素</th><th>英文</th><th>解读</th></tr>
+      <tr><td>清晰易懂</td><td>Clear and easy to understand</td><td>员工读得懂才执行得了——满篇术语的策略形同虚设</td></tr>
+      <tr><td>契合组织</td><td>Applicable to the organization</td><td>能服务于组织的业务目标（business objectives），不是抄模板</td></tr>
+      <tr><td>可行</td><td>Doable</td><td>要求是现实可做到的——「所有系统每天打 10 次补丁」没人做得到</td></tr>
+      <tr><td>可执行</td><td>Enforceable</td><td>有检查手段和惩戒机制，违反能被发现和处理</td></tr>
+      <tr><td>前瞻性</td><td>Proactive</td><td>面向未来风险，不是出了事才补写</td></tr>
+      <tr><td>分阶段推进</td><td>Phasing in</td><td>逐步实施，给组织适应时间——一刀切只会引发抵触</td></tr>
+    </table>
+    <div class="notice"><span class="tag">考点提示</span>单选/判断常见考法：「好的策略应该写得越技术化越详细」→ 错误（要 clear and easy to understand）；「策略应当一次性全面铺开执行」→ 错误（phasing in）。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>六要素：清晰、适用、可行、可执行、前瞻、分阶段。</li><li>记住两个反直觉点：不是越详细越好（要易懂）、不是越快铺开越好（要分阶段）。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-7：层级体系 ======================= -->
+  <section class="chapter" id="l3-7">
+    <h2><span class="chapter-no">L3-7</span>层级体系：从立法到程序</h2>
     <p class="chapter-sub">The Hierarchy</p>
     <div class="demo" style="padding:10px">
       <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="策略层级（L3 版）" style="width:100%;max-width:440px;margin:0 auto;display:block">
@@ -1708,22 +1781,30 @@
     </div>
     <div class="notice"><span class="tag">注意课件前后差异</span>Lecture 1（slide 30）的层级顺序是 Standards → Procedures → Guidelines；<b>Lecture 3 的顺序是 Standards → Guidelines → Procedures</b>。考试以题目对应的课件为准，这里按 Lecture 3 讲解（指南在程序之上更常见）。</div>
     <table class="tb">
-      <tr><th>层级</th><th>英文</th><th>定义</th></tr>
-      <tr><td>策略</td><td>Policy</td><td>对组织信念、目标和目的的高层一般性陈述</td></tr>
-      <tr><td>标准</td><td>Standard</td><td><b>强制性</b>的特定规则、结构、活动或规定，为策略提供具体方向</td></tr>
-      <tr><td>指南</td><td>Guideline</td><td>对程序实施的<strong>建议 / 推荐</strong>（非强制）</td></tr>
-      <tr><td>程序</td><td>Procedure</td><td>策略、标准、指南<strong>如何实施</strong>的具体细节</td></tr>
+      <tr><th>层级</th><th>英文</th><th>定义（课件原文）</th><th>强制性</th></tr>
+      <tr><td>策略</td><td>Policy</td><td>对组织信念、目标和目的的高层一般性陈述</td><td>必须遵守（方向）</td></tr>
+      <tr><td>标准</td><td>Standard</td><td>为策略提供具体方向的<strong>强制性</strong>特定规则、结构、活动或规定</td><td><b>强制 mandatory</b></td></tr>
+      <tr><td>指南</td><td>Guideline</td><td>对程序实施的<strong>建议 / 推荐</strong>（suggestions/recommendations）</td><td><b>非强制</b></td></tr>
+      <tr><td>程序</td><td>Procedure</td><td>策略、标准、指南<strong>如何实施</strong>的具体细节（specifics）</td><td>按标准要求执行</td></tr>
     </table>
-    <h4>课件配套示例（经典四连，考试常考）</h4>
+    <div class="analogy"><span class="tag">通俗理解</span>立法是「国家说了算」，策略是「公司说了算」，标准是「必须这么做」（系安全带），指南是「建议这么做」（长途别疲劳驾驶），程序是「操作手册」（上车先调座椅再系安全带）。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>层级：立法 → 策略 → 标准（强制）→ 指南（建议）→ 程序（怎么做）。</li><li>只有标准是 mandatory；指南是 suggestions/recommendations。</li><li>注意 L1 与 L3 的幻灯片顺序差异。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-8：四连示例与练习 ======================= -->
+  <section class="chapter" id="l3-8">
+    <h2><span class="chapter-no">L3-8</span>课件四连示例 + 两个练习</h2>
+    <p class="chapter-sub">The Example · Practice</p>
+    <h3>课件配套示例（经典四连，考试常考）</h3>
     <table class="tb">
-      <tr><th>层级</th><th>例句</th></tr>
-      <tr><td>Policy</td><td>Access to and use of departmental computing resources is restricted to authorized persons.</td></tr>
-      <tr><td>Standard</td><td>Two-factor authentication mechanism will be used to authenticate users.</td></tr>
-      <tr><td>Guideline</td><td>Passwords/smartcard PINs should consist of at least 8 characters with a mix of alpha, numeric and special characters.</td></tr>
-      <tr><td>Procedure</td><td>Requests for user id and smartcard must be approved and signed by the relevant system owners.</td></tr>
+      <tr><th>层级</th><th>例句</th><th>判别关键词</th></tr>
+      <tr><td>Policy</td><td>Access to and use of departmental computing resources is restricted to authorized persons.</td><td>「restricted to authorized persons」——高层方向</td></tr>
+      <tr><td>Standard</td><td>Two-factor authentication mechanism will be used to authenticate users.</td><td>「will be used」——指定具体技术规则</td></tr>
+      <tr><td>Guideline</td><td>Passwords/smartcard PINs should consist of at least 8 characters with a mix of alpha, numeric and special characters.</td><td>「should」——建议语气</td></tr>
+      <tr><td>Procedure</td><td>Requests for user id and smartcard must be approved and signed by the relevant system owners.</td><td>「approved and signed」——操作步骤</td></tr>
     </table>
 
-    <h3>动手练：归类练习</h3>
+    <h3>练习一：句子归类（演示 8）</h3>
     <div class="demo">
       <p class="demo-title">演示 8 · 策略层级归类（8 句）</p>
       <p class="demo-tip">把每句话归类为 Policy / Standard / Guideline / Procedure。提示：看语气——「must + 具体规则」= Standard，「should / 建议」= Guideline，「具体步骤审批流程」= Procedure，「高层方向」= Policy。</p>
@@ -1735,43 +1816,119 @@
       <div class="quiz-score" id="match-score" style="display:none"></div>
     </div>
 
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>层级：立法 → 策略 → 标准（强制）→ 指南（建议）→ 程序（怎么做）。</li><li>记语气：must 定规则 = 标准；should = 指南；审批流程 = 程序。</li></ul></div>
+    <h3>练习二：把层级排成金字塔（演示 15）</h3>
+    <div class="demo">
+      <p class="demo-title">演示 15 · 层级排序：搭出正确金字塔</p>
+      <p class="demo-tip">按「从高到低」的顺序点击下方词条（已选中的会进入绿色区域并编号；点绿色区域里的词条可撤回）。排好后点交卷——注意 Legislation 在最上面。</p>
+      <div class="rank-list" id="rank-list"></div>
+      <div class="rank-pool" id="rank-pool"></div>
+      <div class="controls">
+        <button class="btn primary" id="rank-submit">Submit / 交卷</button>
+        <button class="btn" id="rank-reset">Reset</button>
+      </div>
+      <div class="quiz-score" id="rank-score" style="display:none"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>记语气：must 定规则 = 标准；should = 指南；审批流程 = 程序。</li><li>金字塔从顶到底：立法 → 策略 → 标准 → 指南 → 程序。</li></ul></div>
   </section>
 
-  <!-- ======================= L3-5 ======================= -->
-  <section class="chapter" id="l3-5">
-    <h2><span class="chapter-no">L3-5</span>策略实例拆解</h2>
-    <p class="chapter-sub">Policy Examples</p>
-    <h3>总体策略示例（General Policy）</h3>
-    <div class="code"><span class="cap"># General Policy 示例</span>
+  <!-- ======================= L3-9：总体策略实例 ======================= -->
+  <section class="chapter" id="l3-9">
+    <h2><span class="chapter-no">L3-9</span>实例一：总体策略（General Policy）</h2>
+    <p class="chapter-sub">An Example</p>
+    <p>课件给出的总体策略只有三句话，但每一句都对应策略的一个功能：</p>
+    <div class="code"><span class="cap"># General Policy 示例（课件原文）</span>
 Information is an invaluable asset and should be appropriately protected.
 All employees are responsible for protecting the organization's information from
 (intentional and accidental) unauthorized access, modification, duplication,
 destruction, or disclosure.
 Internal auditors will perform periodic reviews to ensure the compliance of this
 policy. Consequences of violating this policy are addressed in the Employee's Handbook.</div>
+    <table class="tb">
+      <tr><th>句子</th><th>承载的功能</th><th>对应组成部分</th></tr>
+      <tr><td>第 1 句：信息是宝贵资产，应被适当保护</td><td>定基调、亮观点</td><td>主题陈述 Topic / Thesis statement</td></tr>
+      <tr><td>第 2 句：所有员工有责任保护信息，防（蓄意与意外的）未授权访问、修改、复制、破坏或泄露</td><td>明确<strong>全员责任</strong> + 威胁范围（intentional and accidental 都管）</td><td>角色与职责 Roles &amp; Responsibilities</td></tr>
+      <tr><td>第 3 句：内审定期审查合规；违规后果见员工手册</td><td>审计 + 惩戒</td><td>合规与纪律处分 Compliance &amp; disciplinary actions</td></tr>
+    </table>
+    <div class="notice"><span class="tag">考点细节</span>注意第 2 句的括号内容 <b>(intentional and accidental)</b>——威胁分蓄意与意外两类（呼应 Lecture 2），总体策略一视同仁都要求防范。选择题爱拿「只有蓄意攻击需要防」做干扰项。</div>
 
-    <h3>专题策略示例：信息分类（Topic-Specific）</h3>
-    <ul>
-      <li><strong>政策声明</strong>：信息是宝贵资产，必须按敏感度、价值和关键度分类保护。</li>
-      <li><strong>分类级别</strong>：<b>Public</b>（经授权渠道向公众公开的信息）/ <b>Confidential</b>（一旦泄露会对公司造成重大损害的信息）。</li>
-      <li><strong>降级（Declassification）</strong>：信息所有者应定期审查，必要时重新分类。</li>
-      <li><strong>三层职责</strong>：
-        <table class="tb" style="margin:8px 0">
-          <tr><th>角色</th><th>英文</th><th>职责</th></tr>
-          <tr><td>信息所有者</td><td>Information Owner</td><td>确定分类；定义并实施保护机制；监控合规并报告违规；<b>授权与撤销访问权</b></td></tr>
-          <tr><td>信息保管者</td><td>Information Custodian</td><td>由所有者指定，<b>维护</b>所有者建立的保护机制</td></tr>
-          <tr><td>信息使用者</td><td>Information User</td><td>经所有者授权访问信息并使用保护机制</td></tr>
-        </table>
-      </li>
-      <li><strong>合规（Compliance）</strong>：管理层负责管理与监控信息使用、确保员工理解义务、按策略实施安全实践、对偏差启动纠正措施；违规员工按《员工手册》接受纪律处分。</li>
-    </ul>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>总体策略：三句话定基调（资产观、全员责任、审计与后果）。</li><li>专题策略：分类（Public/Confidential）+ 降级 + 三层角色 + 合规。</li><li>Owner 管授权，Custodian 管维护，User 管使用——职责别记串。</li></ul></div>
+    <h3>动手练：把挖空的关键词填回去（演示 16）</h3>
+    <div class="demo">
+      <p class="demo-title">演示 16 · 策略填空（General Policy 挖空版）</p>
+      <p class="demo-tip">先点一个空格（选中会高亮），再从下方词库点一个词填入；点已填的空格可清空重选。词库里混有干扰项。</p>
+      <div class="cloze-text" id="cloze-text"></div>
+      <div class="wordbank" id="cloze-bank"></div>
+      <div class="controls">
+        <button class="btn primary" id="cloze-submit">Submit / 交卷</button>
+        <button class="btn" id="cloze-reset">Reset</button>
+      </div>
+      <div class="quiz-score" id="cloze-score" style="display:none"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>总体策略三句话 = 主题 + 职责 + 合规惩戒，结构即考点。</li><li>「intentional and accidental」都要防。</li></ul></div>
   </section>
 
-  <!-- ======================= L3-6：自测 ======================= -->
-  <section class="chapter" id="l3-6">
-    <h2><span class="chapter-no">L3-6</span>Lecture 3 自测</h2>
+  <!-- ======================= L3-10：专题策略实例 ======================= -->
+  <section class="chapter" id="l3-10">
+    <h2><span class="chapter-no">L3-10</span>实例二：专题策略（信息分类）</h2>
+    <p class="chapter-sub">A Topic-Specific Policy Example</p>
+    <p>课件用「信息分类策略」完整演示了一份专题策略的四块内容：</p>
+
+    <h3>① 政策声明（Policy）</h3>
+    <p>信息是宝贵资产，必须按其<strong>敏感度、价值和关键度</strong>（sensitivity, value and criticality）进行保护。信息所有者须通过正式评审流程把信息分类为以下级别：</p>
+    <table class="tb">
+      <tr><th>级别</th><th>英文</th><th>定义（课件）</th></tr>
+      <tr><td>公开</td><td>Public</td><td>经组织授权渠道向公众公开的信息</td></tr>
+      <tr><td>机密</td><td>Confidential</td><td>一旦泄露会对公司造成<strong>重大损害</strong>（significant damage）的信息</td></tr>
+    </table>
+
+    <h3>② 降级（Declassification）</h3>
+    <p>信息所有者应<strong>定期审查</strong>，必要时对信息<strong>重新分类</strong>——机密不是永久的，信息会过时、敏感度会变化。</p>
+
+    <h3>③ 三层职责（Responsibilities）</h3>
+    <table class="tb">
+      <tr><th>角色</th><th>英文</th><th>职责（课件原文）</th></tr>
+      <tr>
+        <td><b>信息所有者</b></td>
+        <td>Information Owner</td>
+        <td>(i) 确定相关信息的分类；(ii) 定义并实施适当的信息保护机制；(iii) 监控已实施的机制确保合规并报告违规；(iv) <b>授权与撤销信息访问权</b></td>
+      </tr>
+      <tr>
+        <td><b>信息保管者</b></td>
+        <td>Information Custodian</td>
+        <td>由信息所有者<strong>指定</strong>，负责<strong>维护</strong>所有者建立的保护机制</td>
+      </tr>
+      <tr>
+        <td><b>信息使用者</b></td>
+        <td>Information User</td>
+        <td>经所有者<strong>授权</strong>访问信息并使用保护机制</td>
+      </tr>
+    </table>
+
+    <h3>④ 合规（Compliance）</h3>
+    <ul>
+      <li><strong>管理层的责任</strong>：(i) 管理公司所有信息并监控实际使用；(ii) 确保所有员工理解其保护义务；(iii) 按本策略实施安全实践与程序；(iv) 对任何偏离既定做法的行为启动<strong>纠正措施</strong>。</li>
+      <li><strong>违规后果</strong>：员工不遵守本策略，按《员工手册》接受纪律处分。</li>
+    </ul>
+
+    <h3>动手练：角色职责匹配（演示 17）</h3>
+    <div class="demo">
+      <p class="demo-title">演示 17 · 角色职责匹配（Owner / Custodian / User / Management）</p>
+      <p class="demo-tip">每条职责属于哪个角色？点击职责下方的按钮选择，交卷看解析。注意 Owner 有两条，Management 负责「确保员工理解义务」。</p>
+      <div id="role-box"></div>
+      <div class="controls">
+        <button class="btn primary" id="role-submit">Submit / 交卷</button>
+        <button class="btn" id="role-reset">Reset</button>
+      </div>
+      <div class="quiz-score" id="role-score" style="display:none"></div>
+    </div>
+
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>分类两级：Public（公开无害）/ Confidential（泄露重创）。</li><li>三层角色：Owner 定规则管授权、Custodian 维护机制、User 按权使用。</li><li>合规：管理层四责任 + 员工手册惩戒。</li></ul></div>
+  </section>
+
+  <!-- ======================= L3-11：自测 ======================= -->
+  <section class="chapter" id="l3-11">
+    <h2><span class="chapter-no">L3-11</span>Lecture 3 自测</h2>
     <p class="chapter-sub">Quiz</p>
     <div class="demo">
       <p class="demo-title">演示 13 · L3 自测（10 题 · English）</p>
@@ -1783,6 +1940,7 @@ policy. Consequences of violating this policy are addressed in the Employee's Ha
       </div>
       <div class="quiz-score" id="quiz-score3" style="display:none"></div>
     </div>
+    <div class="takeaway"><span class="tag">自测后行动</span><ul><li>正确率 ≥ 85%：Lecture 3 掌握到位，可进入 Lecture 4。</li><li>60%~85%：重点回看 L3-7 层级与 L3-10 三层角色。</li><li>&lt; 60%：通读 L3-1 到 L3-10，并把两个练习（归类、填空）再做一遍。</li></ul></div>
   </section>
 
   <!-- ======================= 讲座横幅 L4 ======================= -->
