@@ -143,7 +143,6 @@ section.chapter {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 32px 30px;
-  scroll-margin-top: 76px;
 }
 section.chapter > h2 { margin: 0 0 6px; font-size: 26px; display: flex; align-items: center; gap: 12px; }
 .chapter-no {
@@ -166,7 +165,6 @@ section.chapter > h2 { margin: 0 0 6px; font-size: 26px; display: flex; align-it
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 34px 30px 22px;
-  scroll-margin-top: 76px;
 }
 .lecture-banner .lb-num {
   display: inline-block;

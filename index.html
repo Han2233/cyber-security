@@ -52,18 +52,25 @@
     <a href="#sec12">12 PKI</a>
     <a href="#sec13">13 应用·认证·监控</a>
     <a href="#sec14">14 复习自测</a>
-    <a href="#glossary">L1 术语表</a>
+    <a href="#glossary-l1">L1 术语表</a>
     <div class="grp">Lecture 2 · 风险管理</div>
     <a href="#l2-1">L2-1 ISO 31000</a>
-    <a href="#l2-2">L2-2 目标与关键问题</a>
-    <a href="#l2-3">L2-3 评估流程总览</a>
-    <a href="#l2-4">L2-4 项目定义</a>
-    <a href="#l2-5">L2-5 准备阶段</a>
-    <a href="#l2-6">L2-6 数据收集</a>
-    <a href="#l2-7">L2-7 风险度量</a>
-    <a href="#l2-8">L2-8 SLE / ALE 计算</a>
-    <a href="#l2-9">L2-9 缓解与报告</a>
-    <a href="#l2-10">L2-10 自测</a>
+    <a href="#l2-2">L2-2 评估目标</a>
+    <a href="#l2-3">L2-3 四个关键问题</a>
+    <a href="#l2-4">L2-4 流程总览</a>
+    <a href="#l2-5">L2-5 目的与范围</a>
+    <a href="#l2-6">L2-6 三类安全控制</a>
+    <a href="#l2-7">L2-7 资产与系统边界</a>
+    <a href="#l2-8">L2-8 获取授权</a>
+    <a href="#l2-9">L2-9 业务审查</a>
+    <a href="#l2-10">L2-10 关键系统与资产</a>
+    <a href="#l2-11">L2-11 资产估价</a>
+    <a href="#l2-12">L2-12 威胁识别</a>
+    <a href="#l2-13">L2-13 数据收集</a>
+    <a href="#l2-14">L2-14 映射与风险度量</a>
+    <a href="#l2-15">L2-15 SLE/ALE 计算</a>
+    <a href="#l2-16">L2-16 缓解分析与报告</a>
+    <a href="#l2-17">L2-17 自测</a>
     <div class="grp">Lecture 3 · 策略与程序</div>
     <a href="#l3-1">L3-1 为什么需要策略</a>
     <a href="#l3-2">L3-2 三类策略</a>
@@ -1034,10 +1041,12 @@
     <h2>网络安全风险管理概览 · Cyber Security Risk Management Overview</h2>
     <p>从 ISO 31000 框架出发，走一遍完整的风险评估流程：项目定义 → 准备 → 数据收集 → 风险分析 → 缓解分析 → 报告。重点掌握 SLE / ALE 定量计算。</p>
     <div class="lb-nav">
-      <a href="#l2-1">1 ISO 31000</a><a href="#l2-2">2 目标与四问</a><a href="#l2-3">3 流程总览</a>
-      <a href="#l2-4">4 项目定义</a><a href="#l2-5">5 准备阶段</a><a href="#l2-6">6 数据收集</a>
-      <a href="#l2-7">7 风险度量</a><a href="#l2-8">8 SLE/ALE</a><a href="#l2-9">9 缓解与报告</a>
-      <a href="#l2-10">10 自测</a>
+      <a href="#l2-1">1 ISO 31000</a><a href="#l2-2">2 评估目标</a><a href="#l2-3">3 四个关键问题</a>
+      <a href="#l2-4">4 流程总览</a><a href="#l2-5">5 目的与范围</a><a href="#l2-6">6 三类安全控制</a>
+      <a href="#l2-7">7 资产与系统边界</a><a href="#l2-8">8 获取授权</a><a href="#l2-9">9 业务审查</a>
+      <a href="#l2-10">10 关键系统与资产</a><a href="#l2-11">11 资产估价</a><a href="#l2-12">12 威胁识别</a>
+      <a href="#l2-13">13 数据收集</a><a href="#l2-14">14 映射与风险度量</a><a href="#l2-15">15 SLE/ALE 计算</a>
+      <a href="#l2-16">16 缓解分析与报告</a><a href="#l2-17">17 自测</a>
     </div>
   </section>
 
@@ -1045,184 +1054,409 @@
   <section class="chapter" id="l2-1">
     <h2><span class="chapter-no">L2-1</span>ISO 31000：框架与过程</h2>
     <p class="chapter-sub">Risk Management Framework vs Process</p>
+
+    <p>ISO 31000 是国际通用的风险管理标准。本讲先厘清两个最容易被混淆的词——它们是本讲全部内容的骨架：</p>
     <table class="tb">
-      <tr><th>概念</th><th>英文</th><th>含义</th></tr>
-      <tr><td>风险管理框架</td><td><span class="en">Risk Management Framework</span></td><td>规划与设计风险管理活动的<strong>总体结构</strong>（「怎么组织」）</td></tr>
-      <tr><td>风险管理过程</td><td><span class="en">Risk Management Process</span></td><td>风险管理活动的<strong>具体实施</strong>（「怎么做」）</td></tr>
+      <tr><th>概念</th><th>英文</th><th>定义（课件原文）</th><th>通俗理解</th></tr>
+      <tr>
+        <td><b>风险管理框架</b></td>
+        <td><span class="en">Risk Management Framework</span></td>
+        <td>风险管理活动<strong>规划与设计的总体结构</strong></td>
+        <td>「组织结构与章程」——定班子、定制度</td>
+      </tr>
+      <tr>
+        <td><b>风险管理过程</b></td>
+        <td><span class="en">Risk Management Process</span></td>
+        <td>风险管理活动的<strong>具体实施</strong></td>
+        <td>「日常工作流」——按制度干活</td>
+      </tr>
     </table>
-    <p>二者关系：<strong>框架指导并评估过程；过程反过来评估组织的网络安全风险</strong>。</p>
-    <div class="analogy"><span class="tag">通俗理解</span>框架是公司章程和组织架构，过程是每天的日常工作流。没有框架，过程乱成一团；没有过程，框架是空架子。</div>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>框架 = 结构（planning &amp; design）；过程 = 实施（implementation）。</li><li>一句话关系：框架指导和评估过程，过程评估风险。</li></ul></div>
+
+    <h3>两者的关系（课件原话，考试常考）</h3>
+    <div class="demo" style="padding:10px">
+      <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="框架与过程关系" style="width:100%;max-width:500px;margin:0 auto;display:block">
+        <rect x="30" y="30" width="180" height="64" rx="12" fill="#ecfdf5" stroke="#047857" stroke-width="2.5"/>
+        <text x="120" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46">风险管理框架</text>
+        <text x="120" y="78" text-anchor="middle" font-size="11" fill="#64748b">Framework（结构）</text>
+        <rect x="330" y="30" width="200" height="64" rx="12" fill="#eff6ff" stroke="#0369a1" stroke-width="2.5"/>
+        <text x="430" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="#0c4a6e">风险管理过程</text>
+        <text x="430" y="78" text-anchor="middle" font-size="11" fill="#64748b">Process（实施）</text>
+        <rect x="180" y="130" width="220" height="56" rx="12" fill="#fff1f2" stroke="#be123c" stroke-width="2"/>
+        <text x="290" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#881337">组织的网络安全风险</text>
+        <text x="290" y="173" text-anchor="middle" font-size="11" fill="#64748b">Cybersecurity Risks</text>
+        <line x1="210" y1="60" x2="330" y2="60" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrF)"/>
+        <text x="270" y="50" text-anchor="middle" font-size="11" fill="#64748b">指导并评估 guides &amp; assesses</text>
+        <line x1="430" y1="94" x2="320" y2="150" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrF)"/>
+        <text x="390" y="128" text-anchor="middle" font-size="11" fill="#64748b">评估 assesses</text>
+        <defs><marker id="arrF" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#94a3b8"/></marker></defs>
+      </svg>
+    </div>
+    <p><strong>框架指导并评估过程，过程反过来评估组织的网络安全风险。</strong>两层「评估」：框架评过程（制度执行得好不好），过程评风险（风险大不大）。</p>
+    <div class="analogy"><span class="tag">通俗理解</span>框架是公司的风控委员会和规章制度，过程是每个季度的风险评估行动。委员会（框架）监督行动（过程）的质量；行动（过程）的产出是「公司现在有哪些风险」。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>框架 = 结构（planning &amp; design）；过程 = 实施（implementation）。</li><li>关系链：框架 →（指导评估）→ 过程 →（评估）→ 风险。</li></ul></div>
   </section>
 
-  <!-- ======================= L2-2：目标与四问 ======================= -->
+  <!-- ======================= L2-2：评估目标 ======================= -->
   <section class="chapter" id="l2-2">
-    <h2><span class="chapter-no">L2-2</span>评估目标与四个关键问题</h2>
-    <p class="chapter-sub">Objectives & Key Questions</p>
-    <h3>目标（与 Lecture 1 一致的五条）</h3>
-    <ol>
-      <li>确保尽职调查被履行；</li>
-      <li>建立对组织系统与基础设施的理解；</li>
-      <li>为制定安全策略与程序提供基础；</li>
-      <li>为选择与实施防护措施提供基础；</li>
-      <li>为评估现有防护措施的有效性提供基础。</li>
-    </ol>
-    <h3>四个关键问题（对应四个环节，考试爱考连线）</h3>
+    <h2><span class="chapter-no">L2-2</span>风险评估的五大目标</h2>
+    <p class="chapter-sub">Cyber Security Risk Assessment Objectives</p>
+    <p>目标回答了「为什么要做风险评估」。五条逐条拆解：</p>
     <table class="tb">
-      <tr><th>问题</th><th>对应环节</th><th>英文</th></tr>
-      <tr><td>风险在哪里？</td><td><b>风险识别</b></td><td><span class="en">Risk Identification</span></td></tr>
-      <tr><td>当前风险水平如何？</td><td><b>风险分析</b></td><td><span class="en">Risk Analysis</span></td></tr>
-      <tr><td>当前风险水平可接受吗？</td><td><b>风险评价</b></td><td><span class="en">Risk Evaluation</span></td></tr>
-      <tr><td>需要做什么才能降到可接受水平？</td><td><b>风险处理</b></td><td><span class="en">Risk Treatment</span></td></tr>
+      <tr><th>#</th><th>目标（课件原文）</th><th>解读</th></tr>
+      <tr><td>1</td><td>Ensure due diligence is performed</td><td>确保<strong>尽职调查</strong>被履行——出事后能证明「我们已经合理尽责地评估过风险」，是法律与合规层面的护身符</td></tr>
+      <tr><td>2</td><td>Building an understanding of the organization's system and infrastructure</td><td>建立对组织<strong>系统与基础设施的理解</strong>——很多组织连自己有多少资产、哪些是关键系统都说不清，评估强迫你把家底摸清</td></tr>
+      <tr><td>3</td><td>Provide a basis for establishing proper cyber security policy and procedures</td><td>为制定恰当的<strong>安全策略与程序</strong>提供依据——策略不是拍脑袋写的，是风险「逼」出来的（呼应 Lecture 3）</td></tr>
+      <tr><td>4</td><td>Provide a basis for selecting and implementing effective safeguards</td><td>为<strong>选择和实施防护措施</strong>提供依据——钱花在哪，由风险大小决定</td></tr>
+      <tr><td>5</td><td>Provide a basis for evaluating the effectiveness of current implemented safeguards</td><td>为评估<strong>现有防护措施的有效性</strong>提供基准——没有基准，就不知道防护是在真拦攻击还是装样子</td></tr>
     </table>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>评估目标五条：尽职、理解、策略基础、防护选择、有效性评估。</li><li>四问四环节：识别 → 分析 → 评价 → 处理。</li></ul></div>
+    <div class="analogy"><span class="tag">通俗理解</span>风险评估像「年度体检」：① 出了问题能说「我们每年都体检了」（尽职）；② 搞清楚身体现状（理解系统）；③ 据此定养生方案（策略）；④ 决定买什么保险（防护选择）；⑤ 检验去年的养生有没有用（有效性评估）。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>五大目标：尽职 → 理解 → 策略依据 → 防护选择 → 有效性基准。</li><li>关键词成对记：due diligence / understanding / policy basis / safeguard basis / effectiveness。</li></ul></div>
   </section>
 
-  <!-- ======================= L2-3：流程总览 ======================= -->
+  <!-- ======================= L2-3：四个关键问题 ======================= -->
   <section class="chapter" id="l2-3">
-    <h2><span class="chapter-no">L2-3</span>评估 / 处理流程总览</h2>
+    <h2><span class="chapter-no">L2-3</span>评估要回答的四个关键问题</h2>
+    <p class="chapter-sub">Key Questions to be Addressed</p>
+    <p>整个评估过程本质上是在依次回答四个问题，每个问题对应一个标准环节：</p>
+    <table class="tb">
+      <tr><th>环节</th><th>英文</th><th>关键问题</th><th>要产出什么</th></tr>
+      <tr>
+        <td><b>风险识别</b></td><td><span class="en">Risk Identification</span></td>
+        <td>What (and where) are the risks?<br>风险是什么？在哪里？</td>
+        <td>一份「风险清单」：什么资产、什么威胁、什么脆弱性</td>
+      </tr>
+      <tr>
+        <td><b>风险分析</b></td><td><span class="en">Risk Analysis</span></td>
+        <td>What are the current risk levels?<br>当前风险水平如何？</td>
+        <td>每个风险的「大小」：定性等级或定量数值（SLE/ALE）</td>
+      </tr>
+      <tr>
+        <td><b>风险评价</b></td><td><span class="en">Risk Evaluation</span></td>
+        <td>Are the current risk levels acceptable?<br>当前水平可以接受吗？</td>
+        <td>对照<strong>风险接受标准</strong>（acceptance criteria）打勾或打叉</td>
+      </tr>
+      <tr>
+        <td><b>风险处理</b></td><td><span class="en">Risk Treatment</span></td>
+        <td>What does the organization need to do to bring risks down to the acceptable level?<br>怎么把不可接受的风险降下来？</td>
+        <td>处理策略：接受 / 缓解 / 转移（第 2-14 节）</td>
+      </tr>
+    </table>
+    <div class="notice"><span class="tag">记忆技巧</span>四个环节的英文首字母连起来是 <b>I-A-E-T</b>（Identify → Analyze → Evaluate → Treat），顺序不可颠倒：先知道风险在哪，才能分析大小；先分析大小，才能判断可否接受；先判断不可接受，才去处理。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>四问四环节：识别（在哪）→ 分析（多大）→ 评价（能忍吗）→ 处理（怎么办）。</li><li>风险处理三策略：接受 Accept、缓解 Mitigate、转移 Transfer。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-4：流程总览 ======================= -->
+  <section class="chapter" id="l2-4">
+    <h2><span class="chapter-no">L2-4</span>评估 / 处理流程总览</h2>
     <p class="chapter-sub">The Process</p>
+    <p>完整流程七大步（课件图），每一步的具体产出如下表：</p>
     <div class="pipeline">
-      <div class="pipe-step"><b>定义项目</b>范围与目标<br>Define scope &amp; objective</div>
+      <div class="pipe-step"><b>定义项目</b>Define scope &amp; objective</div>
       <div class="pipe-arrow">&#8594;</div>
-      <div class="pipe-step"><b>准备</b>授权·业务审查·资产·威胁<br>Prepare</div>
+      <div class="pipe-step"><b>准备</b>Prepare</div>
       <div class="pipe-arrow">&#8594;</div>
-      <div class="pipe-step"><b>收集数据</b>行政·技术·物理<br>Gather data</div>
+      <div class="pipe-step"><b>收集数据</b>Gather data</div>
       <div class="pipe-arrow">&#8594;</div>
-      <div class="pipe-step"><b>分析风险</b>威胁/脆弱性映射·评价<br>Analyze risks</div>
+      <div class="pipe-step"><b>分析风险</b>Analyze risks</div>
       <div class="pipe-arrow">&#8594;</div>
-      <div class="pipe-step"><b>确定处理策略</b>接受水平·处理方式<br>Risk handling</div>
+      <div class="pipe-step"><b>确定处理策略</b>Risk handling</div>
       <div class="pipe-arrow">&#8594;</div>
-      <div class="pipe-step"><b>缓解分析</b>防护建议·成本效益<br>Mitigation</div>
+      <div class="pipe-step"><b>缓解分析</b>Mitigation Analysis</div>
       <div class="pipe-arrow">&#8594;</div>
       <div class="pipe-step"><b>报告</b>Reporting</div>
     </div>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>七步流程：定义 → 准备 → 收集 → 分析 → 处理 → 缓解 → 报告。</li><li>后续章节 L2-4 ~ L2-9 逐环节展开。</li></ul></div>
+    <table class="tb">
+      <tr><th>步骤</th><th>英文</th><th>做什么（课件）</th><th>对应章节</th></tr>
+      <tr><td>定义项目</td><td>Define project scope and objective</td><td>确定评估目的、范围、系统边界</td><td>L2-5 ~ L2-7</td></tr>
+      <tr><td>准备</td><td>Prepare</td><td>获取授权 → 业务审查 → 识别关键系统与资产 → 识别威胁</td><td>L2-8 ~ L2-12</td></tr>
+      <tr><td>收集数据</td><td>Gather data</td><td>行政 / 技术 / 物理三个维度的数据收集</td><td>L2-13</td></tr>
+      <tr><td>分析风险</td><td>Analyze risks</td><td>威胁/脆弱性映射 + 风险评价</td><td>L2-14</td></tr>
+      <tr><td>确定处理策略</td><td>Determine risk handling approach</td><td>建立风险接受水平、确定处理策略（接受/缓解/转移）</td><td>L2-14</td></tr>
+      <tr><td>缓解分析</td><td>Risk Mitigation Analysis</td><td>防护建议 + 成本效益分析</td><td>L2-16</td></tr>
+      <tr><td>报告</td><td>Reporting</td><td>汇总成正式报告</td><td>L2-16</td></tr>
+    </table>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>七步：定义 → 准备 → 收集 → 分析 → 处理 → 缓解 → 报告。</li><li>本讲后续章节严格按这个顺序展开，学到哪一步都能对上号。</li></ul></div>
   </section>
 
-  <!-- ======================= L2-4：项目定义 ======================= -->
-  <section class="chapter" id="l2-4">
-    <h2><span class="chapter-no">L2-4</span>项目定义：圈定范围</h2>
+  <!-- ======================= L2-5：项目定义（目的与范围） ======================= -->
+  <section class="chapter" id="l2-5">
+    <h2><span class="chapter-no">L2-5</span>项目定义：目的、预算与范围</h2>
     <p class="chapter-sub">Project Definition</p>
-    <h3>要确定什么</h3>
-    <ul>
-      <li><strong>目的 / 目标</strong>：合同合规（Contract compliance）还是项目审查（Program review）；</li>
-      <li><strong>预算与时间约束</strong>；</li>
-      <li><strong>范围</strong>：纳入哪些资产与控制、评估的边界；</li>
-      <li><strong>系统边界</strong>（System boundaries）。</li>
-    </ul>
-    <h3>范围由两类边界决定</h3>
+    <p>项目定义回答「这次评估到底要干什么、干多大」。四个要点：</p>
+    <h3>① 确定目的 / 目标（Determine the purpose/objective）</h3>
     <table class="tb">
-      <tr><th>安全控制 Security Controls</th><th>资产 Assets</th></tr>
+      <tr><th>两种典型目的</th><th>英文</th><th>含义</th></tr>
+      <tr><td>合同合规</td><td><span class="en">Contract Compliance</span></td><td>为满足合同/客户要求而做的评估（甲方要求）</td></tr>
+      <tr><td>项目审查</td><td><span class="en">Program Review</span></td><td>组织自发对自己的安全项目做体检（内驱）</td></tr>
+    </table>
+    <h3>② 理解预算与时间约束（Understand budget and time constraints）</h3>
+    <p>评估不是无限的——预算和时间决定了数据收集的深度、抽样规模和报告篇幅。</p>
+    <h3>③ 确定范围（Determine the scope）</h3>
+    <ul>
+      <li><strong>纳入哪些资产与控制</strong>（Assets and controls to be included）；</li>
+      <li><strong>评估的边界</strong>（Boundaries of the assessment）——哪些部门、哪些系统在评估内，哪些明确排除。</li>
+    </ul>
+    <h3>④ 识别系统边界（Identify system boundaries）</h3>
+    <p>详见 L2-7（物理边界 vs 逻辑边界 + 系统互联）。</p>
+    <div class="analogy"><span class="tag">通俗理解</span>项目定义 = 签合同前的「评估范围清单」：为什么评（目的）、花多少钱多久（预算）、评哪些（范围）、边界画到哪（系统边界）。范围没定清楚，后面每一步都会扯皮。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>四要点：目的（合规 vs 审查）、预算时间、范围（资产+控制）、系统边界。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-6：三类安全控制 ======================= -->
+  <section class="chapter" id="l2-6">
+    <h2><span class="chapter-no">L2-6</span>范围边界之一：三类安全控制</h2>
+    <p class="chapter-sub">Security Controls</p>
+    <p>项目的范围由两类边界决定：<strong>安全控制</strong>的边界和<strong>资产</strong>的边界（课件 1/2 与 2/2 两张 slide）。先说控制——按「管人、管设施、管逻辑」分三类：</p>
+    <table class="tb">
+      <tr><th>类别</th><th>英文</th><th>保护对象</th><th>课件例子</th><th>其他典型例子</th></tr>
       <tr>
-        <td>
-          <b>行政控制 Administrative</b>：策略、程序、非技术活动（离职面谈）、技术性活动（审计日志审查）<br>
-          <b>物理控制 Physical</b>：保护设施与员工（保安、CCTV）<br>
-          <b>技术控制 Technical</b>：为资产提供逻辑保护（杀毒软件）
-        </td>
-        <td>
-          <b>有形 Tangible</b>：物理实体（人员、设施、系统）<br>
-          <b>无形 Intangible</b>：无物理形态的可辨识非货币资产（知识产权、员工安全、客户名单、声誉、许可证）
-        </td>
+        <td><b>行政控制</b></td><td><span class="en">Administrative</span></td>
+        <td>通过<strong>政策、流程、人的活动</strong>实现的管理性控制</td>
+        <td>政策（policies）、程序（procedures）、非技术活动（如离职面谈 exit interviews）、技术性活动（如审计日志审查 audit log review）</td>
+        <td>安全培训、职责分离、背景调查、应急预案演练</td>
+      </tr>
+      <tr>
+        <td><b>物理控制</b></td><td><span class="en">Physical</span></td>
+        <td>保护组织的<strong>设施与员工</strong></td>
+        <td>保安（security guards）、闭路电视（CCTV）</td>
+        <td>门禁卡、机房门锁、消防系统、UPS</td>
+      </tr>
+      <tr>
+        <td><b>技术控制</b></td><td><span class="en">Technical</span></td>
+        <td>为资产提供<strong>逻辑保护</strong></td>
+        <td>杀毒软件（anti-virus software）</td>
+        <td>防火墙、入侵检测、访问控制列表、加密</td>
       </tr>
     </table>
-    <h3>系统边界（两种责任）</h3>
-    <ul>
-      <li><strong>物理边界 Physical</strong>：对物理资产（服务器、工作站）的责任；</li>
-      <li><strong>逻辑边界 Logical</strong>：对系统数据的责任；</li>
-      <li>还要记录<strong>系统互联</strong>（interconnections）及其理由。</li>
-    </ul>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>控制三类：行政（人/流程）、物理（设施）、技术（逻辑保护）。</li><li>资产两类：有形（可触）+ 无形（客户名单、声誉、知识产权）。</li><li>边界两类：物理（设备归谁管）+ 逻辑（数据归谁管）。</li></ul></div>
+    <div class="notice"><span class="tag">记忆技巧</span>三类控制 = 「人·场·技」：行政管<strong>人和流程</strong>、物理管<strong>场地和设施</strong>、技术管<strong>逻辑和数据</strong>。评估时三类都要覆盖，只查防火墙不看制度和门禁，评估就是不完整的。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>控制三分类：Administrative（政策/程序/面谈/日志审查）、Physical（保安/CCTV）、Technical（杀毒等逻辑保护）。</li><li>「离职面谈」属于行政控制、「审计日志审查」也是行政控制——不要看到日志就觉得是技术。</li></ul></div>
   </section>
 
-  <!-- ======================= L2-5：准备阶段 ======================= -->
-  <section class="chapter" id="l2-5">
-    <h2><span class="chapter-no">L2-5</span>准备阶段：授权、业务审查、资产与威胁</h2>
-    <p class="chapter-sub">Preparation</p>
-
-    <h3>① 获得授权 Obtain Permission</h3>
-    <ul>
-      <li>识别系统所有者（System Owner）并获得授权——谁是真正的所有者？多方共有？共享系统？</li>
-      <li>注意潜在的法律违规风险（Potential violation of legislation）；</li>
-      <li>项目所需账号：类型、权限级别、用途。</li>
-    </ul>
-
-    <h3>② 业务审查 Business Review</h3>
-    <p>目标：识别安全需求、理解现有基础设施。七个主要步骤：识别业务目标 → 组织结构 → 相关终端用户 → 基础设施 → 业务伙伴与供应商 → 竞争对手 → 趋势与标准。四种常用方法：<strong>访谈 Interviews、文档审查 Document review、问卷 Questionnaire、研究 Research</strong>。</p>
-
-    <h3>③ 识别关键系统与资产</h3>
-    <p>目标：弄清「要保护什么」。识别信息系统四要素：<strong>资源边界、功能、数据与数据所有者、授权用户</strong>——务必同时覆盖有形与无形资产。判定关键性（criticality）：保护要求（高/中/低）、使命关键度（使命关键/重要/支持性）、系统定义（一般支持系统/主要应用/应用）。</p>
-
-    <h3>④ 资产估价 Asset Valuation</h3>
-    <ul>
-      <li>定性 vs 定量两种方法；<strong>预算和成本效益分析需要定量</strong>。</li>
-      <li>定量法：有形资产 → 重置成本（replacement cost）；无形资产 → 数据/软件重置成本 + 按 C/I/A 衡量信息价值。</li>
-    </ul>
-
-    <h3>⑤ 威胁识别 Threat Identification</h3>
-    <p>威胁 = 发生会对组织造成不良影响的事件。三要素：</p>
-    <table class="tb">
-      <tr><th>要素</th><th>英文</th><th>说明</th></tr>
-      <tr><td>主体</td><td>Agent</td><td>执行威胁的东西，<strong>不一定是人</strong>（恶意代码、大自然）</td></tr>
-      <tr><td>动机</td><td>Motive</td><td>驱动主体行动的原因，<strong>可能是意外也可能是蓄意</strong></td></tr>
-      <tr><td>结果</td><td>Outcomes</td><td>不良后果</td></tr>
-    </table>
-    <p>两大类别：<strong>意外 Accidental</strong> 与 <strong>蓄意 Intentional</strong>。列威胁清单（checklist）时要<strong>明确定义每个威胁</strong>，保证评估团队理解一致。</p>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>先拿授权（找对系统所有者），再做业务审查（7 步、4 法）。</li><li>资产估价：定量才有预算和成本效益分析。</li><li>威胁三要素：主体（可非人）、动机（可意外）、结果。</li></ul></div>
-  </section>
-
-  <!-- ======================= L2-6：数据收集 ======================= -->
-  <section class="chapter" id="l2-6">
-    <h2><span class="chapter-no">L2-6</span>数据收集</h2>
-    <p class="chapter-sub">Data Gathering</p>
-    <h3>三个维度</h3>
-    <table class="tb">
-      <tr><th>维度</th><th>英文</th><th>方法</th></tr>
-      <tr><td>行政</td><td>Administrative</td><td>文档审查、组织审查、访谈、观察</td></tr>
-      <tr><td>物理</td><td>Physical</td><td>文档审查、巡检（Inspection）、观察</td></tr>
-      <tr><td>技术</td><td>Technical</td><td>设计与架构审查、配置审查、<b>测试</b>（漏洞扫描、渗透测试）</td></tr>
-    </table>
-    <h3>两大方法</h3>
-    <ul>
-      <li><strong>统计抽样 Statistical Sampling</strong>：按预设置信水平（confidence level）确定样本量；</li>
-      <li><strong>RIIOT</strong>：<b>R</b>eview（审查）+ <b>I</b>nterview（访谈）+ <b>I</b>nspect（巡检）+ <b>O</b>bserve（观察）+ <b>T</b>est（测试）——五字口诀。</li>
-    </ul>
-    <div class="analogy"><span class="tag">口诀</span>RIIOT = 查、谈、检、观、测。</div>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>行政/物理/技术三维度，技术维度靠扫描和渗透测试。</li><li>RIIOT 五字诀是考点；统计抽样按置信水平定样本量。</li></ul></div>
-  </section>
-
-  <!-- ======================= L2-7：风险度量 ======================= -->
+  <!-- ======================= L2-7：资产与系统边界 ======================= -->
   <section class="chapter" id="l2-7">
-    <h2><span class="chapter-no">L2-7</span>风险度量：六个基本要素</h2>
-    <p class="chapter-sub">Establishing Risk Metrics</p>
-    <h3>威胁/脆弱性/资产映射（Mapping）</h3>
-    <p>目标：把「威胁→脆弱性」「脆弱性→资产」的关系讲清楚。课件简化示例：</p>
+    <h2><span class="chapter-no">L2-7</span>范围边界之二：资产与系统边界</h2>
+    <p class="chapter-sub">Assets & System Boundaries</p>
+    <h3>资产两大类：有形 vs 无形</h3>
     <table class="tb">
-      <tr><th>脆弱性 Vulnerability</th><th>相关威胁 Relevant Threats</th><th>受影响的资产</th></tr>
-      <tr><td>未部署杀毒机制</td><td>数据窃取 / 数据破坏 / 数据修改</td><td>声誉、数据机密性 / 可用性 / 完整性</td></tr>
+      <tr><th>类别</th><th>英文</th><th>定义</th><th>课件例子</th></tr>
+      <tr>
+        <td><b>有形资产</b></td><td><span class="en">Tangible</span></td>
+        <td>物理实体</td>
+        <td>人员（personnel）、设施（facilities）、系统（systems）</td>
+      </tr>
+      <tr>
+        <td><b>无形资产</b></td><td><span class="en">Intangible</span></td>
+        <td><strong>可辨识、非货币、无物理形态</strong>的资产</td>
+        <td>知识产权（intellectual properties）、员工安全（employee safety）、客户名单（customer list）、声誉（reputation）、许可证（licensing）</td>
+      </tr>
     </table>
-    <h3>六个基本风险要素（考试常考）</h3>
-    <div class="pipeline">
-      <div class="pipe-step"><b>资产价值</b>Asset value</div>
-      <div class="pipe-step"><b>威胁频率</b>Threat frequency</div>
-      <div class="pipe-step"><b>暴露因子</b>Threat exposure factor</div>
-      <div class="pipe-step"><b>防护有效性</b>Safeguard effectiveness</div>
-      <div class="pipe-step"><b>防护成本</b>Safeguard cost</div>
-      <div class="pipe-step"><b>置信因子</b>Confidence factor</div>
-    </div>
-    <h3>定量 vs 定性</h3>
+    <div class="analogy"><span class="tag">通俗理解</span>服务器是有形资产，服务器里的客户名单是无形资产。很多组织只给服务器上保险（有形），却把客户名单（无形）放在一个弱口令的共享盘上——无形的往往比有形的更值钱、更难估价。</div>
+    <h3>系统边界：物理 vs 逻辑 vs 互联</h3>
     <table class="tb">
-      <tr><th></th><th>优点 Pros</th><th>缺点 Cons</th></tr>
-      <tr><td><b>定量</b></td><td>客观；易理解；为成本效益分析提供基础；可用专业管理语言表达；绩效可客观跟踪</td><td>复杂耗时；劳动密集；依赖专业知识；缺乏通用量化标准；不灵活</td></tr>
-      <tr><td><b>定性</b></td><td>简单；无需量化资产价值等；易于让各级人员参与；灵活</td><td>主观；无法做成本效益分析；风险价值可能失真；绩效无法客观跟踪</td></tr>
+      <tr><th>边界</th><th>英文</th><th>回答的问题</th><th>课件说明</th></tr>
+      <tr><td>物理边界</td><td>Physical</td><td>硬件归谁管？</td><td>对物理资产（服务器、工作站）的责任</td></tr>
+      <tr><td>逻辑边界</td><td>Logical</td><td>数据归谁管？</td><td>对系统数据的责任</td></tr>
+      <tr><td>系统互联</td><td>System Interconnections</td><td>连了谁、为什么连？</td><td>记录系统互联及其理由（rationales）</td></tr>
     </table>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>六要素：价值、频率、暴露、有效性、成本、置信。</li><li>定量给数字（可算 ROI），定性给等级（快而主观）。</li></ul></div>
+    <p>还要明确<strong>系统类型与安全需求</strong>（System type and security requirements）——不同类型系统（生产/测试/开发）有不同的保护级别。</p>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>资产：有形（人员/设施/系统）+ 无形（IP、员工安全、客户名单、声誉、许可证）。</li><li>边界：物理（设备责任）+ 逻辑（数据责任）+ 互联（连接与理由）。</li></ul></div>
   </section>
 
-  <!-- ======================= L2-8：SLE/ALE ======================= -->
+  <!-- ======================= L2-8：获取授权 ======================= -->
   <section class="chapter" id="l2-8">
-    <h2><span class="chapter-no">L2-8</span>SLE 与 ALE：定量风险计算</h2>
+    <h2><span class="chapter-no">L2-8</span>准备①：获取授权</h2>
+    <p class="chapter-sub">Obtain Permission</p>
+    <p>评估要动别人的系统和数据，<strong>没有合法授权就开工是违法</strong>——这是把「获取授权」放在准备阶段第一步的原因。</p>
+    <h3>要点一：找对系统所有者</h3>
+    <table class="tb">
+      <tr><th>问题（课件）</th><th>为什么要问</th></tr>
+      <tr><td>谁是真正的系统所有者？（Who is the actual system owner?）</td><td>表面负责人 ≠ 真正所有者；找错人授权无效</td></tr>
+      <tr><td>多方所有者情形？（Multiple owner situation）</td><td>一个系统多个部门共有，要拿到所有方的同意</td></tr>
+      <tr><td>共享系统？（Shared system）</td><td>与其他组织共用（如云服务、外包系统），边界要划清</td></tr>
+    </table>
+    <h3>要点二：警惕法律风险</h3>
+    <p>课件提醒：未经授权开展评估可能构成<strong>违反法规</strong>（Potential violation of legislation）——比如未经授权扫描他人系统在不少地区本身就违法。</p>
+    <h3>要点三：项目所需账号</h3>
+    <p>评估团队可能需要登录被评估系统，要提前明确三件事：<strong>账号类型</strong>（Type of account）、<strong>访问级别</strong>（Level of access）、<strong>用途理由</strong>（Reason）。</p>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>授权三连：找对所有者（多方/共享都要覆盖）→ 防违法 → 定账号（类型/级别/理由）。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-9：业务审查 ======================= -->
+  <section class="chapter" id="l2-9">
+    <h2><span class="chapter-no">L2-9</span>准备②：业务审查</h2>
+    <p class="chapter-sub">Business Review</p>
+    <h3>两个目标（Goals）</h3>
+    <ol>
+      <li><strong>识别安全需求</strong>（Identify the security requirements）——业务要什么，安全就保什么；</li>
+      <li><strong>理解现有基础设施</strong>（Understand the present infrastructure）——现在有什么家底。</li>
+    </ol>
+    <h3>七个主要步骤（Major Steps）</h3>
+    <table class="tb">
+      <tr><th>#</th><th>步骤（课件）</th><th>要搞清楚什么</th></tr>
+      <tr><td>1</td><td>Identify the business objectives</td><td>业务目标——安全是为业务服务的</td></tr>
+      <tr><td>2</td><td>Identify the organizational structure</td><td>组织结构——谁管什么、向谁汇报</td></tr>
+      <tr><td>3</td><td>Identify the relevant end-users</td><td>终端用户——系统给谁用、怎么用</td></tr>
+      <tr><td>4</td><td>Identify the infrastructure</td><td>基础设施——网络、系统、应用的现状</td></tr>
+      <tr><td>5</td><td>Identify business partners and vendors</td><td>业务伙伴与供应商——外部依赖（供应链风险）</td></tr>
+      <tr><td>6</td><td>Identify the competitors</td><td>竞争对手——竞争环境（商业间谍风险）</td></tr>
+      <tr><td>7</td><td>Identify trends and standards</td><td>行业趋势与标准——合规要求、技术风向</td></tr>
+    </table>
+    <h3>四种常用方法（Common Approaches）</h3>
+    <div class="cards3">
+      <div class="card"><h4><span class="dot green"></span>访谈 Interviews</h4><p>与关键人员一对一谈话，获取文档上没有的实际情况。</p></div>
+      <div class="card"><h4><span class="dot blue"></span>文档审查 Document Review</h4><p>阅读政策、架构图、流程手册等现有材料。</p></div>
+      <div class="card"><h4><span class="dot orange"></span>问卷 Questionnaire</h4><p>标准化问题批量收集，便于横向比较。</p></div>
+      <div class="card"><h4><span class="dot purple"></span>研究 Research</h4><p>查阅公开资料、行业报告、竞品信息。</p></div>
+    </div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>目标二：识别安全需求 + 理解基础设施。</li><li>七步：目标 → 结构 → 用户 → 设施 → 伙伴 → 对手 → 趋势。</li><li>四法：访谈、文档、问卷、研究。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-10：关键系统与资产 ======================= -->
+  <section class="chapter" id="l2-10">
+    <h2><span class="chapter-no">L2-10</span>准备③：识别关键系统与资产</h2>
+    <p class="chapter-sub">Identify Critical Systems and Assets</p>
+    <h3>目标：搞清楚「要保护什么」</h3>
+    <p>识别信息系统要覆盖四个要素（课件）：<strong>资源边界</strong>（Resources boundary）、<strong>功能</strong>（Functionalities）、<strong>数据与数据所有者</strong>（Data and data owner）、<strong>授权用户</strong>（Authorized users）。<strong>务必同时纳入有形与无形资产</strong>——漏掉无形资产的评估是重大缺陷。</p>
+    <h3>确定系统 / 资产的关键性（Criticality）</h3>
+    <table class="tb">
+      <tr><th>维度</th><th>英文</th><th>分级方式（课件）</th></tr>
+      <tr><td>判断依据</td><td>Sources</td><td>已有信息（Existing information）→ 高层判定（High level determination）→ 详细分类（Detail classification，如基于 NIST）</td></tr>
+      <tr><td>保护要求</td><td>Protection requirements</td><td><b>高 / 中 / 低</b>（High / Medium / Low）</td></tr>
+      <tr><td>使命关键度</td><td>Mission criticality</td><td><b>使命关键 / 重要 / 支持性</b>（Mission critical / Important / Supportive）</td></tr>
+      <tr><td>系统定义</td><td>System definition</td><td><b>一般支持系统 / 主要应用 / 应用</b>（General support system / Major application / Application）</td></tr>
+    </table>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>识别四要素：资源边界、功能、数据与所有者、授权用户。</li><li>关键性三套分级：保护要求（高/中/低）、使命关键度（关键/重要/支持）、系统定义（支持系统/主要应用/应用）。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-11：资产估价 ======================= -->
+  <section class="chapter" id="l2-11">
+    <h2><span class="chapter-no">L2-11</span>准备④：资产估价</h2>
+    <p class="chapter-sub">Asset Valuation</p>
+    <h3>两种方法</h3>
+    <table class="tb">
+      <tr><th>方法</th><th>英文</th><th>要点</th></tr>
+      <tr><td>定性</td><td>Qualitative</td><td>用等级（高/中/低）描述价值，快但粗</td></tr>
+      <tr><td>定量</td><td>Quantitative</td><td>用货币数额给资产定价——<strong>预算（Budgeting）和成本效益分析（Cost-benefit analysis）必须用定量</strong></td></tr>
+    </table>
+    <h3>定量法怎么估（课件细节）</h3>
+    <table class="tb">
+      <tr><th>资产类型</th><th>估价方式</th></tr>
+      <tr><td><b>有形资产</b></td><td>通常可直接用<strong>重置成本</strong>（replacement cost）确定——买一台同样的服务器多少钱</td></tr>
+      <tr><td><b>无形资产</b></td><td>① 数据 / 软件的<strong>重置成本</strong>；② 按信息价值衡量：从<strong>机密性 Confidentiality、完整性 Integrity、可用性 Availability</strong> 三个角度分别评估损失价值</td></tr>
+    </table>
+    <div class="analogy"><span class="tag">通俗理解</span>客户名单值多少钱？不是「一个 Excel 文件几 KB」的钱，而是「名单泄露 → 客户流失 + 罚款 + 声誉损失」的钱——所以课件说无形资产要按 C/I/A 三个维度去估价。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>定性给等级、定量给钱数；预算和成本效益必须定量。</li><li>有形 → 重置成本；无形 → 数据重置成本 + 按 C/I/A 估价。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-12：威胁识别 ======================= -->
+  <section class="chapter" id="l2-12">
+    <h2><span class="chapter-no">L2-12</span>准备⑤：威胁识别</h2>
+    <p class="chapter-sub">Threat Identification</p>
+    <p>课件定义：威胁（Threat）是「<strong>其发生会给组织带来不良影响的事件</strong>」。</p>
+    <h3>威胁三要素（Elements of Threats）</h3>
+    <table class="tb">
+      <tr><th>要素</th><th>英文</th><th>课件说明</th><th>考试注意点</th></tr>
+      <tr><td>主体</td><td>Agent</td><td>实施威胁的东西</td><td><b>不一定非要是人</b>——恶意代码、大自然都是主体</td></tr>
+      <tr><td>动机</td><td>Motive</td><td>驱动主体行动的原因</td><td><b>可以是意外（accidental），也可以是蓄意（intentional）</b></td></tr>
+      <tr><td>结果</td><td>Outcomes</td><td>（不良的）后果</td><td>强调 undesirable——结果一定是坏的</td></tr>
+    </table>
+    <h3>两大类别</h3>
+    <div class="cards3">
+      <div class="card"><h4><span class="dot orange"></span>意外威胁 Accidental</h4><p>非故意的：员工误删数据、误点钓鱼邮件、键盘上的咖啡、程序员写错权限。</p></div>
+      <div class="card"><h4><span class="dot red"></span>蓄意威胁 Intentional</h4><p>故意的：黑客攻击、内部人员窃密、商业间谍、勒索。</p></div>
+    </div>
+    <h3>列威胁清单的两个动作</h3>
+    <ol>
+      <li><strong>清单法 Checklist</strong>：对照标准威胁清单逐项排查，避免遗漏；</li>
+      <li><strong>撰写并校验威胁陈述 Threat Statement</strong>：把每个威胁写成一句明确的话并验证——课件强调「<strong>威胁必须定义清楚，确保评估团队所有成员理解一致</strong>」，否则同一份清单不同人理解不同，评估就失效了。</li>
+    </ol>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>威胁 = 会带来不良影响的事件；三要素：主体（可非人）、动机（可意外）、结果（必不良）。</li><li>两类：意外 vs 蓄意；清单要明确到团队理解一致。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-13：数据收集 ======================= -->
+  <section class="chapter" id="l2-13">
+    <h2><span class="chapter-no">L2-13</span>数据收集</h2>
+    <p class="chapter-sub">Data Gathering</p>
+    <p>准备做完，开始「取证」。数据收集沿<strong>行政 / 物理 / 技术</strong>三个维度展开，每个维度的方法不同：</p>
+    <table class="tb">
+      <tr><th>维度</th><th>英文</th><th>方法（课件）</th><th>说明</th></tr>
+      <tr>
+        <td><b>行政</b></td><td>Administrative</td>
+        <td>文档审查 Document review、组织审查 Organization review、访谈 Interviews、观察 Observation</td>
+        <td>看政策写没写、流程走没走、人知不知道</td>
+      </tr>
+      <tr>
+        <td><b>物理</b></td><td>Physical</td>
+        <td>文档审查、巡检 Inspection、观察</td>
+        <td>看门禁、机房、监控是否名副其实</td>
+      </tr>
+      <tr>
+        <td><b>技术</b></td><td>Technical</td>
+        <td>设计与架构审查 Design and architectural review、配置审查 Configuration review、<b>测试 Testing</b></td>
+        <td>测试包括<strong>漏洞扫描 vulnerability scanning</strong> 和 <strong>渗透测试 penetration test</strong></td>
+      </tr>
+    </table>
+    <h3>两大方法体系</h3>
+    <table class="tb">
+      <tr><th>方法</th><th>英文</th><th>要点（课件）</th></tr>
+      <tr>
+        <td>统计抽样</td>
+        <td><span class="en">Statistical Sampling</span></td>
+        <td>不必查 100% 的样本——按预定的<strong>置信水平</strong>（confidence level）计算需要的样本量，抽查即具统计意义</td>
+      </tr>
+      <tr>
+        <td><b>RIIOT</b></td>
+        <td><span class="en">RIIOT</span></td>
+        <td><b>R</b>eview 审查 + <b>I</b>nterview 访谈 + <b>I</b>nspect 巡检 + <b>O</b>bserve 观察 + <b>T</b>est 测试——五种动作组合拳</td>
+      </tr>
+    </table>
+    <div class="mnemonic"><span class="tag">口诀</span>RIIOT = 「<b>查、谈、检、观、测</b>」——文档翻一翻（Review）、找人聊一聊（Interview）、现场看一看（Inspect）、旁观察一察（Observe）、动手测一测（Test）。</div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>三维度：行政（文档/访谈）、物理（巡检/观察）、技术（配置审查/漏洞扫描/渗透测试）。</li><li>抽样按置信水平定样本量；RIIOT 五字诀年年考。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-14：映射与风险度量 ======================= -->
+  <section class="chapter" id="l2-14">
+    <h2><span class="chapter-no">L2-14</span>风险分析：威胁/脆弱性/资产映射与风险度量</h2>
+    <p class="chapter-sub">Threat/Vulnerability/Asset Mapping · Risk Metrics</p>
+
+    <h3>第一步：建立映射（Mapping）</h3>
+    <p>目标：为「威胁→脆弱性」「脆弱性→资产」的关系建立<strong>清晰定义的度量</strong>。课件简化示例：</p>
+    <table class="tb">
+      <tr><th>脆弱性 Vulnerability</th><th>相关威胁 Relevant Threats</th><th>受影响的资产 Assets Affected</th></tr>
+      <tr><td rowspan="3">未部署杀毒机制<br>No anti-virus mechanism implemented</td><td>数据窃取 Theft of data</td><td>声誉 Reputation、数据机密性 Data confidentiality</td></tr>
+      <tr><td>数据破坏 Destruction of data</td><td>声誉 Reputation、数据可用性 Data availability</td></tr>
+      <tr><td>数据修改 Modification of data</td><td>声誉 Reputation、数据完整性 Data integrity</td></tr>
+    </table>
+    <div class="notice"><span class="tag">读表方法</span>一个脆弱性可以对上多个威胁，一个威胁可以打击多个资产、破坏多个 C/I/A 属性——映射表就是把这张「多对多关系网」显式画出来，避免只看到单一因果链。</div>
+
+    <h3>第二步：建立风险度量（Risk Metrics）</h3>
+    <p>度量的目标：<strong>给风险排优先级</strong>（prioritize risks）、<strong>做风险处理决策</strong>（accept / mitigate / transfer）。度量的基础是<strong>六个基本要素</strong>（primitive elements）：</p>
+    <table class="tb">
+      <tr><th>要素</th><th>英文</th><th>含义</th><th>定量单位（课件表）</th><th>定性方式（课件表）</th></tr>
+      <tr><td>资产价值</td><td>Asset value</td><td>资产值多少钱</td><td>$（美元）</td><td>低/中/高；序数排名；关键/重要/非必要</td></tr>
+      <tr><td>威胁频率</td><td>Threat frequency</td><td>威胁多久来一次</td><td>发生率（年化 Rate of occurrence）</td><td>低/中/高；序数排名</td></tr>
+      <tr><td>威胁暴露因子</td><td>Threat exposure factor</td><td>一旦发生，损失资产的百分之几</td><td>%（百分比）</td><td>低/中/高；序数排名</td></tr>
+      <tr><td>防护有效性</td><td>Safeguard effectiveness</td><td>防护能把风险降多少</td><td>%（百分比）</td><td>低/中/高；序数排名</td></tr>
+      <tr><td>防护成本</td><td>Safeguard cost</td><td>防护要花多少钱</td><td>$（美元）</td><td>低/中/高；序数排名</td></tr>
+      <tr><td>置信因子</td><td>Confidence factor</td><td>对前面数值有多大把握</td><td>%（百分比）</td><td>低/中/高；序数排名</td></tr>
+    </table>
+
+    <h3>定量 vs 定性：完整优缺点对照（课件两张 slide）</h3>
+    <table class="tb">
+      <tr><th></th><th>定量 Quantitative（客观）</th><th>定性 Qualitative（主观）</th></tr>
+      <tr><td><b>优点</b></td><td>客观（Objective in nature）；易于理解；<b>为成本效益分析提供基础</b>；可用专业管理语言表达；绩效可客观跟踪（Performance can be tracked objectively）</td><td>简单；<b>无需量化</b>资产价值、威胁频率、防护有效性；易于让不同层级人员参与（Easy to involve different level of personals）；灵活（Flexible）</td></tr>
+      <tr><td><b>缺点</b></td><td>复杂耗时；劳动密集；知识密集型；<b>缺乏通用量化标准</b>（Lack of common quantification standards）；不灵活</td><td>主观；<b>无法做成本效益分析</b>；风险的真实价值可能得不到体现（Value at risk may not be truly reflected）；绩效无法客观跟踪</td></tr>
+    </table>
+    <p>度量做完，就可以建立<strong>风险处理标准</strong>（risk handling criteria）：不可接受的风险进入缓解分析，确定「能做什么、花多少钱、有多大效果」。</p>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>映射：一个脆弱性 ↔ 多个威胁 ↔ 多个资产/属性（多对多）。</li><li>六要素：价值、频率、暴露因子、有效性、成本、置信因子。</li><li>定量客观但难做，定性简单但没法算账——实践中常混合。</li></ul></div>
+  </section>
+
+  <!-- ======================= L2-15：SLE/ALE ======================= -->
+  <section class="chapter" id="l2-15">
+    <h2><span class="chapter-no">L2-15</span>定量计算：SLE 与 ALE</h2>
     <p class="chapter-sub">Single Loss Expectancy · Annualized Loss Expectancy</p>
+
+    <h3>两个核心公式</h3>
     <div class="formula">
       <span class="fn">单次损失期望 SLE（Single Loss Expectancy）：</span>
       SLE = 资产价值 AV × 暴露因子 EF
@@ -1231,12 +1465,47 @@
       <span class="fn">年度损失期望 ALE（Annualized Loss Expectancy）：</span>
       ALE = SLE × 年发生率 ARO
     </div>
-    <ul>
-      <li><strong>暴露因子 EF（Exposure Factor）</strong>：威胁发生后，资产价值损失的<strong>百分比</strong>。</li>
-      <li><strong>年发生率 ARO（Annualized Rate of Occurrence）</strong>：威胁<strong>每年预计发生</strong>的次数——6 个月发生 2 次 → ARO = 4；8 年发生 2 次 → ARO = 0.25。</li>
-    </ul>
-    <div class="analogy"><span class="tag">课件例题</span>ABC 公司总部价值 300 万美元，位于地震多发区。过去 4 年发生 6 次地震，暴露因子估计 60%。求 ALE。<br>
-    解：ARO = 6 ÷ 4 = 1.5；SLE = 3,000,000 × 60% = 1,800,000；<b>ALE = 1,800,000 × 1.5 = 2,700,000 美元</b>。</div>
+
+    <h3>两个参数的精确定义（课件原文）</h3>
+    <table class="tb">
+      <tr><th>参数</th><th>英文</th><th>定义</th><th>课件例子</th></tr>
+      <tr>
+        <td>暴露因子</td>
+        <td><span class="en">Exposure Factor (EF)</span></td>
+        <td>以<strong>百分比</strong>衡量威胁发生后资产价值的损失幅度</td>
+        <td>EF = 60% 表示一次事件损失资产的六成</td>
+      </tr>
+      <tr>
+        <td>年发生率</td>
+        <td><span class="en">Annualized Rate of Occurrence (ARO)</span></td>
+        <td>威胁<strong>每年预计发生</strong>的次数</td>
+        <td>6 个月发生 2 次 → ARO = <b>4</b>；8 年发生 2 次 → ARO = <b>0.25</b></td>
+      </tr>
+    </table>
+
+    <h3>课件例题（完整解答）</h3>
+    <div class="analogy"><span class="tag">例题</span>ABC 公司总部价值 300 万美元，位于地震多发区。过去 4 年发生 6 次地震，暴露因子估计为 60%。求 ALE。<br>
+    <b>解：</b><br>
+    ① 求 ARO：6 次 ÷ 4 年 = <b>1.5</b>（次/年）<br>
+    ② 求 SLE：3,000,000 × 60% = <b>1,800,000</b>（美元/次）<br>
+    ③ 求 ALE：1,800,000 × 1.5 = <b>2,700,000</b>（美元/年）</div>
+
+    <h3>巩固练习（点开看答案）</h3>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习 1：ARO 换算</summary>
+      <p style="margin-top:8px">某勒索软件攻击平均每 3 年发生 2 次，其 ARO 是多少？每月发生 1 次的攻击，ARO 是多少？</p>
+      <p><b>答案：</b>2 ÷ 3 ≈ <b>0.67</b>；每月 1 次 = 每年 12 次 → ARO = <b>12</b>。（记住 ARO 永远换算成「每年」）</p>
+    </details>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习 2：SLE 与 ALE 计算</summary>
+      <p style="margin-top:8px">一台数据库服务器价值 50 万美元。攻击者成功入侵后，预计损失其价值的 80%（EF）。此类入侵预计每年发生 0.5 次。求 SLE 与 ALE。</p>
+      <p><b>答案：</b>SLE = 500,000 × 80% = <b>400,000</b>；ALE = 400,000 × 0.5 = <b>200,000</b>（美元/年）。</p>
+    </details>
+    <details class="demo" style="margin:10px 0">
+      <summary style="cursor:pointer;font-weight:700;color:var(--primary-deep)">练习 3：缓解决策（结合下一节公式）</summary>
+      <p style="margin-top:8px">某风险 ALE 为 50 万美元/年。部署防火墙后 ALE 降为 10 万美元/年，防火墙年均成本 15 万美元。值得买吗？</p>
+      <p><b>答案：</b>缓解价值 = 500,000 − (100,000 + 150,000) = <b>250,000 &gt; 0</b>，值得购买——每年净省 25 万。</p>
+    </details>
 
     <h3>动手算：ALE 计算器</h3>
     <div class="demo">
@@ -1264,42 +1533,59 @@
       <div class="demo-info" id="ale-info"></div>
     </div>
 
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>SLE = AV × EF；ALE = SLE × ARO——两道乘法，年年考。</li><li>ARO 是「每年多少次」：半年 2 次 = 4，8 年 2 次 = 0.25。</li><li>风险值算出来后：可接受就留着，不可接受就做缓解分析。</li></ul></div>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>SLE = AV × EF；ALE = SLE × ARO——两道乘法年年考。</li><li>ARO 必须换算成「每年」：半年 2 次 = 4；8 年 2 次 = 0.25。</li><li>风险值算完 → 对照接受标准 → 不可接受就进缓解分析。</li></ul></div>
   </section>
 
-  <!-- ======================= L2-9：缓解与报告 ======================= -->
-  <section class="chapter" id="l2-9">
-    <h2><span class="chapter-no">L2-9</span>风险缓解分析与报告</h2>
+  <!-- ======================= L2-16：缓解与报告 ======================= -->
+  <section class="chapter" id="l2-16">
+    <h2><span class="chapter-no">L2-16</span>风险缓解分析与报告</h2>
     <p class="chapter-sub">Risk Mitigation Analysis & Reporting</p>
-    <h3>缓解分析三大步骤</h3>
-    <ol>
-      <li><strong>选择防护措施并做预期缓解分析</strong>：选防护措施 → 建立「防护/脆弱性」配对 → 评估预期缓解效果（大量数据需自动化工具）；</li>
-      <li><strong>计算防护措施成本</strong>：每平方英尺安装成本、年均成本、年维护成本、工时与材料；</li>
-      <li><strong>成本效益分析</strong>（Cost-Benefit Analysis）。</li>
-    </ol>
+
+    <h3>三大步骤</h3>
+    <table class="tb">
+      <tr><th>步骤</th><th>英文</th><th>具体做法（课件）</th></tr>
+      <tr>
+        <td><b>1. 选择防护并做预期缓解分析</b></td>
+        <td>Select safeguards and perform expected risk mitigation analysis</td>
+        <td>① 选择防护措施；② 把防护与相关威胁的脆弱性<strong>配对</strong>（safeguard/vulnerability pairs）；③ 评估预期缓解效果。量大时需要<strong>自动化工具</strong>（Automated tools needed for efficiency）</td>
+      </tr>
+      <tr>
+        <td><b>2. 计算防护成本</b></td>
+        <td>Calculate costs for the recommended safeguards</td>
+        <td>每平方英尺安装成本（cost per square foot, installed）、平均年度成本、年化维护成本、工时与材料（time and materials）</td>
+      </tr>
+      <tr>
+        <td><b>3. 成本效益分析</b></td>
+        <td>Perform cost-benefit analysis</td>
+        <td>用下面的公式判断「买不买」</td>
+      </tr>
+    </table>
+
     <div class="formula">
       <span class="fn">期望风险缓解价值（Expected Risk Mitigation Value）：</span>
       缓解价值 = 防护前 ALE − ( 防护后 ALE + 防护措施年均成本 )
     </div>
-    <p>注意：实际没那么简单——<strong>所有选定防护措施的联合效果</strong>必须一并考虑（防护之间有协同也有重叠）。</p>
-    <h3>风险评估报告结构（Sample Report）</h3>
-    <div class="pipeline">
-      <div class="pipe-step"><b>引言</b>Introduction</div>
-      <div class="pipe-step"><b>执行摘要</b>Executive Summary</div>
-      <div class="pipe-step"><b>资产识别</b>Asset Identification</div>
-      <div class="pipe-step"><b>威胁识别</b>Threat Identification</div>
-      <div class="pipe-step"><b>风险分析</b>Risk Analysis</div>
-      <div class="pipe-step"><b>防护识别</b>Safeguard Identification</div>
-      <div class="pipe-step"><b>成本效益</b>Cost-Benefit Analysis</div>
-      <div class="pipe-step"><b>建议</b>Recommendations</div>
-      <div class="pipe-step"><b>附录</b>Appendix</div>
-    </div>
-    <div class="takeaway"><span class="tag">本讲小结</span><ul><li>缓解三步骤：选防护 → 算成本 → 成本效益分析。</li><li>缓解价值 = ALE 前 −（ALE 后 + 成本），为正才划算。</li><li>报告结构 9 段，从引言到附录。</li></ul></div>
+    <p>课件特别提醒：<strong>实际没那么简单</strong>——所有选定防护措施的<strong>联合效果</strong>必须一并考虑（多个防护有协同效应，也可能重叠浪费），不是简单叠加。</p>
+
+    <h3>风险评估报告结构（9 段）</h3>
+    <table class="tb">
+      <tr><th>章节</th><th>英文</th><th>内容</th></tr>
+      <tr><td>引言</td><td>Introduction</td><td>评估背景、目的、范围</td></tr>
+      <tr><td>执行摘要</td><td>Executive Summary</td><td>给管理层看的「一页结论」——最重要的风险与建议</td></tr>
+      <tr><td>资产识别</td><td>Asset Identification</td><td>识别了哪些资产、价值几何（L2-10、11）</td></tr>
+      <tr><td>威胁识别</td><td>Threat Identification</td><td>威胁清单与陈述（L2-12）</td></tr>
+      <tr><td>风险分析</td><td>Risk Analysis</td><td>映射、度量、SLE/ALE 结果（L2-14、15）</td></tr>
+      <tr><td>防护识别</td><td>Safeguard Identification</td><td>建议的防护措施清单</td></tr>
+      <tr><td>成本效益分析</td><td>Cost-Benefit Analysis</td><td>每项防护的账算清楚</td></tr>
+      <tr><td>建议</td><td>Recommendations</td><td>优先级排序的行动建议</td></tr>
+      <tr><td>附录</td><td>Appendix</td><td>支撑材料、原始数据</td></tr>
+    </table>
+    <div class="takeaway"><span class="tag">本节小结</span><ul><li>缓解三步骤：选防护配对 → 算成本 → 成本效益分析。</li><li>缓解价值 = ALE 前 −（ALE 后 + 成本），为正才划算；注意联合效果。</li><li>报告 9 段：引言 → 摘要 → 资产 → 威胁 → 分析 → 防护 → 效益 → 建议 → 附录。</li></ul></div>
   </section>
 
-  <!-- ======================= L2-10：自测 ======================= -->
-  <section class="chapter" id="l2-10">
-    <h2><span class="chapter-no">L2-10</span>Lecture 2 自测</h2>
+  <!-- ======================= L2-17：自测 ======================= -->
+  <section class="chapter" id="l2-17">
+    <h2><span class="chapter-no">L2-17</span>Lecture 2 自测</h2>
     <p class="chapter-sub">Quiz</p>
     <div class="demo">
       <p class="demo-title">演示 12 · L2 自测（12 题 · English）</p>
@@ -1312,6 +1598,7 @@
       </div>
       <div class="quiz-score" id="quiz-score2" style="display:none"></div>
     </div>
+    <div class="takeaway"><span class="tag">自测后行动</span><ul><li>正确率 ≥ 85%：Lecture 2 掌握到位，可进入 Lecture 3。</li><li>60%~85%：重点回看 L2-5 ~ L2-12（准备阶段细节最多）。</li><li>&lt; 60%：按 L2-1 到 L2-16 顺序通读一遍，动动手玩 ALE 计算器。</li></ul></div>
   </section>
 
   <!-- ======================= 讲座横幅 L3 ======================= -->
