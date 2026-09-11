@@ -165,8 +165,9 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({
    演示 4：攻击·威胁·风险关系图（点击节点看定义）
    ============================================================ */
 (function () {
-  const box = document.getElementById('rel-detail');
-  const svg = document.querySelector('.rel-box svg');
+  const detailBox = document.getElementById('rel-detail');   // 下方的说明面板
+  const svgBox = document.querySelector('.rel-box');         // 点击区域 = SVG 所在容器
+  const svg = svgBox.querySelector('svg');
   const els = svg.querySelectorAll('.rel-el');
 
   const DETAILS = [
@@ -178,7 +179,8 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({
     { t: '风险 Risk', x: '资产暴露后「可能造成」的损失与影响。风险管理就是围绕它做文章：评估 → 策略 → 实施 → 监控 → 审计。' },
   ];
 
-  box.addEventListener('click', (e) => {
+  // 监听器必须挂在包含 SVG 的容器上（之前误挂在下方说明面板上，导致点击无反应）
+  svgBox.addEventListener('click', (e) => {
     const el = e.target.closest('.rel-el');
     if (!el) return;
     // 高亮当前节点，其余恢复默认
@@ -188,7 +190,7 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({
       n.setAttribute('stroke', active ? '#047857' : '#94a3b8');
     });
     const d = DETAILS[parseInt(el.dataset.idx, 10)];
-    box.innerHTML = '<b>' + d.t + '：</b>' + esc(d.x);
+    detailBox.innerHTML = '<b>' + d.t + '：</b>' + esc(d.x);
   });
 })();
 
